@@ -1034,7 +1034,7 @@ for(let i=0;i<10;i++){const c=document.createElement('i');const s=10+i*7;c.style
 /* ---------- scroll reveal, progress, zones ---------- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 $$('.rv').forEach(el=>io.observe(el));
-const zio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.body.dataset.zone=e.target.dataset.zone}),{threshold:.3});
+const zio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.body.dataset.zone=e.target.dataset.zone}),{rootMargin:'-45% 0px -45% 0px',threshold:0});
 $$('[data-zone]').filter(e=>e.tagName==='SECTION'||e.tagName==='HEADER').forEach(el=>zio.observe(el));
 const prog=$('#prog');
 addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
