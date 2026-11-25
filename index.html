@@ -705,16 +705,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .sit button:disabled{opacity:.45;cursor:not-allowed}
 .sit .own{font:700 12px var(--body);letter-spacing:.12em;color:#1a7f3c}
 
-/* ---- animated strokes (light + quick) ---- */
-.dr{stroke-dasharray:1;stroke-dashoffset:1}
-.imap.in .dr{animation:drw .55s ease-out forwards;animation-delay:calc(var(--i,0)*.04s)}
-@keyframes drw{to{stroke-dashoffset:0}}
-.imrd{animation:march .7s linear infinite}
-@keyframes march{to{stroke-dashoffset:-48}}
-#radar .pl{stroke-dasharray:16 9;animation:march 1.2s linear infinite}
-#strings path{stroke-dasharray:12 8;animation:march 1.4s linear infinite}
-.rv.in .p4h,.grid3.in .gm h3,.shop.in h3{animation:strkin .4s ease-out both}
-@keyframes strkin{0%{-webkit-text-stroke-width:0;opacity:0;transform:skewX(-8deg) scale(.92)}100%{-webkit-text-stroke-width:8px;opacity:1;transform:skewX(-8deg)}}
+/* strokes are static */
+.imrd{animation:none}
 </style>
 </head>
 <body data-zone="hero">
@@ -1853,11 +1845,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  draw();
 })();
 
-/* ---------- animated strokes: map draw-in ---------- */
-(function(){
- document.querySelectorAll('#imsvg g[stroke] > *').forEach((e,i)=>{e.setAttribute('pathLength','1');e.classList.add('dr');e.style.setProperty('--i',i)});
- const r=document.querySelector('#imsvg > path[stroke-width="22"]');if(r){r.setAttribute('pathLength','1');r.classList.add('dr')}
-})();
+
 })();
 
 </script>
