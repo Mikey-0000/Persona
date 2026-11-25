@@ -2118,7 +2118,9 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   function tryMove(d){const nx=px+Math.cos(ang)*d,ny=py+Math.sin(ang)*d,r=.2;
    if(cell(nx+(d>0?r:-r)*Math.sign(Math.cos(ang)||1),py)!==1)px=nx;if(cell(px,ny+(d>0?r:-r)*Math.sign(Math.sin(ang)||1))!==1)py=ny;
    if(cell(px,py)===2){fl++;won++;SAVE.put(t.key,won);try{sfx('win')}catch(e){}if(won>=3)award(t.tro);gen()}}
-  function catchCheck(){if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.5)){caught++;SAVE.put(t.cau,caught);px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
+  let inv=0;
+  function relocate(){const free=[];for(let y=1;y<N-1;y+=2)for(let x=1;x<N-1;x+=2)if(Math.abs(x-1)+Math.abs(y-1)>6&&map[y][x]===0)free.push([x,y]);en.forEach(e=>{if(Math.hypot(e.x-1.5,e.y-1.5)<4&&free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];e.x=e.tx=x+.5;e.y=e.ty=y+.5;e.px=e.py=-1}})}
+  function catchCheck(){if(performance.now()<inv)return;if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.5)){inv=performance.now()+1800;relocate();caught++;SAVE.put(t.cau,caught);px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
   const act={f:()=>tryMove(.3),b:()=>tryMove(-.3),l:()=>{ang-=.3},r:()=>{ang+=.3}},keys={},KM={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r'};
   cv.addEventListener('keydown',e=>{const k=KM[e.key];if(k){e.preventDefault();keys[k]=1}});
   cv.addEventListener('keyup',e=>{const k=KM[e.key];if(k)keys[k]=0});
