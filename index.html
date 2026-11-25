@@ -136,7 +136,7 @@ body[data-zone="p3"] a[href="#p3"],body[data-zone="p4"] a[href="#p4"],body[data-
 .p4bg{position:absolute;inset:0;z-index:0;pointer-events:none}.p4stick{position:sticky;top:0;height:100vh;overflow:hidden}.p4stick svg{width:100%;height:100%;display:block}
 .rg{transform-origin:960px 540px;animation:breathe 9s ease-in-out infinite}
 .sl{animation:slide 8s ease-in-out infinite alternate}
-.oc{transform-box:fill-box;transform-origin:center;animation:breathe 7s ease-in-out infinite}
+.oc{transform-box:fill-box;transform-origin:center}
 .st{transform-box:fill-box;transform-origin:center;animation:twinkle 3.4s ease-in-out infinite}
 #p4 .sec-head .n,#p4 .sec-head h2{color:#181818}
 #p4 .lede{color:#2b2b2b}
@@ -789,6 +789,17 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .cmp div small{display:block;font:600 10px var(--body);letter-spacing:.14em;opacity:.7;margin-bottom:2px}
 .cmpt{text-align:center;font:600 13px var(--body);letter-spacing:.3em;color:var(--gold);margin-top:18px;text-transform:uppercase}
 @media (max-width:600px){.cmp{grid-template-columns:repeat(3,1fr)}}
+
+.mreq{margin-top:clamp(36px,5vw,60px)}
+.mrg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.mr{position:relative;background:#f1deca;color:#0e0d0e;padding:16px 16px 18px;transform:rotate(var(--r,0deg));box-shadow:6px 6px 0 #000;clip-path:polygon(0 3%,6% 0,14% 3%,26% 0,40% 3%,55% 0,70% 3%,84% 0,94% 3%,100% 0,100% 97%,92% 100%,80% 97%,64% 100%,48% 97%,32% 100%,18% 97%,8% 100%,0 97%)}
+.mr small{display:block;font:800 10px var(--body);letter-spacing:.3em;color:#df1a21;margin-bottom:6px}
+.mr b{display:block;font:italic 900 20px/1.1 var(--body);text-transform:uppercase}
+.mr p{font:600 13px/1.4 var(--body);margin-top:6px;min-height:36px}
+.mr .st{position:absolute;right:10px;bottom:10px;font:900 20px var(--body);color:#df1a21;border:4px solid #df1a21;padding:2px 8px;transform:rotate(-12deg);opacity:0;letter-spacing:.06em}
+.mr.ok{background:#d8c3ae}
+.mr.ok .st{opacity:.9}
+.mr .bar{height:8px;background:#0e0d0e;margin-top:10px}.mr .bar i{display:block;height:100%;background:#df1a21}
 </style>
 </head>
 <body data-zone="hero">
@@ -1066,6 +1077,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <figure class="pc-img"><img src="images/p5-hero.jpg" alt="Portrait of the Persona 5 protagonist with round glasses and a smirk" loading="lazy"></figure>
       <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Ren Amamiya</h3><p class="pc-r">Joker / Leader of the Phantom Thieves</p><p>On probation in a new city, he wears a polite smile in daylight and a mask after dark. Sharp, patient and a step ahead, he steals the distortions out of people one palace at a time.</p><button class="pc-go" type="button">Awaken</button><ul class="pc-c"><li><small>PERSONA</small><b>Arsene</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Dagger and gun</b></li></ul></div>
     </article>
+    <div class="mreq rv" id="mreq"><h3 class="gh">MEMENTOS REQUESTS</h3><div class="mrg" id="mrg"></div></div>
     <div class="gal rv" data-g="p5"><h3 class="gh">SCENES FROM THE CITY</h3><div class="gal-row"></div></div>
   </div>
 </section>
@@ -1110,7 +1122,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1982,6 +1994,23 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   const n=Object.keys(found).length;ttl.textContent='Compendium '+n+'/15';if(n>=15)award('compendium')}
  window.__cmp=(i,j,name)=>{const a=Math.min(i,j),b=Math.max(i,j);found[a+'-'+b]=name;SAVE.put('cmp',found);draw()};
  draw();
+})();
+
+/* ---------- Mementos requests ---------- */
+(function(){
+ const R=[['Send a calling card','Type a name into the calling card.',()=>{const n=SAVE.get('name','');return n&&n.trim()&&n.trim()!=='Someone'?1:0},1],
+  ['First steal','Reach the treasure in the heist game.',()=>Math.min(1,SAVE.get('wins',0)),1],
+  ['Professional','Steal the treasure three times.',()=>Math.min(3,SAVE.get('wins',0)),3],
+  ['Learn the route','Get spotted three times.',()=>Math.min(3,SAVE.get('caught',0)),3],
+  ['Take over','Press the Take over button.',()=>TRS.takeover?1:0,1]];
+ const g=document.getElementById('mrg');
+ function draw(){let all=true;g.innerHTML=R.map((r,i)=>{const v=r[2](),ok=v>=r[3];if(!ok)all=false;
+  return '<div class="mr'+(ok?' ok':'')+'" style="--r:'+((i%2?1:-1)*(1+i%3*.6))+'deg"><small>REQUEST '+(i+1)+'</small><b>'+r[0]+'</b><p>'+r[1]+'</p><div class="bar"><i style="width:'+(v/r[3]*100)+'%"></i></div><span class="st">CLEARED</span></div>'}).join('');
+  if(all)award('requests')}
+ draw();
+ document.getElementById('p5').addEventListener('click',()=>setTimeout(draw,60));
+ document.getElementById('p5').addEventListener('input',()=>setTimeout(draw,60));
+ setInterval(()=>{if(document.body.dataset.zone==='p5')draw()},2500);
 })();
 })();
 
