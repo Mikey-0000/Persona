@@ -707,6 +707,47 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 
 /* strokes are static */
 .imrd{animation:none}
+
+/* ---- protagonist cards (refs: user portraits) ---- */
+.pc{position:relative;display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:clamp(18px,3vw,36px);align-items:center;max-width:920px;margin:clamp(36px,5vw,64px) auto 0;padding:clamp(16px,2.4vw,28px);overflow:hidden}
+.pc-img{margin:0;position:relative;z-index:1;aspect-ratio:1;overflow:hidden}
+.pc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-t{position:relative;z-index:1}
+.pc-e{display:block;font:700 12px var(--body);letter-spacing:.4em;margin-bottom:8px}
+.pc h3{font-size:clamp(34px,5vw,58px);line-height:1;margin-bottom:6px}
+.pc-r{font:700 13px var(--body);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.pc-t p:not(.pc-r){font:500 16px/1.55 var(--body);max-width:46ch}
+.pc-c{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pc-c li{padding:8px 14px}
+.pc-c small{display:block;font:700 10px var(--body);letter-spacing:.3em;opacity:.75}
+.pc-c b{font:800 15px var(--body)}
+@media (max-width:700px){.pc{grid-template-columns:1fr}.pc-img{max-width:320px;margin:0 auto}}
+/* P3: white ink-wash */
+.pc3{background:linear-gradient(135deg,#fff 0,#f4f7ff 60%,#e4ebfa);color:#1b1d25;border:1px solid #c1c9db;box-shadow:0 18px 50px rgba(0,20,80,.35)}
+.pc3 .pc-wire{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.35}
+.pc3 .pc-img{border:1px solid #c1c9db;box-shadow:14px 14px 0 #c1c9db;background:#fff}
+.pc3 h3{font:300 clamp(34px,5vw,58px)/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;color:#1b1d25}
+.pc3 .pc-e,.pc3 .pc-r{color:#5a6999}
+.pc3 .pc-c li{border:1px solid #5a6999;background:rgba(255,255,255,.7);color:#1b1d25}
+/* P4: yellow, olive rings, houndstooth */
+.pc4{background:#e6e123;color:#0a0909;border:4px solid #0a0909;box-shadow:0 0 0 5px #f5a300,12px 12px 0 5px #0a0909}
+.pc4 .pc-ring{position:absolute;left:-40px;top:-30px;width:60%;height:140%;opacity:.9;pointer-events:none}
+.pc4 .pc-img{border:4px solid #0a0909;background:#f2dca7;transform:rotate(-2deg);box-shadow:8px 8px 0 #0a0909}
+.pc4:after{content:"II";position:absolute;right:22px;bottom:0;padding:6px 14px 2px;background:#f5a300;color:#0a0909;font:900 22px var(--body);border:3px solid #0a0909;border-bottom:0}
+.pc4:before{content:"";position:absolute;left:0;right:0;bottom:0;height:20px;background:conic-gradient(#0a0909 25%,#bab7ac 0 50%,#0a0909 0 75%,#bab7ac 0) 0 0/20px 20px;border-top:3px solid #0a0909;z-index:0}
+.pc4{padding-bottom:calc(clamp(16px,2.4vw,28px) + 24px)}
+.pc4 h3{font:italic 900 clamp(34px,5vw,58px)/1 var(--body);color:#fff;-webkit-text-stroke:7px #0a0909;paint-order:stroke fill;text-shadow:4px 4px 0 #f5a300;text-transform:uppercase}
+.pc4 .pc-e,.pc4 .pc-r{color:#0a0909}
+.pc4 .pc-c li{background:#0a0909;color:#fff603;transform:skewX(-10deg)}
+/* P5: red, black cut, glossy sparkles */
+.pc5{background:#df1a21;color:#fff;border:0;clip-path:polygon(0 0,100% 3%,100% 100%,0 97%);padding-block:clamp(28px,3.4vw,44px)}
+.pc5:before{content:"";position:absolute;inset:0;background:#0e0d0e;clip-path:polygon(0 0,48% 0,28% 100%,0 100%);z-index:0}
+.pc5 .pc-img{clip-path:polygon(8% 0,100% 0,92% 100%,0 100%);box-shadow:none;filter:drop-shadow(8px 8px 0 #000)}
+.pc5 h3{font:italic 900 clamp(34px,5vw,60px)/1 var(--body);color:#fff;text-shadow:5px 5px 0 #0e0d0e;text-transform:uppercase}
+.pc5 .pc-e,.pc5 .pc-r{color:#fff}
+.pc5 .pc-c li{background:#0e0d0e;color:#fff;transform:skewX(-10deg)}
+.pc5 .sp{position:absolute;z-index:2;width:26px;height:26px;background:#fff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);pointer-events:none;filter:drop-shadow(0 0 6px #fff)}
+.pc5 .s1{left:24%;top:14%}.pc5 .s2{right:8%;top:20%;transform:scale(.7)}.pc5 .s3{right:22%;bottom:12%;transform:scale(.5)}
 </style>
 </head>
 <body data-zone="hero">
@@ -813,6 +854,12 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
         <p class="status" id="cmsg" style="text-align:left;margin-top:12px" aria-live="polite">The tower stretches upward.</p>
       </div>
     </div>
+
+    <article class="pc pc3 rv" aria-label="Makoto Yuki">
+      <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
+      <figure class="pc-img"><img src="images/p3-hero.jpg" alt="Portrait of the Persona 3 protagonist with headphones" loading="lazy"></figure>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Makoto Yuki</h3><p class="pc-r">Transfer student / Wild Card</p><p>A quiet new arrival at Gekkoukan High with a pair of headphones and a calm that never quite breaks. In the hidden hour he can call more than one Persona, and the bonds he builds by day decide how far he can climb by night.</p><ul class="pc-c"><li><small>PERSONA</small><b>Orpheus</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Evoker</b></li></ul></div>
+    </article>
     <div class="gal rv" data-g="p3"><h3 class="gh">SCENES FROM THE DARK HOUR</h3><div class="gal-row"></div></div>
   </div>
 </section>
@@ -925,6 +972,12 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="yen">&yen;<b id="yen">0</b></div>
       <div class="sitems" id="sitems"></div>
     </div>
+
+    <article class="pc pc4 rv" aria-label="Yu Narukami">
+      <svg class="pc-ring" viewBox="0 0 400 400" aria-hidden="true"><g fill="none" stroke="#8d8d09" stroke-width="14"><ellipse cx="120" cy="200" rx="110" ry="170"/><ellipse cx="120" cy="200" rx="70" ry="120"/><ellipse cx="120" cy="200" rx="30" ry="70"/></g></svg>
+      <figure class="pc-img"><img src="images/p4-hero.jpg" alt="Portrait of the Persona 4 protagonist looking up with glasses on his forehead" loading="lazy"></figure>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Yu Narukami</h3><p class="pc-r">Inaba transfer / Investigation Team leader</p><p>He arrives in a sleepy, rainy town for a single year and ends up chasing a case through the TV. Level-headed, a little dry, and always the one people reach for when the fog rolls in.</p><ul class="pc-c"><li><small>PERSONA</small><b>Izanagi</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Katana</b></li></ul></div>
+    </article>
     <div class="gal rv" data-g="p4"><h3 class="gh">SCENES FROM THE TOWN</h3><div class="gal-row"></div></div>
   </div>
 </section>
@@ -966,6 +1019,12 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="dpad"><button class="btn red" data-m="0,-1" type="button"><span>Up</span></button><button class="btn red" data-m="-1,0" type="button"><span>Left</span></button><button class="btn red" data-m="0,1" type="button"><span>Down</span></button><button class="btn red" data-m="1,0" type="button"><span>Right</span></button></div>
       <p class="status" id="hmsg" style="color:#fff;text-align:left" aria-live="polite">Reach the treasure without being seen.</p>
     </div>
+
+    <article class="pc pc5 rv" aria-label="Ren Amamiya">
+      <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
+      <figure class="pc-img"><img src="images/p5-hero.jpg" alt="Portrait of the Persona 5 protagonist with round glasses and a smirk" loading="lazy"></figure>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Ren Amamiya</h3><p class="pc-r">Joker / Leader of the Phantom Thieves</p><p>On probation in a new city, he wears a polite smile in daylight and a mask after dark. Sharp, patient and a step ahead, he steals the distortions out of people one palace at a time.</p><ul class="pc-c"><li><small>PERSONA</small><b>Arsene</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Dagger and gun</b></li></ul></div>
+    </article>
     <div class="gal rv" data-g="p5"><h3 class="gh">SCENES FROM THE CITY</h3><div class="gal-row"></div></div>
   </div>
 </section>
