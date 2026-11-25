@@ -1,0 +1,7 @@
+.git
+.github
+node_modules
+wrangler.jsonc
+.assetsignore
+README.md
+images/README.txt
