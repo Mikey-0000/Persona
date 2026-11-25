@@ -800,6 +800,17 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .mr.ok{background:#d8c3ae}
 .mr.ok .st{opacity:.9}
 .mr .bar{height:8px;background:#0e0d0e;margin-top:10px}.mr .bar i{display:block;height:100%;background:#df1a21}
+
+.fp{margin-top:clamp(28px,4vw,44px);padding:18px}
+.fp-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.fp-h h3{font:400 28px var(--cond);letter-spacing:.12em}
+.fp-w{position:relative;border:3px solid #4aa3ff;background:#000;line-height:0}
+.dh .fp-w{border-color:#2ef2b6}
+#fp{width:100%;height:auto;display:block;outline:none;image-rendering:pixelated;cursor:crosshair}
+#fp:focus-visible{box-shadow:inset 0 0 0 3px #fff}
+#fpm{position:absolute;right:8px;top:8px;width:26%;max-width:150px;height:auto;border:2px solid rgba(255,255,255,.6);background:rgba(0,0,0,.55);image-rendering:pixelated}
+.fp-c{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+.fp-c .btn{padding:10px 18px;font-size:14px;min-height:44px}
 </style>
 </head>
 <body data-zone="hero">
@@ -907,6 +918,12 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       </div>
     </div>
 
+    <div class="panel rv fp" id="fpbox">
+      <div class="fp-h"><h3>TARTARUS: FIRST PERSON</h3><span class="fine" id="fpinfo">Floor 1</span></div>
+      <div class="fp-w"><canvas id="fp" width="640" height="360" tabindex="0" aria-label="First-person maze. Use arrow keys or WASD."></canvas><canvas id="fpm" width="150" height="150" aria-hidden="true"></canvas></div>
+      <div class="fp-c"><button class="btn blue" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn blue" data-k="f" type="button"><span>Forward</span></button><button class="btn blue" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button></div>
+      <p class="fine">Find the glowing door at the end of the maze. Click the view, then use arrow keys or WASD.</p>
+    </div>
     <article class="pc pc3 rv holo" data-z="pc3" aria-label="Makoto Yuki">
       <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
       <figure class="pc-img"><img src="images/p3-hero.jpg" alt="Portrait of the Persona 3 protagonist with headphones" loading="lazy"></figure>
@@ -1122,7 +1139,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['maze','Lost in Tartarus','Find the exit on 3 first-person floors.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -2011,6 +2028,65 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  document.getElementById('p5').addEventListener('click',()=>setTimeout(draw,60));
  document.getElementById('p5').addEventListener('input',()=>setTimeout(draw,60));
  setInterval(()=>{if(document.body.dataset.zone==='p5')draw()},2500);
+})();
+
+/* ---------- Tartarus first-person raycaster ---------- */
+(function(){
+ const cv=document.getElementById('fp'),mm=document.getElementById('fpm'),info=document.getElementById('fpinfo');
+ const c=cv.getContext('2d'),m2=mm.getContext('2d');const W=cv.width,H=cv.height;
+ let N=11,map=[],px=1.5,py=1.5,ang=0,fl=1,won=SAVE.get('fpwon',0);
+ function gen(){
+  N=9+fl*2;if(N>21)N=21;map=Array.from({length:N},()=>Array(N).fill(1));
+  const st=[[1,1]];map[1][1]=0;const D=[[0,-2],[2,0],[0,2],[-2,0]];
+  while(st.length){const [x,y]=st[st.length-1];const o=D.map(d=>[x+d[0],y+d[1],d]).filter(([a,b])=>a>0&&b>0&&a<N-1&&b<N-1&&map[b][a]===1);
+   if(!o.length){st.pop();continue}const [a,b,d]=o[Math.floor(Math.random()*o.length)];map[y+d[1]/2][x+d[0]/2]=0;map[b][a]=0;st.push([a,b])}
+  map[N-2][N-2]=2;px=1.5;py=1.5;ang=0;info.textContent='Floor '+fl+'  ('+N+'x'+N+')'}
+ const ndh=()=>document.getElementById('p3').classList.contains('dh');
+ function cell(x,y){return x<0||y<0||x>=N||y>=N?1:map[y|0][x|0]}
+ function render(){
+  const dh=ndh(),hue=dh?[46,242,182]:[74,163,255];
+  let g=c.createLinearGradient(0,0,0,H/2);g.addColorStop(0,'#000');g.addColorStop(1,dh?'#03221a':'#06183a');c.fillStyle=g;c.fillRect(0,0,W,H/2);
+  g=c.createLinearGradient(0,H/2,0,H);g.addColorStop(0,dh?'#02130f':'#030c1e');g.addColorStop(1,'#000');c.fillStyle=g;c.fillRect(0,H/2,W,H/2);
+  const fov=1.05,cols=160,cw=W/cols;
+  for(let i=0;i<cols;i++){
+   const a=ang+(i/cols-.5)*fov,dx=Math.cos(a),dy=Math.sin(a);let mx=px|0,my=py|0;
+   const ddx=Math.abs(1/dx),ddy=Math.abs(1/dy);let sx,sy,sdx,sdy;
+   if(dx<0){sx=-1;sdx=(px-mx)*ddx}else{sx=1;sdx=(mx+1-px)*ddx}
+   if(dy<0){sy=-1;sdy=(py-my)*ddy}else{sy=1;sdy=(my+1-py)*ddy}
+   let side=0,hit=0,n=0;
+   while(!hit&&n++<64){if(sdx<sdy){sdx+=ddx;mx+=sx;side=0}else{sdy+=ddy;my+=sy;side=1}if(cell(mx,my)>0)hit=cell(mx,my)}
+   const perp=side?sdy-ddy:sdx-ddx;let dist=Math.max(.05,perp*Math.cos(a-ang));
+   const h=Math.min(H*1.5,H/dist);
+   let wx=side?px+perp*dx:py+perp*dy;wx-=Math.floor(wx);
+   const brick=((wx*6|0)+(((my+mx)&1)?1:0))%2;const fog=Math.max(0,1-dist/9);
+   let r,gg,b;
+   if(hit===2){const t=.6+.4*Math.sin(performance.now()/180);r=255*t;gg=240*t;b=170*t}
+   else{const k=(side?.62:.9)*fog*(brick?1:.82);r=hue[0]*k*.8;gg=hue[1]*k*.8;b=hue[2]*k*.8}
+   c.fillStyle='rgb('+(r|0)+','+(gg|0)+','+(b|0)+')';c.fillRect(i*cw,(H-h)/2,cw+1,h);
+   if(hit===1){c.fillStyle='rgba(0,0,0,.28)';for(let k=1;k<6;k++)c.fillRect(i*cw,(H-h)/2+h*k/6-1,cw+1,2);if(((wx*6)%1)<.07){c.fillStyle='rgba(0,0,0,.3)';c.fillRect(i*cw,(H-h)/2,cw+1,h)}}
+  }
+  // minimap
+  const sc=150/N;m2.clearRect(0,0,150,150);
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){const v=map[y][x];m2.fillStyle=v===1?'rgba(255,255,255,.18)':v===2?'#ffe14a':'rgba(0,0,0,.2)';m2.fillRect(x*sc,y*sc,sc,sc)}
+  m2.fillStyle='#fff';m2.beginPath();m2.arc(px*sc,py*sc,Math.max(2,sc*.3),0,6.283);m2.fill();
+  m2.strokeStyle='#fff';m2.beginPath();m2.moveTo(px*sc,py*sc);m2.lineTo((px+Math.cos(ang)*1.2)*sc,(py+Math.sin(ang)*1.2)*sc);m2.stroke();
+ }
+ function tryMove(d){const nx=px+Math.cos(ang)*d,ny=py+Math.sin(ang)*d,r=.2;
+  if(cell(nx+(d>0?r:-r)*Math.sign(Math.cos(ang)||1),py)!==1)px=nx;if(cell(px,ny+(d>0?r:-r)*Math.sign(Math.sin(ang)||1))!==1)py=ny;
+  if(cell(px,py)===2){fl++;won++;SAVE.put('fpwon',won);try{sfx('win')}catch(e){}if(won>=3)award('maze');gen()}}
+ const act={f:()=>tryMove(.3),b:()=>tryMove(-.3),l:()=>{ang-=.3},r:()=>{ang+=.3}};
+ const keys={};
+ cv.addEventListener('keydown',e=>{const k={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r'}[e.key];if(k){e.preventDefault();keys[k]=1}});
+ cv.addEventListener('keyup',e=>{const k={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r'}[e.key];if(k)keys[k]=0});
+ cv.addEventListener('blur',()=>{for(const k in keys)keys[k]=0});
+ cv.addEventListener('click',()=>cv.focus());
+ document.querySelectorAll('.fp-c [data-k]').forEach(b=>b.addEventListener('click',()=>{act[b.dataset.k]();if(RM||!vis)render()}));
+ let vis=false;new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)loop()}).observe(cv);
+ let raf=0,last=0;
+ function loop(t){raf=0;if(!vis)return;t=t||0;const dt=Math.min(50,t-last);last=t;
+  if(keys.f)tryMove(.0035*dt);if(keys.b)tryMove(-.0035*dt);if(keys.l)ang-=.0028*dt;if(keys.r)ang+=.0028*dt;
+  render();raf=requestAnimationFrame(loop)}
+ gen();render();
 })();
 })();
 
