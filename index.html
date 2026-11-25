@@ -807,6 +807,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .fp-w{position:relative;border:3px solid #4aa3ff;background:#000;line-height:0}
 .dh .fp-w{border-color:#2ef2b6}
 .fp5 .fp-w{border-color:#df1a21}
+#p4 .fp4 .fp-w{border-color:#12191c;box-shadow:0 0 0 4px #f5a300}
+#p4 .fp4 .fp-h h3{font:italic 900 28px var(--body);color:#12191c}
 .fp5{background:#0b0b0d;border-color:#fff;box-shadow:8px 8px 0 #df1a21}
 .fp5 .fp-h h3{color:#df1a21;font:italic 900 30px var(--body);text-transform:uppercase}
 #fp,.rc{width:100%;height:auto;display:block;outline:none;image-rendering:pixelated;cursor:crosshair}
@@ -1054,6 +1056,12 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="sitems" id="sitems"></div>
     </div>
 
+    <div class="panel rv fp fp4" id="frbox" data-t="p4">
+      <div class="fp-h"><h3>THE OTHER SIDE: FIRST PERSON</h3><span class="fine rci">Floor 1</span></div>
+      <div class="fp-w"><canvas class="rc" width="640" height="360" tabindex="0" aria-label="First-person TV world. Use arrow keys or WASD."></canvas><canvas class="rcm" width="150" height="150" aria-hidden="true"></canvas></div>
+      <div class="fp-c"><button class="btn dark" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn dark" data-k="f" type="button"><span>Forward</span></button><button class="btn dark" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn dark" data-k="b" type="button"><span>Back</span></button><button class="btn dark" data-k="x" type="button"><span>Attack</span></button></div>
+      <p class="fine" style="color:#3d3d3d">Step through the TV, find the door and cut down the shadows. Each hit costs a heart. Space or X swings.</p>
+    </div>
     <article class="pc pc4 rv holo" data-z="pc4" aria-label="Yu Narukami">
       <svg class="pc-ring" viewBox="0 0 400 400" aria-hidden="true"><g fill="none" stroke="#8d8d09" stroke-width="14"><ellipse cx="120" cy="200" rx="110" ry="170"/><ellipse cx="120" cy="200" rx="70" ry="120"/><ellipse cx="120" cy="200" rx="30" ry="70"/></g></svg>
       <figure class="pc-img"><img src="images/p4-hero.jpg" alt="Portrait of the Persona 4 protagonist looking up with glasses on his forehead" loading="lazy"></figure>
@@ -1158,7 +1166,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['slayer','Blade Dancer','Defeat 10 enemies with the sword.'],['palace','Phantom Route','Clear 3 first-person palace floors.'],['maze','Lost in Tartarus','Find the exit on 3 first-person floors.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['tvworld','Midnight Wanderer','Clear 3 floors of the TV world.'],['slayer','Blade Dancer','Defeat 10 enemies with the sword.'],['palace','Phantom Route','Clear 3 first-person palace floors.'],['maze','Lost in Tartarus','Find the exit on 3 first-person floors.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -2053,11 +2061,12 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
 (function(){
  const TH={
   p3:{wall:(dh)=>dh?[46,242,182]:[74,163,255],sky:(dh)=>[dh?'#03221a':'#06183a','#000'],flo:(dh)=>[dh?'#02130f':'#030c1e','#000'],door:[255,240,170],en:'shadow',tro:'maze',key:'fpwon',cau:'fpcaught',label:'Floor '},
+  p4:{wall:()=>[255,213,0],sky:()=>['#7a1a6a','#12041a'],flo:()=>['#063a3a','#000'],door:[255,120,220],en:'shadow',tro:'tvworld',key:'frwon',cau:'frcaught',label:'TV floor ',sw:{blade:['#ffffff','#b8b8b8'],edge:'#fff',guard:'#ffd500',grip:'#0a0909',glow:'rgba(255,230,0,.6)'}},
   p5:{wall:()=>[223,26,33],sky:()=>['#1a0003','#000'],flo:()=>['#150002','#000'],door:[255,255,255],en:'guard',tro:'palace',key:'fqwon',cau:'fqcaught',label:'Palace floor '}};
  function mk(box){
   const t=TH[box.dataset.t],cv=box.querySelector('.rc'),mm=box.querySelector('.rcm'),info=box.querySelector('.rci');
   const c=cv.getContext('2d'),m2=mm.getContext('2d');const W=cv.width,H=cv.height,cols=160,cw=W/cols,fov=1.05;
-  let swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],px=1.5,py=1.5,ang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=new Array(cols).fill(99);
+  let hp=5,swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],px=1.5,py=1.5,ang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=new Array(cols).fill(99);
   const dh=()=>t.en==='shadow'&&document.getElementById('p3').classList.contains('dh');
   function gen(){
    N=Math.min(21,9+fl*2);map=Array.from({length:N},()=>Array(N).fill(1));
@@ -2075,7 +2084,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     const o=opts.length?opts:[[0,-1],[1,0],[0,1],[-1,0]].filter(([a,b])=>map[cy+b]&&map[cy+b][cx+a]!==1);
     const [a,b]=o[Math.floor(Math.random()*o.length)];e.px=cx;e.py=cy;e.tx=cx+a+.5;e.ty=cy+b+.5}
    else{e.x+=dx/l*d;e.y+=dy/l*d}}
-  const SWD=t.en==='shadow'?{blade:['#e8f3ff','#7fb4ff'],edge:'#fff',guard:'#4aa3ff',grip:'#0b1f5c',glow:'rgba(120,190,255,.55)'}:{blade:['#f4f4f4','#9a9a9a'],edge:'#fff',guard:'#df1a21',grip:'#0e0d0e',glow:'rgba(255,60,70,.5)'};
+  const SWD=t.sw?t.sw:t.en==='shadow'?{blade:['#e8f3ff','#7fb4ff'],edge:'#fff',guard:'#4aa3ff',grip:'#0b1f5c',glow:'rgba(120,190,255,.55)'}:{blade:['#f4f4f4','#9a9a9a'],edge:'#fff',guard:'#df1a21',grip:'#0e0d0e',glow:'rgba(255,60,70,.5)'};
   function drawSword(now){
    const el=swing?(now-swing)/300:2;let rot=.42,tx=0,ty=0;
    const bob=Math.sin(now/260)*(keysAny()?5:2);
@@ -2132,6 +2141,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
      else{c.fillStyle='#fff';c.fillRect(cx*cw-sh*.14,ey-es,sh*.28,es*3);c.fillStyle='#df1a21';c.fillRect(cx*cw-sh*.08,ey,es,es);c.fillRect(cx*cw+sh*.05,ey,es,es)}}
    });
    drawSword(now);
+   c.font='26px Arial';c.textAlign='left';for(let i=0;i<5;i++){c.fillStyle=i<hp?'#ff2a40':'rgba(255,255,255,.25)';c.fillText('\u2665',12+i*28,36)}
    if(flash>0){c.fillStyle='rgba(223,26,33,'+Math.min(.6,flash/40)+')';c.fillRect(0,0,W,H);c.fillStyle='#fff';c.font='italic 900 44px Arial,sans-serif';c.textAlign='center';c.fillText(msg,W/2,H/2);flash--}
    const sc=150/N;m2.clearRect(0,0,150,150);
    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const v=map[y][x];m2.fillStyle=v===1?'rgba(255,255,255,.18)':v===2?'#ffe14a':'rgba(0,0,0,.2)';m2.fillRect(x*sc,y*sc,sc,sc)}
@@ -2141,10 +2151,10 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   }
   function tryMove(d){const nx=px+Math.cos(ang)*d,ny=py+Math.sin(ang)*d,r=.2;
    if(cell(nx+(d>0?r:-r)*Math.sign(Math.cos(ang)||1),py)!==1)px=nx;if(cell(px,ny+(d>0?r:-r)*Math.sign(Math.sin(ang)||1))!==1)py=ny;
-   if(cell(px,py)===2){fl++;won++;SAVE.put(t.key,won);try{sfx('win')}catch(e){}if(won>=3)award(t.tro);gen()}}
+   if(cell(px,py)===2){fl++;won++;hp=Math.min(5,hp+1);SAVE.put(t.key,won);try{sfx('win')}catch(e){}if(won>=3)award(t.tro);gen()}}
   let inv=0;
   function relocate(){const free=[];for(let y=1;y<N-1;y+=2)for(let x=1;x<N-1;x+=2)if(Math.abs(x-1)+Math.abs(y-1)>6&&map[y][x]===0)free.push([x,y]);en.forEach(e=>{if(Math.hypot(e.x-1.5,e.y-1.5)<4&&free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];e.x=e.tx=x+.5;e.y=e.ty=y+.5;e.px=e.py=-1}})}
-  function catchCheck(){if(performance.now()<inv)return;if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.5)){inv=performance.now()+1800;relocate();caught++;SAVE.put(t.cau,caught);px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
+  function catchCheck(){if(performance.now()<inv)return;if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.5)){inv=performance.now()+1800;relocate();caught++;hp--;SAVE.put(t.cau,caught);px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';if(hp<=0){msg='DEFEATED';fl=Math.max(1,fl-1);hp=5;gen()}try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
   const act={f:()=>tryMove(.3),b:()=>tryMove(-.3),l:()=>{ang-=.3},r:()=>{ang+=.3},x:()=>attack()},keys={},KM={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',' ':'x',x:'x',e:'x'};
   cv.addEventListener('keydown',e=>{const k=KM[e.key];if(k){e.preventDefault();if(k==='x'){if(!e.repeat)attack()}else keys[k]=1}});
   cv.addEventListener('keyup',e=>{const k=KM[e.key];if(k)keys[k]=0});
