@@ -939,7 +939,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="fp-h"><h3>TARTARUS: FIRST PERSON</h3><span class="fine rci" id="fpinfo">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" id="fp" width="640" height="360" tabindex="0" aria-label="First-person maze. Use arrow keys or WASD."></canvas><canvas class="rcm" id="fpm" width="150" height="150" aria-hidden="true"></canvas></div>
       <div class="fp-c"><button class="btn blue" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn blue" data-k="f" type="button"><span>Forward</span></button><button class="btn blue" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
-      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Phone: swipe the view or use the buttons (hold to keep moving), tap the view to swing your sword. Computer: click the view, then arrows or WASD, Space to attack.</p>
+      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Phone: drag on the view to look around and walk (drag up to go forward), or hold the buttons; tap the view to swing your sword. Computer: click the view, then arrows or WASD (hold to walk), Space to attack.</p>
     </div>
     <article class="pc pc3 rv holo" data-z="pc3" aria-label="Makoto Yuki">
       <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
@@ -1116,7 +1116,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="fp-h"><h3>PALACE: FIRST PERSON</h3><span class="fine rci">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" width="640" height="360" tabindex="0" aria-label="First-person palace. Use arrow keys or WASD."></canvas><canvas class="rcm" width="150" height="150" aria-hidden="true"></canvas></div>
       <div class="fp-c"><button class="btn red" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn red" data-k="f" type="button"><span>Forward</span></button><button class="btn red" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
-      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Phone: swipe the view or use the buttons (hold to keep moving), tap the view to swing your sword. Computer: click the view, then arrows or WASD, Space to attack.</p>
+      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Phone: drag on the view to look around and walk (drag up to go forward), or hold the buttons; tap the view to swing your sword. Computer: click the view, then arrows or WASD (hold to walk), Space to attack.</p>
     </div>
     <article class="pc pc5 rv holo" data-z="pc5" aria-label="Ren Amamiya">
       <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
@@ -2115,7 +2115,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   let fc=cvs(FW,FH),fx=fc.getContext('2d'),fimg=fx.createImageData(FW,FH);
   function setQ(l){Q=l;cols=Math.round(W/[1,2,3][l]);cw=W/cols;FW=[320,240,160][l];FH=Math.round(FW*H/W);fc=cvs(FW,FH);fx=fc.getContext('2d');fimg=fx.createImageData(FW,FH);zb=new Array(cols).fill(99)}
   const vig=c.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,W*.62);vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,.6)');
-  let hp=5,swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],gx=1,gy=1,gd=0,px=1.5,py=1.5,ang=0,tang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=[],inv=0,pendCmd=null;
+  let vel=0,av=0,ana=0,hp=5,swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],gx=1,gy=1,gd=0,px=1.5,py=1.5,ang=0,tang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=[],inv=0,pendCmd=null;
   const DXS=[1,0,-1,0],DYS=[0,1,0,-1],keys={};
   const dhOn=()=>box.dataset.t==='p3'&&document.getElementById('p3').classList.contains('dh');
   const cell=(x,y)=>x<0||y<0||x>=N||y>=N?1:map[y|0][x|0];
@@ -2128,7 +2128,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     if(!o.length){st.pop();continue}const [a,b,d]=o[Math.floor(Math.random()*o.length)];map[y+d[1]/2][x+d[0]/2]=0;map[b][a]=0;st.push([a,b])}
    // widen: knock out a few walls for loops
    for(let i=0;i<N;i++){const x=1+Math.floor(Math.random()*(N-2)),y=1+Math.floor(Math.random()*(N-2));if(map[y][x]===1&&((map[y][x-1]===0&&map[y][x+1]===0)||(map[y-1][x]===0&&map[y+1][x]===0)))map[y][x]=0}
-   map[N-2][N-2]=2;gx=1;gy=1;gd=map[1][2]===0?0:1;px=1.5;py=1.5;ang=tang=gd*Math.PI/2;
+   vel=av=0;map[N-2][N-2]=2;gx=1;gy=1;gd=map[1][2]===0?0:1;px=1.5;py=1.5;ang=tang=gd*Math.PI/2;
    en=[];const cnt=Math.min(6,fl+1),free=spawnFree(6);
    for(let i=0;i<cnt&&free.length;i++){const [x,y]=free.splice(Math.floor(Math.random()*free.length),1)[0];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1,hp:2,hit:0})}
    updInfo()}
@@ -2140,7 +2140,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   /* sword */
   const SWD=t.sw?t.sw:t.en==='shadow'?{blade:['#e8f3ff','#7fb4ff'],edge:'#fff',guard:'#4aa3ff',grip:'#0b1f5c',glow:'rgba(120,190,255,.55)'}:{blade:['#f4f4f4','#9a9a9a'],edge:'#fff',guard:'#df1a21',grip:'#0e0d0e',glow:'rgba(255,60,70,.5)'};
   function drawSword(now){
-   const el=swing?(now-swing)/300:2;let rot=.42,tx=0;const moving=Math.hypot(gx+.5-px,gy+.5-py)>.05,bob=Math.sin(now/110)*(moving?7:1.5);
+   const el=swing?(now-swing)/300:2;let rot=.42,tx=0;const moving=Math.abs(vel)>.4,bob=Math.sin(now/110)*(moving?7:1.5);
    if(el<1){rot=el<.45?.42-1.95*(el/.45):-1.53+(el-.45)/.55*1.95;tx=-W*.22*Math.sin(el*Math.PI)}else if(swing)swing=0;
    const bx=W*.78+tx,by=H*1.02+bob;
    if(el<1){c.save();c.globalCompositeOperation='lighter';c.globalAlpha=Math.sin(el*Math.PI)*.75;c.strokeStyle=SWD.glow;c.lineCap='round';c.lineWidth=H*.05;c.beginPath();c.moveTo(W*.92,H*.95);c.quadraticCurveTo(W*.55,H*.2,W*.12,H*.42);c.stroke();c.lineWidth=H*.015;c.strokeStyle='#fff';c.stroke();c.restore()}
@@ -2204,12 +2204,11 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    m2.fillStyle='#fff';m2.beginPath();m2.arc(px*sc,py*sc,Math.max(2,sc*.32),0,TAU);m2.fill();
    m2.strokeStyle='#fff';m2.lineWidth=2;m2.beginPath();m2.moveTo(px*sc,py*sc);m2.lineTo((px+Math.cos(ang)*1.4)*sc,(py+Math.sin(ang)*1.4)*sc);m2.stroke();
   }
-  /* grid movement */
-  const ready=()=>Math.hypot(gx+.5-px,gy+.5-py)<.12&&Math.abs(tang-ang)<.1;
-  function cmd(k){if(k==='x'){attack();return}if(!ready()){pendCmd=k;return}
-   if(k==='l'){gd=(gd+3)%4;tang-=Math.PI/2}else if(k==='r'){gd=(gd+1)%4;tang+=Math.PI/2}
-   else if(k==='f'||k==='b'){const s=k==='f'?1:-1,nx=gx+DXS[gd]*s,ny=gy+DYS[gd]*s;if(cell(nx,ny)!==1){gx=nx;gy=ny}else{flash=0}}}
-  function arrive(){if(cell(gx,gy)===2&&Math.hypot(gx+.5-px,gy+.5-py)<.2){fl++;won++;hp=Math.min(5,hp+1);SAVE.put(t.key,won);try{sfx('win')}catch(e){}if(won>=3)award(t.tro);gen()}}
+  /* free movement: smooth acceleration, sliding collision */
+  const until={};
+  function cmd(k){if(k==='x'){attack();return}until[k]=performance.now()+150}
+  const free=(x,y)=>{const r=.35;return cell(x-r,y-r)!==1&&cell(x+r,y-r)!==1&&cell(x-r,y+r)!==1&&cell(x+r,y+r)!==1};
+  function arrive(){if(cell(px,py)===2){fl++;won++;hp=Math.min(5,hp+1);SAVE.put(t.key,won);try{sfx('win')}catch(e){}if(won>=3)award(t.tro);gen()}}
   function relocate(){const free=spawnFree(6);en.forEach(e=>{if(Math.hypot(e.x-1.5,e.y-1.5)<4&&free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];e.x=e.tx=x+.5;e.y=e.ty=y+.5;e.px=e.py=-1}})}
   function catchCheck(){if(performance.now()<inv)return;if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.55)){inv=performance.now()+1800;relocate();caught++;hp--;SAVE.put(t.cau,caught);gx=1;gy=1;px=1.5;py=1.5;gd=map[1][2]===0?0:1;ang=tang=gd*Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';if(hp<=0){msg='DEFEATED';fl=Math.max(1,fl-1);hp=5;gen()}try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
   const KM={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',' ':'x',x:'x',e:'x',q:'l'};
@@ -2221,16 +2220,16 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    b.addEventListener('pointerdown',e=>{e.preventDefault();dn=1;if(k==='x')attack();else{keys[k]=1;cmd(k)}if(window.__vib)window.__vib(8);if(RM||!vis)render()});
    const up=()=>{keys[k]=0};['pointerup','pointercancel','pointerleave'].forEach(n=>b.addEventListener(n,up));
    b.addEventListener('click',e=>{if(dn){dn=0;return}cmd(k);if(RM||!vis)render()})});
-  // swipe on canvas for touch
-  let tsx=0,tsy=0,tst=0;cv.addEventListener('touchstart',e=>{const q=e.touches[0];tsx=q.clientX;tsy=q.clientY;tst=performance.now()},{passive:true});
-  cv.addEventListener('touchend',e=>{const q=e.changedTouches[0],dx=q.clientX-tsx,dy=q.clientY-tsy;if(Math.max(Math.abs(dx),Math.abs(dy))<30){if(performance.now()-tst<300)attack();return}
-   cmd(Math.abs(dx)>Math.abs(dy)?(dx>0?'r':'l'):(dy<0?'f':'b'))},{passive:true});
+  // touch: drag sideways to look, drag up/down to walk, tap to attack
+  let ts=null;cv.addEventListener('touchstart',e=>{const q=e.touches[0];ts={sx:q.clientX,sy:q.clientY,lx:q.clientX,t:performance.now(),mv:0}},{passive:true});
+  cv.addEventListener('touchmove',e=>{if(!ts)return;const q=e.touches[0],r=cv.getBoundingClientRect();ang+=(q.clientX-ts.lx)*(W/r.width)*.0075;tang=ang;ts.lx=q.clientX;const dy=ts.sy-q.clientY;ts.mv=Math.max(ts.mv,Math.abs(q.clientX-ts.sx),Math.abs(dy));ana=Math.abs(dy)>14?Math.max(-1,Math.min(1,dy/70)):0},{passive:true});
+  const tend=()=>{if(ts&&ts.mv<12&&performance.now()-ts.t<300)attack();ts=null;ana=0};cv.addEventListener('touchend',tend,{passive:true});cv.addEventListener('touchcancel',()=>{ts=null;ana=0},{passive:true});
   let vis=false,raf=0,last=0;new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(loop)}).observe(cv);
   function loop(tm){raf=0;if(!vis)return;const dt=Math.min(50,tm-last||16);last=tm;
-   // tween
-   const tx=gx+.5,ty=gy+.5,dxp=tx-px,dyp=ty-py,l=Math.hypot(dxp,dyp),sp=.0068*dt;if(l<=sp){px=tx;py=ty}else{px+=dxp/l*sp;py+=dyp/l*sp}
-   const da=tang-ang,sa=.0075*dt;if(Math.abs(da)<=sa)ang=tang;else ang+=Math.sign(da)*sa;
-   if(ready()){if(pendCmd){const k=pendCmd;pendCmd=null;cmd(k)}else if(keys.f)cmd('f');else if(keys.b)cmd('b');else if(keys.l)cmd('l');else if(keys.r)cmd('r')}
+   const nw=performance.now(),on=k=>keys[k]||nw<(until[k]||0);
+   const tf=Math.max(-.7,Math.min(1,(on('f')?1:0)-(on('b')?.7:0)+ana)),tr=(on('r')?1:0)-(on('l')?1:0),ds=dt/1000;
+   vel+=(tf*3.2-vel)*Math.min(1,dt*.013);av+=(tr*2.6-av)*Math.min(1,dt*.016);ang+=av*ds;tang=ang;
+   {const mx=Math.cos(ang)*vel*ds,my=Math.sin(ang)*vel*ds;if(free(px+mx,py))px+=mx;if(free(px,py+my))py+=my;gx=px|0;gy=py|0}
    arrive();
    en.forEach(e=>stepEn(e,.0016*dt*(1+fl*.06)));
    if(pend.length&&performance.now()>pend[0]){pend.shift();const free=spawnFree(5);if(free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1,hp:2,hit:0});updInfo()}}
