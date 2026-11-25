@@ -309,9 +309,11 @@ footer{padding:36px 16px 84px;text-align:center;color:#8d92a6;font-size:13px;bac
 .spot{animation:shim 1.6s ease-in-out infinite alternate}
 .beam{transform-box:view-box;animation:sweep 5s ease-in-out infinite alternate}
 .climb{display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:center;margin-top:36px}
+.climb .shaft{justify-self:center;width:150px;box-sizing:border-box}
 .shaft{position:relative;height:250px;border:3px solid #4aa3ff;background:repeating-linear-gradient(180deg,#07203f 0 40px,#4aa3ff 40px 43px);transition:background-position .45s cubic-bezier(.2,.9,.2,1),border-color .8s;overflow:hidden}
 .dh .shaft{background-image:repeating-linear-gradient(180deg,#02140f 0 40px,#2ef2b6 40px 43px);border-color:#2ef2b6}
-.shaft .sil{top:auto;bottom:4px;width:46px;color:#9fd0ff;left:50%}
+.shaft .sil{top:auto;bottom:4px;width:46px;color:#9fd0ff;left:50%;margin-left:0!important;transform:translateX(-50%);animation:bobf 2.4s ease-in-out infinite}
+@keyframes bobf{50%{transform:translateX(-50%) translateY(-4px)}}
 .shadow{position:absolute;left:50%;top:34px;width:76px;height:64px;margin-left:-38px;border-radius:50% 50% 40% 40%;background:#05060d;box-shadow:0 0 22px 6px #6d28d9;display:none;animation:wob 1s ease-in-out infinite}
 .shadow:before,.shadow:after{content:"";position:absolute;top:22px;width:13px;height:13px;border-radius:50%;background:#ffe14a}
 .shadow:before{left:15px}.shadow:after{right:15px}
@@ -521,6 +523,23 @@ body.shake{animation:shake .12s linear 4}
   *,*:before,*:after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
 }
+
+.tilt{transform-style:preserve-3d;will-change:transform}
+.shine{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.35),transparent 55%);opacity:0;transition:opacity .25s;mix-blend-mode:overlay}
+.tilt:hover .shine{opacity:1}
+.vh p.talk:after{content:"";display:inline-block;width:2px;height:.9em;background:var(--gold2);margin-left:4px;vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.vhost{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;color:var(--gold)}
+.vhost i{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 18px rgba(230,211,161,.35)}
+.vhost i svg{width:24px;height:24px}
+.vhost small{font:600 12px var(--body);letter-spacing:.35em;text-transform:uppercase}
+#kcode{position:fixed;inset:0;z-index:130;pointer-events:none;display:none;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,255,255,.9),rgba(255,213,0,.5) 40%,transparent 70%)}
+#kcode.on{display:flex;animation:kfl 1.6s ease-out forwards}
+#kcode b{font:italic 900 clamp(40px,10vw,120px) var(--body);color:#000;transform:skewX(-10deg);letter-spacing:.04em}
+@keyframes kfl{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+body.konami{animation:kh 2.4s ease-in-out}
+@keyframes kh{50%{filter:hue-rotate(180deg) saturate(1.4)}}
+@media (prefers-reduced-motion:reduce){.shaft .sil{animation:none}body.konami{animation:none}}
 </style>
 </head>
 <body data-zone="hero">
@@ -733,7 +752,7 @@ body.shake{animation:shake .12s linear 4}
 <!-- VELVET -->
 <section id="velvet" class="world" data-zone="velvet">
   <div class="wrap">
-    <div class="vh rv"><h2>The Velvet Room</h2><p id="vline">Choose your reality.</p></div>
+    <div class="vh rv"><div class="vhost"><i><svg viewBox="0 0 120 170"><use href="#sil"/></svg></i><small>Attendant</small></div><h2>The Velvet Room</h2><p id="vline" class="talk">Choose your reality.</p></div>
     <div class="cards" id="cards"></div>
     <div class="fusion" id="fusion" aria-live="polite">Select two cards to begin a fusion.</div>
     <div style="text-align:center"><button class="reset" id="vreset" type="button">Clear</button></div>
@@ -749,6 +768,7 @@ body.shake{animation:shake .12s linear 4}
   </div>
 </section>
 
+<div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey000"><i></i><span><small>MADE BY</small><b data-t="MIKEY000">MIKEY000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
 
@@ -765,7 +785,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -796,7 +816,7 @@ const prog=$('#prog');
 addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
 
 /* hero silhouettes follow the pointer a little */
-const sils=$$('.sil');
+const sils=$$('#top .sil');
 $('#top').addEventListener('pointermove',e=>{if(RM||innerWidth<821)return;const dx=(e.clientX/innerWidth-.5)*16;sils.forEach((s,i)=>{s.style.marginLeft=(dx*(i+1)*.5)+'px'})});
 
 /* ---------- FX canvas ---------- */
@@ -1387,7 +1407,43 @@ function waterLoad(ms,cb){
 }
 $$('a[href="#p3"]').forEach(a=>a.addEventListener('click',e=>{if(RM)return;e.preventDefault();waterLoad(2600,()=>{const h=document.documentElement;h.style.scrollBehavior='auto';$('#p3').scrollIntoView();h.style.scrollBehavior=''})}));
 $('#wreplay').addEventListener('click',()=>waterLoad(2600));
+
+/* ---------- extras: tilt, host dialogue, secret code, world tour ---------- */
+(function(){
+ const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ if(fine&&!RM){
+  document.addEventListener('pointermove',e=>{
+   const t=e.target.closest&&e.target.closest('.tile:not(.add),.tc,.jbx,.panel.climb');
+   document.querySelectorAll('.tilt-on').forEach(n=>{if(n!==t){n.style.transform='';n.classList.remove('tilt-on')}});
+   if(!t)return;const r=t.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+   t.classList.add('tilt-on');
+   const k=t.matches('.tile,.tc')?9:2;
+   t.style.transform='perspective(800px) rotateY('+((px-.5)*k*2)+'deg) rotateX('+((.5-py)*k*2)+'deg) translateY(-4px)';
+  },{passive:true});
+ }
+ /* host dialogue */
+ const vl=document.getElementById('vline');let tw=0,last='',own=false;
+ const LINES=['Welcome. Every guest here carries a different truth.','Two cards, one fusion. Choose with care.','Time passes differently in this room.','Music suits the quiet. Try the jukebox below.','The contract is yours to keep.'];
+ function speak(t){if(!vl||t===last)return;last=t;clearInterval(tw);if(RM){own=true;vl.textContent=t;return}
+  let i=0;vl.classList.add('talk');own=true;vl.textContent='';tw=setInterval(()=>{own=true;vl.textContent=t.slice(0,++i);if(i%3===0&&SND&&SND.on)try{sfx('click')}catch(e){}if(i>=t.length)clearInterval(tw)},28)}
+ window.vSpeak=speak;
+ let seen=false;
+ new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!seen){seen=true;speak(LINES[0])}})},{threshold:.3}).observe(document.getElementById('velvet'));
+ setInterval(()=>{if(document.body.dataset.zone==='velvet'&&!document.getElementById('cards').querySelector('.sel'))speak(LINES[1+Math.floor(Math.random()*(LINES.length-1))])},12000);
+ /* the fusion code writes straight to vline; re-type it */
+ new MutationObserver(()=>{if(own){own=false;return}const t=vl.textContent;if(t&&t!==last){clearInterval(tw);last='';speak(t)}}).observe(vl,{childList:true,characterData:true,subtree:true});
+ /* secret code */
+ const KC=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let ki=0;
+ addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;ki=(k===KC[ki])?ki+1:(k===KC[0]?1:0);
+  if(ki===KC.length){ki=0;const o=document.getElementById('kcode');o.classList.remove('on');void o.offsetWidth;o.classList.add('on');document.body.classList.add('konami');setTimeout(()=>document.body.classList.remove('konami'),2500);
+   try{burst('p5',innerWidth/2,innerHeight/2);burst('p4',innerWidth/3,innerHeight/2);burst('p3',innerWidth*.66,innerHeight/2)}catch(er){}
+   try{sfx('boom')}catch(er){}award('code')}});
+ /* world tour */
+ const V=SAVE.get('zones',{});
+ new MutationObserver(()=>{const z=document.body.dataset.zone;if(z&&z!=='hero'&&!V[z]){V[z]=1;SAVE.put('zones',V);if(['p3','p4','p5','velvet'].every(x=>V[x]))award('tour')}}).observe(document.body,{attributes:true,attributeFilter:['data-zone']});
 })();
+})();
+
 </script>
 </body>
 </html>
