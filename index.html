@@ -671,6 +671,44 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 @keyframes slipk{20%{transform:rotate(-14deg) translateY(-8px)}50%{transform:rotate(12deg)}80%{transform:rotate(-6deg)}}
 .slip b{font:900 15px/1.05 var(--body);writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.1em}
 @media (max-width:820px){#p4 .imap{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.pin{width:34px;height:34px;margin:-17px 0 0 -17px}}
+
+/* ---- P4 original-style skin for the Around Inaba block (palette from key art) ---- */
+#p4{--yel:#fff603;--gold:#f5a300;--blk:#12191c;--cy:#2de3e0;--rd:#c8202a;--bl:#2a4fb8}
+#p4 .imap,#p4 .gm{background:#fff;border:4px solid var(--blk);border-radius:0;box-shadow:0 0 0 5px var(--gold),12px 12px 0 5px var(--blk)}
+#p4 .gm{background:linear-gradient(#fff 0 70%,#fffc83)}
+#p4 .gm h3,.p4h{font:italic 900 30px/1 var(--body);letter-spacing:.02em;color:#fff;-webkit-text-stroke:8px var(--blk);paint-order:stroke fill;text-shadow:4px 4px 0 var(--gold);transform:skewX(-8deg);text-transform:uppercase}
+#p4 .btn.dark{background:var(--blk);color:var(--yel);border:0;box-shadow:5px 5px 0 var(--gold)}
+#p4 .btn.dark:hover,#p4 .btn.dark:focus-visible{background:var(--yel);color:var(--blk);box-shadow:5px 5px 0 var(--blk)}
+.imap-w{border-color:var(--blk)}
+.pin{background:var(--rd);border:4px solid var(--blk);box-shadow:0 0 0 3px var(--gold),3px 3px 0 3px var(--blk);color:#fff}
+.pin:hover,.pin:focus-visible,.pin.on{background:var(--yel);color:var(--blk)}
+.pin.seen:not(.on){background:var(--cy);color:var(--blk)}
+.imcard{background:var(--blk);border-left:8px solid var(--gold)}
+.imcard b{color:var(--yel);text-shadow:2px 2px 0 var(--rd)}
+.imcard small{color:var(--cy)}
+.fscene{border:4px solid var(--blk);background:linear-gradient(#fffc83 0 38%,var(--cy) 38%);box-shadow:inset 0 0 0 3px #fff}
+.wtr{background:repeating-linear-gradient(0deg,rgba(18,25,28,.12) 0 2px,transparent 2px 5px),repeating-linear-gradient(90deg,transparent 0 24px,rgba(255,255,255,.6) 24px 28px)}
+.bob{background:var(--rd);border:3px solid var(--blk)}
+.bang{color:var(--rd);-webkit-text-stroke:3px var(--blk);paint-order:stroke fill}
+.cbar{border:4px solid var(--blk);background:#fff;box-shadow:0 0 0 3px var(--gold)}
+.cbar .zone{background:var(--cy);border-color:var(--blk)}
+.cbar .zone:before{background:var(--yel)}
+.mk4{background:var(--rd);border-color:var(--blk)}
+.cdots i{border-color:var(--blk)}
+.slip{border:4px solid var(--rd);box-shadow:0 0 0 3px var(--blk),7px 7px 0 3px var(--gold);background:linear-gradient(#fff,#fffc83);color:var(--rd)}
+.slip b{color:var(--rd)}
+.status4{color:var(--blk)}
+.shop{grid-column:auto;max-width:960px;margin:clamp(28px,4vw,44px) auto 0}
+.yen{font:italic 900 44px/1 var(--body);color:var(--blk);background:var(--yel);padding:4px 22px;transform:skewX(-8deg);border:4px solid var(--blk);box-shadow:4px 4px 0 var(--gold)}
+.yen b{font-weight:900}
+.sitems{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;width:100%}
+.sit{border:4px solid var(--blk);background:#fff;padding:12px;display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:5px 5px 0 var(--gold)}
+.sit b{font:italic 900 18px var(--body);color:var(--blk)}
+.sit small{font:600 13px/1.3 var(--body);color:#2b2b2b;min-height:34px}
+.sit .pr{font:900 20px var(--body);color:var(--rd)}
+.sit button{margin-top:4px}
+.sit button:disabled{opacity:.45;cursor:not-allowed}
+.sit .own{font:700 12px var(--body);letter-spacing:.12em;color:#1a7f3c}
 </style>
 </head>
 <body data-zone="hero">
@@ -836,18 +874,20 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
       </div>
     </div>
 
-    <div class="sec-head rv" style="margin-top:clamp(50px,7vw,90px)"><span class="n" style="font-size:.5em">+</span><h2 style="font-size:clamp(28px,5vw,56px)">AROUND INABA</h2></div>
+    <div class="sec-head rv" style="margin-top:clamp(50px,7vw,90px)"><h2 class="p4h" style="font-size:clamp(34px,6vw,68px);-webkit-text-stroke:8px #12191c">AROUND INABA</h2></div>
     <div class="panel rv imap" id="imap">
       <div class="imap-w">
         <svg viewBox="0 0 800 420" role="img" aria-label="Map of a small rainy town" id="imsvg">
-          <rect width="800" height="420" fill="#fff6bf"/>
-          <path d="M-10 330 C120 280 200 390 340 350 S600 300 810 360 L810 430 L-10 430Z" fill="#6fc3ff"/>
-          <path d="M-10 345 C120 295 200 405 340 365 S600 315 810 375" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="14 12" class="imrip"/>
-          <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#fff" stroke-width="16" fill="none"/>
-          <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#181818" stroke-width="2" stroke-dasharray="10 10" fill="none"/>
-          <g fill="#ff2d95" stroke="#181818" stroke-width="3"><rect x="560" y="70" width="110" height="70"/><rect x="340" y="40" width="110" height="60" fill="#3a7bff"/><rect x="350" y="140" width="40" height="55" fill="#ffd500"/><rect x="410" y="140" width="40" height="55" fill="#00c2b8"/><rect x="460" y="140" width="40" height="55" fill="#ffd500"/><rect x="600" y="245" width="90" height="60" fill="#fff"/></g>
-          <g stroke="#181818" stroke-width="3"><path d="M110 120 L150 70 L190 120Z" fill="#d90019"/><rect x="122" y="120" width="56" height="30" fill="#fff"/></g>
-          <g fill="#2fa84f" stroke="#181818" stroke-width="2"><circle cx="60" cy="180" r="16"/><circle cx="250" cy="120" r="18"/><circle cx="500" cy="260" r="14"/><circle cx="760" cy="90" r="16"/></g>
+          <defs><linearGradient id="imy" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff603"/><stop offset="1" stop-color="#fffc83"/></linearGradient>
+          <pattern id="gird" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M0 0L60 60M60 0L0 60M0 30H60M30 0V60" stroke="#12191c" stroke-opacity=".13" stroke-width="5" fill="none"/></pattern></defs>
+          <rect width="800" height="420" fill="url(#imy)"/><rect width="800" height="420" fill="url(#gird)"/>
+          <path d="M-10 330 C120 280 200 390 340 350 S600 300 810 360 L810 430 L-10 430Z" fill="#2de3e0" stroke="#12191c" stroke-width="5"/>
+          <path d="M-10 350 C120 300 200 410 340 370 S600 320 810 380" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="14 12" class="imrip"/>
+          <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#12191c" stroke-width="22" fill="none"/>
+          <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#fff" stroke-width="3" stroke-dasharray="14 12" fill="none"/>
+          <g stroke="#12191c" stroke-width="5" stroke-linejoin="round"><rect x="560" y="70" width="110" height="70" fill="#fff"/><rect x="560" y="70" width="110" height="18" fill="#c8202a"/><rect x="340" y="40" width="110" height="60" fill="#fff"/><rect x="340" y="40" width="110" height="14" fill="#2a4fb8"/><rect x="350" y="140" width="40" height="55" fill="#fff"/><rect x="410" y="140" width="40" height="55" fill="#f5a300"/><rect x="460" y="140" width="40" height="55" fill="#fff"/><rect x="600" y="245" width="90" height="60" fill="#fff"/><path d="M600 245 L645 215 L690 245Z" fill="#c8202a"/></g>
+          <g stroke="#12191c" stroke-width="5" stroke-linejoin="round"><path d="M100 122 L150 68 L200 122Z" fill="#c8202a"/><rect x="118" y="122" width="64" height="32" fill="#fff"/></g>
+          <g fill="#12191c"><circle cx="60" cy="180" r="14"/><circle cx="250" cy="120" r="16"/><circle cx="500" cy="262" r="12"/><circle cx="760" cy="90" r="14"/></g>
         </svg>
         <button class="pin" data-i="0" style="left:76%;top:25%" type="button" aria-label="Department store">1</button>
         <button class="pin" data-i="1" style="left:25%;top:80%" type="button" aria-label="River">2</button>
@@ -879,6 +919,13 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
         <p class="status4" id="omsg">Shake the box and draw a slip.</p>
         <button class="btn dark" id="odraw" type="button"><span>Draw</span></button>
       </div>
+    </div>
+
+    <div class="panel rv gm shop" id="shop">
+      <h3>JUNES</h3>
+      <p class="status4" id="shmsg">Earn yen by fishing, cooking and exploring. Spend it on items for the tower.</p>
+      <div class="yen">&yen;<b id="yen">0</b></div>
+      <div class="sitems" id="sitems"></div>
     </div>
     <div class="gal rv" data-g="p4"><h3 class="gh">SCENES FROM THE TOWN</h3><div class="gal-row"></div></div>
   </div>
@@ -965,7 +1012,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1344,6 +1391,7 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
   fl++;floorView();if(fl>=5)award('floor5');const b=fl%10===0;
   if(b||Math.random()<.32){save();encounter(b)}
   else{if(php<MH)php++;if(Math.random()<.25&&items<5)items++;hud();save();say(['Quiet. Keep climbing.','The air is cold here.','Another floor into the dark.'][fl%3])}});
+ addEventListener('pbm:buy',e=>{if(e.detail==='med'){items=Math.min(9,items+1)}else if(e.detail==='soda'){psp=MS}hud();save()});
  floorView();hud();if(fl>1)say('Welcome back. You were on floor '+fl+'.');
 })();
 
@@ -1750,7 +1798,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  const seen=SAVE.get('map',{});const pins=[...document.querySelectorAll('.pin')],card=document.getElementById('imcard');
  const upd=()=>{const n=Object.keys(seen).length;document.getElementById('imcount').textContent=n+'/6 visited';pins.forEach(p=>p.classList.toggle('seen',!!seen[p.dataset.i]));if(n>=6)award('map')};
  pins.forEach(pn=>pn.addEventListener('click',()=>{const i=+pn.dataset.i;pins.forEach(x=>x.classList.remove('on'));pn.classList.add('on');
-  card.querySelector('b').textContent=PL[i][0];card.querySelector('p').textContent=PL[i][1];seen[i]=1;SAVE.put('map',seen);upd();try{sfx('click')}catch(e){}}));
+  card.querySelector('b').textContent=PL[i][0];card.querySelector('p').textContent=PL[i][1];if(!seen[i])window.__yen&&window.__yen(50);seen[i]=1;SAVE.put('map',seen);upd();try{sfx('click')}catch(e){}}));
  upd();
  /* fishing */
  const bob=document.getElementById('bob'),bang=document.getElementById('bang'),fm=document.getElementById('fmsg'),fb=document.getElementById('fcast'),fc=document.getElementById('fcount');
@@ -1763,7 +1811,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    t1=setTimeout(()=>{fs='bite';bob.className='bob dip';bang.classList.add('on');fm.textContent='A bite! Reel now!';try{sfx('hit')}catch(e){}if(window.__vib)window.__vib(40);
     t2=setTimeout(()=>{if(fs==='bite'){reset();fm.textContent='It got away.'}},800)},1200+Math.random()*2600)}
   else if(fs==='wait'){reset();fm.textContent='Too early. Cast again.'}
-  else if(fs==='bite'){const f=FISH[Math.floor(Math.random()*FISH.length)];reset();caught++;SAVE.put('fish',caught);fc.textContent='Caught: '+caught;fm.textContent='You caught '+f+'!';try{sfx('win')}catch(e){}if(caught>=5)award('fish')}
+  else if(fs==='bite'){const f=FISH[Math.floor(Math.random()*FISH.length)];reset();caught++;SAVE.put('fish',caught);window.__yen&&window.__yen(60+Math.floor(Math.random()*200));fc.textContent='Caught: '+caught;fm.textContent='You caught '+f+'!';try{sfx('win')}catch(e){}if(caught>=5)award('fish')}
  });
  /* cooking */
  const mk=document.getElementById('cmk'),cm=document.getElementById('cmsg'),cg=document.getElementById('cgo'),dots=document.getElementById('cdots');
@@ -1776,13 +1824,28 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   if(step<0||step>=5){step=0;sc=0;sp=1.1;[...dots.children].forEach(d=>d.className='');pos=0;dir=1;last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);prompt();return}
   const d=Math.abs(pos-50);let pts,c;if(d<5){pts=3;c='p'}else if(d<12){pts=2;c='g'}else if(d<25){pts=1;c='o'}else{pts=0;c='x'}
   sc+=pts;dots.children[step].className=c;try{sfx(pts>1?'win':'hit')}catch(e){}step++;sp+=.25;
-  if(step>=5){cancelAnimationFrame(raf);const r=sc>=14?'Master chef! Perfect.':sc>=10?'Delicious.':sc>=6?'Edible, mostly.':'It is... a dish.';cm.textContent=r+' ('+sc+'/15)';cg.querySelector('span').textContent='Cook again';if(sc>=14)award('cook')}
+  if(step>=5){cancelAnimationFrame(raf);const r=sc>=14?'Master chef! Perfect.':sc>=10?'Delicious.':sc>=6?'Edible, mostly.':'It is... a dish.';cm.textContent=r+' ('+sc+'/15)';cg.querySelector('span').textContent='Cook again';window.__yen&&window.__yen(sc*20);if(sc>=14)award('cook')}
   else prompt()});
  /* fortunes */
  const FO=[['GREAT BLESSING','Everything lines up. Say yes today.'],['BLESSING','A kind word reaches the right person.'],['SMALL BLESSING','Look closely. Something good is hiding in plain sight.'],['LUCK','Rain clears by evening.'],['FUTURE LUCK','Be patient. The best part comes later.'],['CAUTION','Check the fog twice before you decide.']];
  const sl=document.getElementById('slip'),om=document.getElementById('omsg');
  document.getElementById('odraw').addEventListener('click',()=>{sl.classList.remove('shake');void sl.offsetWidth;sl.classList.add('shake');try{sfx('click')}catch(e){}
   setTimeout(()=>{const f=FO[Math.floor(Math.random()*FO.length)];sl.innerHTML='<b>'+f[0].split(' ')[0]+'</b>';om.textContent=f[0]+'. '+f[1]},500)});
+})();
+
+/* ---------- Junes shop ---------- */
+(function(){
+ let yen=SAVE.get('yen',0),own=SAVE.get('shop',{});
+ const IT=[['med','Medicine','Heals in the tower. Adds one item.',150,1],['soda','Energy drink','Refills SP in the tower.',200,1],['toy','Stuffed toy','A soft, round collectible.',500,0]];
+ const yd=document.getElementById('yen'),box=document.getElementById('sitems'),sm=document.getElementById('shmsg');
+ function draw(){yd.textContent=yen;box.innerHTML='';IT.forEach(t=>{const d=document.createElement('div');d.className='sit';
+  const n=own[t[0]]||0;d.innerHTML='<b>'+t[1]+'</b><small>'+t[2]+'</small><span class="pr">&yen;'+t[3]+'</span>'+(n?'<span class="own">OWNED x'+n+'</span>':'');
+  const b=document.createElement('button');b.type='button';b.className='btn dark';b.innerHTML='<span>Buy</span>';b.disabled=yen<t[3]||(!t[4]&&n>0);
+  b.addEventListener('click',()=>{if(yen<t[3])return;yen-=t[3];own[t[0]]=n+1;SAVE.put('yen',yen);SAVE.put('shop',own);try{sfx('win')}catch(e){}
+   if(t[4])dispatchEvent(new CustomEvent('pbm:buy',{detail:t[0]}));sm.textContent='Bought '+t[1].toLowerCase()+'. '+(t[4]?'It is waiting in the tower.':'Nice.');draw();
+   if(own.med&&own.soda&&own.toy)award('junes')});d.append(b);box.append(d)})}
+ window.__yen=n=>{yen+=n;SAVE.put('yen',yen);draw();sm.textContent='+'+n+' yen.'};
+ draw();
 })();
 })();
 
