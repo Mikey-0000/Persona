@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101015">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Persona Beyond the Mask</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -619,6 +623,16 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 }
 @media (max-width:820px) and (max-height:520px){.mk{display:none}}
 @media (hover:none){.tile:hover{transform:none;box-shadow:none}.card:hover .in{transform:none}}
+
+#tod{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0;transition:opacity 2s,background 2s;mix-blend-mode:multiply}
+body[data-tod="dawn"] #tod{background:linear-gradient(180deg,#ffb27a,#ff7bd8);opacity:.16}
+body[data-tod="day"] #tod{opacity:0}
+body[data-tod="dusk"] #tod{background:linear-gradient(180deg,#ff8a3d,#8a3dff);opacity:.2}
+body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
+.inst{position:fixed;right:14px;bottom:14px;z-index:86;padding:10px 18px;border:2px solid var(--accent);background:#0b0b0d;color:#fff;font:italic 800 13px var(--body);letter-spacing:.08em;text-transform:uppercase;transform:skewX(-12deg);cursor:pointer;box-shadow:4px 4px 0 var(--accent)}
+.inst[hidden]{display:none}
+@media (max-width:820px){.inst{bottom:max(8px,env(safe-area-inset-bottom))}}
+@media (display-mode:standalone){.inst{display:none}}
 </style>
 </head>
 <body data-zone="hero">
@@ -652,7 +666,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 
 <header id="top" data-zone="hero">
   <div class="wrap">
-    <p class="eyebrow">An interactive fan board by Mikey000</p>
+    <p class="eyebrow" id="greet">An interactive fan board by Mikey000</p>
     <h1 class="hero-title">PERSONA</h1>
     <p class="hero-sub">BEYOND THE MASK</p>
   </div>
@@ -849,6 +863,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 
 <div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
 <div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
+<div id="tod" aria-hidden="true"></div>
+<button class="inst" id="inst" type="button" hidden>Install app</button>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey000"><i></i><span><small>MADE BY</small><b data-t="MIKEY000">MIKEY000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
@@ -866,7 +882,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1608,6 +1624,19 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  if(touch){const h=document.querySelector('#heist');if(h){const f=h.parentNode.querySelector('.fine,p');}}
  /* mobile: nav scroll active link into view */
  new MutationObserver(()=>{const a=document.querySelector('.nav a.l.on, .nav a[href="#'+(document.body.dataset.zone||'')+'"]');if(a&&innerWidth<=820&&a.scrollIntoView)try{a.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}).observe(document.body,{attributes:true,attributeFilter:['data-zone']});
+})();
+
+/* ---------- time of day + install ---------- */
+(function(){
+ function tod(){const h=new Date().getHours();return h>=5&&h<8?'dawn':h>=8&&h<17?'day':h>=17&&h<20?'dusk':'night'}
+ const G={dawn:'Good morning',day:'Good afternoon',dusk:'Good evening',night:'Burning the midnight hour'};
+ function set(){const t=tod();document.body.dataset.tod=t;const g=document.getElementById('greet');if(g)g.textContent=G[t]+'. An interactive fan board by Mikey000'}
+ set();setInterval(set,60000);
+ let dp=null;const ib=document.getElementById('inst');
+ addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;ib.hidden=false});
+ ib.addEventListener('click',()=>{if(!dp)return;dp.prompt();dp.userChoice.finally(()=>{dp=null;ib.hidden=true})});
+ addEventListener('appinstalled',()=>{ib.hidden=true;try{award('app')}catch(e){}});
+ if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))addEventListener('load',()=>{try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}});
 })();
 })();
 
