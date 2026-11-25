@@ -933,8 +933,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
     <div class="panel rv fp" id="fpbox" data-t="p3">
       <div class="fp-h"><h3>TARTARUS: FIRST PERSON</h3><span class="fine rci" id="fpinfo">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" id="fp" width="640" height="360" tabindex="0" aria-label="First-person maze. Use arrow keys or WASD."></canvas><canvas class="rcm" id="fpm" width="150" height="150" aria-hidden="true"></canvas></div>
-      <div class="fp-c"><button class="btn blue" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn blue" data-k="f" type="button"><span>Forward</span></button><button class="btn blue" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button></div>
-      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Click the view, then use arrow keys or WASD.</p>
+      <div class="fp-c"><button class="btn blue" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn blue" data-k="f" type="button"><span>Forward</span></button><button class="btn blue" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
+      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Click the view, then use arrow keys or WASD. Space or X swings your sword.</p>
     </div>
     <article class="pc pc3 rv holo" data-z="pc3" aria-label="Makoto Yuki">
       <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
@@ -1104,8 +1104,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
     <div class="panel rv fp fp5" id="fqbox" data-t="p5">
       <div class="fp-h"><h3>PALACE: FIRST PERSON</h3><span class="fine rci">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" width="640" height="360" tabindex="0" aria-label="First-person palace. Use arrow keys or WASD."></canvas><canvas class="rcm" width="150" height="150" aria-hidden="true"></canvas></div>
-      <div class="fp-c"><button class="btn red" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn red" data-k="f" type="button"><span>Forward</span></button><button class="btn red" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button></div>
-      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Click the view, then use arrow keys or WASD.</p>
+      <div class="fp-c"><button class="btn red" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn red" data-k="f" type="button"><span>Forward</span></button><button class="btn red" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
+      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Click the view, then use arrow keys or WASD. Space or X swings your sword.</p>
     </div>
     <article class="pc pc5 rv holo" data-z="pc5" aria-label="Ren Amamiya">
       <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
@@ -1140,7 +1140,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 <div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
 <div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
 <button class="inst" id="inst" type="button" hidden>Install app</button>
-<div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move in the first-person views, the heist and the menu</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
+<div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move in the first-person views, the heist and the menu</li><li><b>Space / X</b>Swing the sword in the first-person views</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey0000"><i></i><span><small>MADE BY</small><b data-t="MIKEY0000">MIKEY0000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
@@ -1158,7 +1158,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['palace','Phantom Route','Clear 3 first-person palace floors.'],['maze','Lost in Tartarus','Find the exit on 3 first-person floors.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['slayer','Blade Dancer','Defeat 10 enemies with the sword.'],['palace','Phantom Route','Clear 3 first-person palace floors.'],['maze','Lost in Tartarus','Find the exit on 3 first-person floors.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -2057,7 +2057,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  function mk(box){
   const t=TH[box.dataset.t],cv=box.querySelector('.rc'),mm=box.querySelector('.rcm'),info=box.querySelector('.rci');
   const c=cv.getContext('2d'),m2=mm.getContext('2d');const W=cv.width,H=cv.height,cols=160,cw=W/cols,fov=1.05;
-  let N=11,map=[],px=1.5,py=1.5,ang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=new Array(cols).fill(99);
+  let swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],px=1.5,py=1.5,ang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=new Array(cols).fill(99);
   const dh=()=>t.en==='shadow'&&document.getElementById('p3').classList.contains('dh');
   function gen(){
    N=Math.min(21,9+fl*2);map=Array.from({length:N},()=>Array(N).fill(1));
@@ -2066,8 +2066,8 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     if(!o.length){st.pop();continue}const [a,b,d]=o[Math.floor(Math.random()*o.length)];map[y+d[1]/2][x+d[0]/2]=0;map[b][a]=0;st.push([a,b])}
    map[N-2][N-2]=2;px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;
    en=[];const cnt=Math.min(6,fl+1);const free=[];for(let y=1;y<N-1;y+=2)for(let x=1;x<N-1;x+=2)if(Math.abs(x-1)+Math.abs(y-1)>6&&map[y][x]===0)free.push([x,y]);
-   for(let i=0;i<cnt&&free.length;i++){const [x,y]=free.splice(Math.floor(Math.random()*free.length),1)[0];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1})}
-   info.textContent=t.label+fl+'  ('+N+'x'+N+', '+en.length+' '+t.en+(en.length>1?'s':'')+')'}
+   for(let i=0;i<cnt&&free.length;i++){const [x,y]=free.splice(Math.floor(Math.random()*free.length),1)[0];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1,hp:2,hit:0})}
+   updInfo()}
   const cell=(x,y)=>x<0||y<0||x>=N||y>=N?1:map[y|0][x|0];
   function stepEn(e,d){
    const dx=e.tx-e.x,dy=e.ty-e.y,l=Math.hypot(dx,dy);
@@ -2075,6 +2075,29 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     const o=opts.length?opts:[[0,-1],[1,0],[0,1],[-1,0]].filter(([a,b])=>map[cy+b]&&map[cy+b][cx+a]!==1);
     const [a,b]=o[Math.floor(Math.random()*o.length)];e.px=cx;e.py=cy;e.tx=cx+a+.5;e.ty=cy+b+.5}
    else{e.x+=dx/l*d;e.y+=dy/l*d}}
+  const SWD=t.en==='shadow'?{blade:['#e8f3ff','#7fb4ff'],edge:'#fff',guard:'#4aa3ff',grip:'#0b1f5c',glow:'rgba(120,190,255,.55)'}:{blade:['#f4f4f4','#9a9a9a'],edge:'#fff',guard:'#df1a21',grip:'#0e0d0e',glow:'rgba(255,60,70,.5)'};
+  function drawSword(now){
+   const el=swing?(now-swing)/300:2;let rot=.42,tx=0,ty=0;
+   const bob=Math.sin(now/260)*(keysAny()?5:2);
+   if(el<1){const e=el<.35?el/.35:1-(el-.35)/.65*.0;const k=el<.4?(el/.4):1-(el-.4)/.6*.0;rot=.42-1.95*Math.min(1,el/.45);if(el>.45)rot=-1.53+(el-.45)/.55*1.95;tx=-W*.22*Math.sin(Math.min(1,el)*Math.PI)}
+   else if(swing&&el>=1)swing=0;
+   const bx=W*.78+tx,by=H*1.02+ty+bob;
+   if(el<.6&&el>0){c.save();c.translate(bx,by);c.fillStyle=SWD.glow;c.beginPath();c.moveTo(0,0);c.arc(0,0,H*.9,-Math.PI/2-1.9+rot*0,-Math.PI/2+.2,false);c.closePath();c.globalAlpha=(1-el/.6)*.45;c.fill();c.restore()}
+   c.save();c.translate(bx,by);c.rotate(rot);
+   const L=H*.82,w=H*.07;
+   const gr=c.createLinearGradient(-w,0,w,0);gr.addColorStop(0,SWD.blade[1]);gr.addColorStop(.5,SWD.blade[0]);gr.addColorStop(1,SWD.blade[1]);
+   c.fillStyle=gr;c.beginPath();c.moveTo(-w*.5,-H*.06);c.lineTo(-w*.55,-L);c.lineTo(0,-L-H*.07);c.lineTo(w*.55,-L);c.lineTo(w*.5,-H*.06);c.closePath();c.fill();
+   c.strokeStyle=SWD.edge;c.lineWidth=2;c.beginPath();c.moveTo(0,-H*.06);c.lineTo(0,-L-H*.05);c.stroke();
+   c.fillStyle=SWD.guard;c.fillRect(-w*1.9,-H*.075,w*3.8,H*.035);
+   c.fillStyle=SWD.grip;c.fillRect(-w*.35,-H*.045,w*.7,H*.2);
+   c.fillStyle=SWD.guard;c.beginPath();c.arc(0,H*.16,w*.5,0,6.283);c.fill();
+   c.restore()}
+  const keysAny=()=>keys.f||keys.b;
+  function attack(){const now=performance.now();if(now-swing<380)return;swing=now;try{sfx('hit')}catch(e){}if(window.__vib)window.__vib(25);
+   setTimeout(()=>{let hit=false;en.forEach(e=>{const d=Math.hypot(e.x-px,e.y-py);let da=Math.atan2(e.y-py,e.x-px)-ang;while(da>Math.PI)da-=6.283;while(da<-Math.PI)da+=6.283;
+     if(d<1.9&&Math.abs(da)<.55){hit=true;e.hp--;e.hit=performance.now();if(e.hp<=0){e.dead=1;kills++;SAVE.put('kills',kills);flash=0;msg='';if(kills>=10)award('slayer');pend.push(performance.now()+5000)}}});
+    if(hit){en=en.filter(e=>!e.dead);updInfo();try{sfx('win')}catch(e){}}},130)}
+  function updInfo(){info.textContent=t.label+fl+'  ('+N+'x'+N+', '+en.length+' '+t.en+(en.length===1?'':'s')+')  Kills '+kills}
   function render(){
    const D=dh(),hue=t.wall(D),sk=t.sky(D),fo=t.flo(D);
    let g=c.createLinearGradient(0,0,0,H/2);g.addColorStop(0,sk[1]);g.addColorStop(1,sk[0]);c.fillStyle=g;c.fillRect(0,0,W,H/2);
@@ -2102,12 +2125,13 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     const cx=(da/fov+.5)*cols,sh=Math.min(H*1.4,H/(d*Math.cos(da)||1)*.7),sw=sh*.8/ (W/cols)/ (H/W*cols/cols)/3.2;
     const half=Math.max(1,sh*.42/cw);
     for(let col=Math.floor(cx-half);col<=Math.ceil(cx+half);col++){if(col<0||col>=cols||zb[col]<d)continue;const u=(col-cx)/half,hh=sh*Math.sqrt(Math.max(0,1-u*u));
-     c.fillStyle=t.en==='shadow'?'#05060d':'#0e0d0e';c.fillRect(col*cw,H/2-hh*.45+sh*.1,cw+1,hh*.9);
+     c.fillStyle=performance.now()-e.hit<160?'#fff':t.en==='shadow'?'#05060d':'#0e0d0e';c.fillRect(col*cw,H/2-hh*.45+sh*.1,cw+1,hh*.9);
      if(t.en==='shadow'){c.fillStyle='rgba(109,40,217,.35)';c.fillRect(col*cw,H/2-hh*.45+sh*.1,cw+1,3)}}
     const ci=Math.round(cx);if(ci>=0&&ci<cols&&zb[ci]>=d){const ey=H/2-sh*.12+sh*.1,es=Math.max(2,sh*.07);
      if(t.en==='shadow'){c.fillStyle='#ffe14a';c.fillRect(cx*cw-sh*.17,ey,es*1.4,es);c.fillRect(cx*cw+sh*.1,ey,es*1.4,es)}
      else{c.fillStyle='#fff';c.fillRect(cx*cw-sh*.14,ey-es,sh*.28,es*3);c.fillStyle='#df1a21';c.fillRect(cx*cw-sh*.08,ey,es,es);c.fillRect(cx*cw+sh*.05,ey,es,es)}}
    });
+   drawSword(now);
    if(flash>0){c.fillStyle='rgba(223,26,33,'+Math.min(.6,flash/40)+')';c.fillRect(0,0,W,H);c.fillStyle='#fff';c.font='italic 900 44px Arial,sans-serif';c.textAlign='center';c.fillText(msg,W/2,H/2);flash--}
    const sc=150/N;m2.clearRect(0,0,150,150);
    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const v=map[y][x];m2.fillStyle=v===1?'rgba(255,255,255,.18)':v===2?'#ffe14a':'rgba(0,0,0,.2)';m2.fillRect(x*sc,y*sc,sc,sc)}
@@ -2121,17 +2145,18 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   let inv=0;
   function relocate(){const free=[];for(let y=1;y<N-1;y+=2)for(let x=1;x<N-1;x+=2)if(Math.abs(x-1)+Math.abs(y-1)>6&&map[y][x]===0)free.push([x,y]);en.forEach(e=>{if(Math.hypot(e.x-1.5,e.y-1.5)<4&&free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];e.x=e.tx=x+.5;e.y=e.ty=y+.5;e.px=e.py=-1}})}
   function catchCheck(){if(performance.now()<inv)return;if(en.some(e=>Math.hypot(e.x-px,e.y-py)<.5)){inv=performance.now()+1800;relocate();caught++;SAVE.put(t.cau,caught);px=1.5;py=1.5;ang=map[1][2]===0?0:Math.PI/2;flash=40;msg=t.en==='shadow'?'AMBUSHED':'SPOTTED';try{sfx('caught')}catch(e){}if(window.__vib)window.__vib([40,30,40])}}
-  const act={f:()=>tryMove(.3),b:()=>tryMove(-.3),l:()=>{ang-=.3},r:()=>{ang+=.3}},keys={},KM={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r'};
-  cv.addEventListener('keydown',e=>{const k=KM[e.key];if(k){e.preventDefault();keys[k]=1}});
+  const act={f:()=>tryMove(.3),b:()=>tryMove(-.3),l:()=>{ang-=.3},r:()=>{ang+=.3},x:()=>attack()},keys={},KM={ArrowUp:'f',w:'f',ArrowDown:'b',s:'b',ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',' ':'x',x:'x',e:'x'};
+  cv.addEventListener('keydown',e=>{const k=KM[e.key];if(k){e.preventDefault();if(k==='x'){if(!e.repeat)attack()}else keys[k]=1}});
   cv.addEventListener('keyup',e=>{const k=KM[e.key];if(k)keys[k]=0});
   cv.addEventListener('blur',()=>{for(const k in keys)keys[k]=0});
-  cv.addEventListener('click',()=>cv.focus());
+  cv.addEventListener('click',()=>{if(document.activeElement===cv)attack();else cv.focus()});
   box.querySelectorAll('.fp-c [data-k]').forEach(b=>b.addEventListener('click',()=>{act[b.dataset.k]();catchCheck();if(RM||!vis)render()}));
   let vis=false,raf=0,last=0;new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(loop)}).observe(cv);
   function loop(tm){raf=0;if(!vis)return;const dt=Math.min(50,tm-last||16);last=tm;
    if(keys.f)tryMove(.0035*dt);if(keys.b)tryMove(-.0035*dt);if(keys.l)ang-=.0028*dt;if(keys.r)ang+=.0028*dt;
-   en.forEach(e=>stepEn(e,.0016*dt*(1+fl*.06)));catchCheck();render();raf=requestAnimationFrame(loop)}
+   en.forEach(e=>stepEn(e,.0016*dt*(1+fl*.06)));if(pend.length&&performance.now()>pend[0]){pend.shift();const free=[];for(let y=1;y<N-1;y+=2)for(let x=1;x<N-1;x+=2)if(Math.hypot(x+.5-px,y+.5-py)>6&&map[y][x]===0)free.push([x,y]);if(free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1,hp:2,hit:0});updInfo()}}catchCheck();render();raf=requestAnimationFrame(loop)}
   gen();render();
+  (window.__rc=window.__rc||[]).push({en:()=>en,put:(x,y,a)=>{px=x;py=y;ang=a},kills:()=>kills});
  }
  document.querySelectorAll('.fp[data-t]').forEach(mk);
 })();
