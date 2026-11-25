@@ -709,6 +709,28 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 .sit button{margin-top:4px}
 .sit button:disabled{opacity:.45;cursor:not-allowed}
 .sit .own{font:700 12px var(--body);letter-spacing:.12em;color:#1a7f3c}
+
+/* ---- animated strokes ---- */
+.dr{stroke-dasharray:1;stroke-dashoffset:1}
+.imap.in .dr{animation:drw 1.3s cubic-bezier(.5,0,.2,1) forwards;animation-delay:calc(var(--i,0)*.1s)}
+@keyframes drw{to{stroke-dashoffset:0}}
+.imrd{animation:march 1.2s linear infinite}
+@keyframes march{to{stroke-dashoffset:-48}}
+#radar .pl{stroke-dasharray:16 9;animation:march 2.2s linear infinite}
+#strings path{stroke-dasharray:12 8;animation:march 3s linear infinite}
+.pin:not(.seen):not(.on){animation:pinb 1.6s ease-in-out infinite,pinr 1.6s ease-in-out infinite}
+@keyframes pinr{0%,100%{box-shadow:0 0 0 3px var(--gold),3px 3px 0 3px var(--blk)}50%{box-shadow:0 0 0 8px rgba(245,163,0,.45),3px 3px 0 3px var(--blk)}}
+.rv.in .p4h,.rv.in.gm h3,.gm.in h3,.grid3.in .gm h3{animation:strkin .9s cubic-bezier(.2,1.2,.3,1) both,shb 2.6s 1s ease-in-out infinite}
+@keyframes strkin{0%{-webkit-text-stroke-width:0;opacity:0;transform:skewX(-8deg) translateY(14px) scale(.9)}100%{-webkit-text-stroke-width:8px;opacity:1;transform:skewX(-8deg)}}
+@keyframes shb{0%,100%{text-shadow:4px 4px 0 var(--gold)}50%{text-shadow:8px 8px 0 var(--gold),12px 12px 0 var(--cy)}}
+#p4 .sec-head h2{animation:h2s 3.2s ease-in-out infinite}
+@keyframes h2s{0%,100%{text-shadow:3px 3px 0 #fff,6px 6px 0 #ff2d95,10px 10px 0 #00c2b8}50%{text-shadow:3px 3px 0 #fff,9px 9px 0 #ff2d95,15px 15px 0 #00c2b8}}
+#p4 .sec-head .n{animation:nst 2.4s ease-in-out infinite}
+@keyframes nst{0%,100%{-webkit-text-stroke-width:4px;text-shadow:6px 6px 0 #ff2d95}50%{-webkit-text-stroke-width:6px;text-shadow:10px 10px 0 #ff2d95}}
+.yen{animation:yb 2.4s ease-in-out infinite}@keyframes yb{50%{box-shadow:7px 7px 0 var(--gold)}}
+.shaft{animation:shbd 2.4s ease-in-out infinite}
+@keyframes shbd{50%{box-shadow:0 0 18px 2px rgba(74,163,255,.55)}}
+.dh .shaft{animation-name:shbd2}@keyframes shbd2{50%{box-shadow:0 0 18px 2px rgba(46,242,182,.6)}}
 </style>
 </head>
 <body data-zone="hero">
@@ -884,7 +906,7 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
           <path d="M-10 330 C120 280 200 390 340 350 S600 300 810 360 L810 430 L-10 430Z" fill="#2de3e0" stroke="#12191c" stroke-width="5"/>
           <path d="M-10 350 C120 300 200 410 340 370 S600 320 810 380" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="14 12" class="imrip"/>
           <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#12191c" stroke-width="22" fill="none"/>
-          <path d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#fff" stroke-width="3" stroke-dasharray="14 12" fill="none"/>
+          <path class="imrd" d="M0 215 H800 M400 0 V300 M130 0 V215 M650 120 V330" stroke="#fff" stroke-width="3" stroke-dasharray="14 12" fill="none"/>
           <g stroke="#12191c" stroke-width="5" stroke-linejoin="round"><rect x="560" y="70" width="110" height="70" fill="#fff"/><rect x="560" y="70" width="110" height="18" fill="#c8202a"/><rect x="340" y="40" width="110" height="60" fill="#fff"/><rect x="340" y="40" width="110" height="14" fill="#2a4fb8"/><rect x="350" y="140" width="40" height="55" fill="#fff"/><rect x="410" y="140" width="40" height="55" fill="#f5a300"/><rect x="460" y="140" width="40" height="55" fill="#fff"/><rect x="600" y="245" width="90" height="60" fill="#fff"/><path d="M600 245 L645 215 L690 245Z" fill="#c8202a"/></g>
           <g stroke="#12191c" stroke-width="5" stroke-linejoin="round"><path d="M100 122 L150 68 L200 122Z" fill="#c8202a"/><rect x="118" y="122" width="64" height="32" fill="#fff"/></g>
           <g fill="#12191c"><circle cx="60" cy="180" r="14"/><circle cx="250" cy="120" r="16"/><circle cx="500" cy="262" r="12"/><circle cx="760" cy="90" r="14"/></g>
@@ -1846,6 +1868,12 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    if(own.med&&own.soda&&own.toy)award('junes')});d.append(b);box.append(d)})}
  window.__yen=n=>{yen+=n;SAVE.put('yen',yen);draw();sm.textContent='+'+n+' yen.'};
  draw();
+})();
+
+/* ---------- animated strokes: map draw-in ---------- */
+(function(){
+ document.querySelectorAll('#imsvg g[stroke] > *').forEach((e,i)=>{e.setAttribute('pathLength','1');e.classList.add('dr');e.style.setProperty('--i',i)});
+ const r=document.querySelector('#imsvg > path[stroke-width="22"]');if(r){r.setAttribute('pathLength','1');r.classList.add('dr')}
 })();
 })();
 
