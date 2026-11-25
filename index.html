@@ -689,6 +689,7 @@ body.shake{animation:shake .12s linear 4}
 
 <audio id="bgm3" src="audio/persona-3-time.mp3" loop preload="none"></audio>
 <audio id="bgm4" src="audio/persona-4-heartbeat-heartbreak.mp3" loop preload="none"></audio>
+<audio id="bgm5" src="audio/beneath-the-mask.mp3" loop preload="none"></audio>
 <footer><button class="wipe" id="wipe" type="button">Reset saved progress</button><div class="bigtag" aria-label="Mikey000">MIKEY000</div>A fan-made tribute with original artwork and placeholder silhouettes. Persona is a trademark of its respective owners. This page is not affiliated with or endorsed by them.</footer>
 
 <script>
@@ -1147,7 +1148,7 @@ const SCN={
   if(s===2||s===10)[4,5,6].forEach(m=>tone('triangle',root*m,t,.2,.04,b));
   if(s%2&&Math.random()<.35)tone('sine',pick(PENT),t,.35,.05,b);
  },
- p5(i,t,b){const s=i%16;
+ p5(i,t,b){if(BG.p5.ok)return;const s=i%16;
   if([0,5,8,10].includes(s))tone('sine',160,t,.14,.5,b,.002,45);
   if(s===4||s===12){noise(t,.14,.2,b,'bandpass',2200);tone('triangle',200,t,.09,.12,b)}
   noise(t,.03,s%4===2?.07:.03,b,'highpass',8000);
@@ -1161,7 +1162,7 @@ const SCN={
  }
 };
 function sTick(){const c=SND.ctx;while(SND.next<c.currentTime+.15){const z=SND.zone;if(SCN[z])SCN[z](SND.step,SND.next,SND.bus[z]);SND.next+=SD;SND.step++}}
-const BG={p3:{el:$('#bgm3'),ok:true,t:0},p4:{el:$('#bgm4'),ok:true,t:0}};
+const BG={p3:{el:$('#bgm3'),ok:true,t:0},p4:{el:$('#bgm4'),ok:true,t:0},p5:{el:$('#bgm5'),ok:true,t:0}};
 Object.values(BG).forEach(b=>b.el.addEventListener('error',()=>{b.ok=false}));
 function bgFade(b,target,done){clearInterval(b.t);b.t=setInterval(()=>{const v=b.el.volume,d=target-v;if(Math.abs(d)<.03){b.el.volume=target;clearInterval(b.t);done&&done();return}b.el.volume=Math.max(0,Math.min(1,v+Math.sign(d)*.03))},50)}
 function bgmSet(zone){Object.entries(BG).forEach(([k,b])=>{if(k===zone&&b.ok){b.el.play().then(()=>bgFade(b,.65)).catch(()=>{b.ok=false})}else if(!b.el.paused)bgFade(b,0,()=>b.el.pause())})}
