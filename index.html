@@ -748,6 +748,35 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .pc5 .pc-c li{background:#0e0d0e;color:#fff;transform:skewX(-10deg)}
 .pc5 .sp{position:absolute;z-index:2;width:26px;height:26px;background:#fff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);pointer-events:none;filter:drop-shadow(0 0 6px #fff)}
 .pc5 .s1{left:24%;top:14%}.pc5 .s2{right:8%;top:20%;transform:scale(.7)}.pc5 .s3{right:22%;bottom:12%;transform:scale(.5)}
+
+/* ---- holo tilt + awaken cut-in ---- */
+.holo .pc-img{transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s ease-out,box-shadow .3s;will-change:transform}
+.holo .pc-img:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),var(--sh1,rgba(255,255,255,.55)),transparent 55%)}
+.holo.on .pc-img:after{opacity:1}
+.pc3{--sh1:rgba(150,190,255,.55)}
+.pc4{--sh1:rgba(255,246,3,.5)}
+.pc4 .pc-img:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.7) 40%,#ff2d95 44%,#fff603 48%,#2de3e0 52%,#2a4fb8 56%,transparent 66%) calc(var(--mx,50%)*2 - 50%) 0/200% 100%;mix-blend-mode:overlay}
+.pc4.on .pc-img:before{opacity:.9}
+.pc5{--sh1:rgba(255,255,255,.6)}
+.pc-go{margin-top:16px;padding:10px 26px;border:0;font:italic 900 16px var(--body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transform:skewX(-12deg);transition:transform .15s}
+.pc-go:hover{transform:skewX(-12deg) translateY(-3px)}
+.pc3 .pc-go{background:#0057B8;color:#fff;box-shadow:5px 5px 0 #c1c9db}
+.pc4 .pc-go{background:#0a0909;color:#fff603;box-shadow:5px 5px 0 #f5a300}
+.pc5 .pc-go{background:#fff;color:#0e0d0e;box-shadow:5px 5px 0 #0e0d0e}
+.pc-t .pc-go+.pc-c{margin-top:18px}
+.cut{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:hidden}
+.cut .fl{position:absolute;inset:0;background:#fff;animation:cfl .5s ease-out forwards}
+.cut .bd{position:absolute;left:-10%;right:-10%;top:32%;height:36%;transform:skewY(-6deg) translateX(-110%);animation:cbd 1.35s cubic-bezier(.2,.9,.2,1) forwards;display:flex;align-items:center;justify-content:center;gap:16px}
+.cut .bd b{font:italic 900 clamp(30px,6vw,72px)/1 var(--body);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.cut .bd small{font:800 clamp(11px,1.4vw,16px) var(--body);letter-spacing:.4em;text-transform:uppercase}
+.cut.c3 .bd{background:linear-gradient(90deg,#02081a,#0057B8 60%,#4aa3ff);color:#fff;box-shadow:0 0 40px #4aa3ff}
+.cut.c4 .bd{background:#fff603;color:#0a0909;border-block:6px solid #0a0909;box-shadow:0 0 0 4px #f5a300}
+.cut.c5 .bd{background:#0e0d0e;color:#fff;border-block:6px solid #df1a21}
+.cut.c5 .bd b{text-shadow:4px 4px 0 #df1a21}
+.cut .ln{position:absolute;left:0;right:0;height:3px;background:#fff;opacity:.8;animation:cln .6s ease-out forwards}
+@keyframes cfl{0%{opacity:.95}100%{opacity:0}}
+@keyframes cbd{0%{transform:skewY(-6deg) translateX(-110%)}22%,78%{transform:skewY(-6deg) translateX(0)}100%{transform:skewY(-6deg) translateX(110%)}}
+@keyframes cln{from{transform:scaleX(0)}to{transform:scaleX(1);opacity:0}}
 </style>
 </head>
 <body data-zone="hero">
@@ -855,10 +884,10 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       </div>
     </div>
 
-    <article class="pc pc3 rv" aria-label="Makoto Yuki">
+    <article class="pc pc3 rv holo" data-z="pc3" aria-label="Makoto Yuki">
       <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
       <figure class="pc-img"><img src="images/p3-hero.jpg" alt="Portrait of the Persona 3 protagonist with headphones" loading="lazy"></figure>
-      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Makoto Yuki</h3><p class="pc-r">Transfer student / Wild Card</p><p>A quiet new arrival at Gekkoukan High with a pair of headphones and a calm that never quite breaks. In the hidden hour he can call more than one Persona, and the bonds he builds by day decide how far he can climb by night.</p><ul class="pc-c"><li><small>PERSONA</small><b>Orpheus</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Evoker</b></li></ul></div>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Makoto Yuki</h3><p class="pc-r">Transfer student / Wild Card</p><p>A quiet new arrival at Gekkoukan High with a pair of headphones and a calm that never quite breaks. In the hidden hour he can call more than one Persona, and the bonds he builds by day decide how far he can climb by night.</p><button class="pc-go" type="button">Awaken</button><ul class="pc-c"><li><small>PERSONA</small><b>Orpheus</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Evoker</b></li></ul></div>
     </article>
     <div class="gal rv" data-g="p3"><h3 class="gh">SCENES FROM THE DARK HOUR</h3><div class="gal-row"></div></div>
   </div>
@@ -973,10 +1002,10 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="sitems" id="sitems"></div>
     </div>
 
-    <article class="pc pc4 rv" aria-label="Yu Narukami">
+    <article class="pc pc4 rv holo" data-z="pc4" aria-label="Yu Narukami">
       <svg class="pc-ring" viewBox="0 0 400 400" aria-hidden="true"><g fill="none" stroke="#8d8d09" stroke-width="14"><ellipse cx="120" cy="200" rx="110" ry="170"/><ellipse cx="120" cy="200" rx="70" ry="120"/><ellipse cx="120" cy="200" rx="30" ry="70"/></g></svg>
       <figure class="pc-img"><img src="images/p4-hero.jpg" alt="Portrait of the Persona 4 protagonist looking up with glasses on his forehead" loading="lazy"></figure>
-      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Yu Narukami</h3><p class="pc-r">Inaba transfer / Investigation Team leader</p><p>He arrives in a sleepy, rainy town for a single year and ends up chasing a case through the TV. Level-headed, a little dry, and always the one people reach for when the fog rolls in.</p><ul class="pc-c"><li><small>PERSONA</small><b>Izanagi</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Katana</b></li></ul></div>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Yu Narukami</h3><p class="pc-r">Inaba transfer / Investigation Team leader</p><p>He arrives in a sleepy, rainy town for a single year and ends up chasing a case through the TV. Level-headed, a little dry, and always the one people reach for when the fog rolls in.</p><button class="pc-go" type="button">Awaken</button><ul class="pc-c"><li><small>PERSONA</small><b>Izanagi</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Katana</b></li></ul></div>
     </article>
     <div class="gal rv" data-g="p4"><h3 class="gh">SCENES FROM THE TOWN</h3><div class="gal-row"></div></div>
   </div>
@@ -1020,10 +1049,10 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <p class="status" id="hmsg" style="color:#fff;text-align:left" aria-live="polite">Reach the treasure without being seen.</p>
     </div>
 
-    <article class="pc pc5 rv" aria-label="Ren Amamiya">
+    <article class="pc pc5 rv holo" data-z="pc5" aria-label="Ren Amamiya">
       <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
       <figure class="pc-img"><img src="images/p5-hero.jpg" alt="Portrait of the Persona 5 protagonist with round glasses and a smirk" loading="lazy"></figure>
-      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Ren Amamiya</h3><p class="pc-r">Joker / Leader of the Phantom Thieves</p><p>On probation in a new city, he wears a polite smile in daylight and a mask after dark. Sharp, patient and a step ahead, he steals the distortions out of people one palace at a time.</p><ul class="pc-c"><li><small>PERSONA</small><b>Arsene</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Dagger and gun</b></li></ul></div>
+      <div class="pc-t"><small class="pc-e">THE PROTAGONIST</small><h3>Ren Amamiya</h3><p class="pc-r">Joker / Leader of the Phantom Thieves</p><p>On probation in a new city, he wears a polite smile in daylight and a mask after dark. Sharp, patient and a step ahead, he steals the distortions out of people one palace at a time.</p><button class="pc-go" type="button">Awaken</button><ul class="pc-c"><li><small>PERSONA</small><b>Arsene</b></li><li><small>ARCANA</small><b>The Fool</b></li><li><small>WEAPON</small><b>Dagger and gun</b></li></ul></div>
     </article>
     <div class="gal rv" data-g="p5"><h3 class="gh">SCENES FROM THE CITY</h3><div class="gal-row"></div></div>
   </div>
@@ -1068,7 +1097,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1905,6 +1934,28 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
 })();
 
 
+
+/* ---------- protagonist cards: holo tilt + awaken ---------- */
+(function(){
+ const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ const T={pc3:['Hidden hour','Evoker drawn'],pc4:['Truth unmasked','Card shattered'],pc5:['Showtime','Mask torn off']};
+ const done=SAVE.get('awk',{});
+ document.querySelectorAll('.holo').forEach(c=>{
+  const im=c.querySelector('.pc-img');
+  if(fine&&!RM){
+   c.addEventListener('pointermove',e=>{const r=im.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    c.style.setProperty('--ry',((x-.5)*16)+'deg');c.style.setProperty('--rx',((.5-y)*16)+'deg');c.style.setProperty('--mx',(x*100)+'%');c.style.setProperty('--my',(y*100)+'%');c.classList.add('on')});
+   c.addEventListener('pointerleave',()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg');c.classList.remove('on')});
+  }
+  c.querySelector('.pc-go').addEventListener('click',()=>{
+   const z=c.dataset.z,t=T[z];c.querySelectorAll('.cut').forEach(n=>n.remove());
+   const d=document.createElement('div');d.className='cut c'+z.slice(2);
+   d.innerHTML='<div class="fl"></div><div class="bd"><small>'+t[1]+'</small><b>'+t[0]+'</b></div>'+[18,48,78].map(y=>'<i class="ln" style="top:'+y+'%"></i>').join('');
+   c.append(d);setTimeout(()=>d.remove(),1500);
+   try{sfx('boom');setTimeout(()=>sfx('win'),500)}catch(e){}if(window.__vib)window.__vib([30,40,60]);
+   done[z]=1;SAVE.put('awk',done);if(done.pc3&&done.pc4&&done.pc5)award('faces')});
+ });
+})();
 })();
 
 </script>
