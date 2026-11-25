@@ -624,11 +624,6 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 @media (max-width:820px) and (max-height:520px){.mk{display:none}}
 @media (hover:none){.tile:hover{transform:none;box-shadow:none}.card:hover .in{transform:none}}
 
-#tod{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0;transition:opacity 2s,background 2s;mix-blend-mode:multiply}
-body[data-tod="dawn"] #tod{background:linear-gradient(180deg,#ffb27a,#ff7bd8);opacity:.16}
-body[data-tod="day"] #tod{opacity:0}
-body[data-tod="dusk"] #tod{background:linear-gradient(180deg,#ff8a3d,#8a3dff);opacity:.2}
-body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 .inst{position:fixed;right:14px;bottom:14px;z-index:86;padding:10px 18px;border:2px solid var(--accent);background:#0b0b0d;color:#fff;font:italic 800 13px var(--body);letter-spacing:.08em;text-transform:uppercase;transform:skewX(-12deg);cursor:pointer;box-shadow:4px 4px 0 var(--accent)}
 .inst[hidden]{display:none}
 @media (max-width:820px){.inst{bottom:max(8px,env(safe-area-inset-bottom))}}
@@ -710,27 +705,16 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 .sit button:disabled{opacity:.45;cursor:not-allowed}
 .sit .own{font:700 12px var(--body);letter-spacing:.12em;color:#1a7f3c}
 
-/* ---- animated strokes ---- */
+/* ---- animated strokes (light + quick) ---- */
 .dr{stroke-dasharray:1;stroke-dashoffset:1}
-.imap.in .dr{animation:drw 1.3s cubic-bezier(.5,0,.2,1) forwards;animation-delay:calc(var(--i,0)*.1s)}
+.imap.in .dr{animation:drw .55s ease-out forwards;animation-delay:calc(var(--i,0)*.04s)}
 @keyframes drw{to{stroke-dashoffset:0}}
-.imrd{animation:march 1.2s linear infinite}
+.imrd{animation:march .7s linear infinite}
 @keyframes march{to{stroke-dashoffset:-48}}
-#radar .pl{stroke-dasharray:16 9;animation:march 2.2s linear infinite}
-#strings path{stroke-dasharray:12 8;animation:march 3s linear infinite}
-.pin:not(.seen):not(.on){animation:pinb 1.6s ease-in-out infinite,pinr 1.6s ease-in-out infinite}
-@keyframes pinr{0%,100%{box-shadow:0 0 0 3px var(--gold),3px 3px 0 3px var(--blk)}50%{box-shadow:0 0 0 8px rgba(245,163,0,.45),3px 3px 0 3px var(--blk)}}
-.rv.in .p4h,.rv.in.gm h3,.gm.in h3,.grid3.in .gm h3{animation:strkin .9s cubic-bezier(.2,1.2,.3,1) both,shb 2.6s 1s ease-in-out infinite}
-@keyframes strkin{0%{-webkit-text-stroke-width:0;opacity:0;transform:skewX(-8deg) translateY(14px) scale(.9)}100%{-webkit-text-stroke-width:8px;opacity:1;transform:skewX(-8deg)}}
-@keyframes shb{0%,100%{text-shadow:4px 4px 0 var(--gold)}50%{text-shadow:8px 8px 0 var(--gold),12px 12px 0 var(--cy)}}
-#p4 .sec-head h2{animation:h2s 3.2s ease-in-out infinite}
-@keyframes h2s{0%,100%{text-shadow:3px 3px 0 #fff,6px 6px 0 #ff2d95,10px 10px 0 #00c2b8}50%{text-shadow:3px 3px 0 #fff,9px 9px 0 #ff2d95,15px 15px 0 #00c2b8}}
-#p4 .sec-head .n{animation:nst 2.4s ease-in-out infinite}
-@keyframes nst{0%,100%{-webkit-text-stroke-width:4px;text-shadow:6px 6px 0 #ff2d95}50%{-webkit-text-stroke-width:6px;text-shadow:10px 10px 0 #ff2d95}}
-.yen{animation:yb 2.4s ease-in-out infinite}@keyframes yb{50%{box-shadow:7px 7px 0 var(--gold)}}
-.shaft{animation:shbd 2.4s ease-in-out infinite}
-@keyframes shbd{50%{box-shadow:0 0 18px 2px rgba(74,163,255,.55)}}
-.dh .shaft{animation-name:shbd2}@keyframes shbd2{50%{box-shadow:0 0 18px 2px rgba(46,242,182,.6)}}
+#radar .pl{stroke-dasharray:16 9;animation:march 1.2s linear infinite}
+#strings path{stroke-dasharray:12 8;animation:march 1.4s linear infinite}
+.rv.in .p4h,.grid3.in .gm h3,.shop.in h3{animation:strkin .4s ease-out both}
+@keyframes strkin{0%{-webkit-text-stroke-width:0;opacity:0;transform:skewX(-8deg) scale(.92)}100%{-webkit-text-stroke-width:8px;opacity:1;transform:skewX(-8deg)}}
 </style>
 </head>
 <body data-zone="hero">
@@ -1015,7 +999,6 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 
 <div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
 <div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
-<div id="tod" aria-hidden="true"></div>
 <button class="inst" id="inst" type="button" hidden>Install app</button>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey0000"><i></i><span><small>MADE BY</small><b data-t="MIKEY0000">MIKEY0000</b></span></div>
