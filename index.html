@@ -687,6 +687,7 @@ body.shake{animation:shake .12s linear 4}
 <div class="mk" aria-label="Made by Mikey000"><i></i><span><small>MADE BY</small><b data-t="MIKEY000">MIKEY000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
 
+<audio id="bgm3" src="audio/persona-3-time.m4a" loop preload="none"></audio>
 <footer><button class="wipe" id="wipe" type="button">Reset saved progress</button><div class="bigtag" aria-label="Mikey000">MIKEY000</div>A fan-made tribute with original artwork and placeholder silhouettes. Persona is a trademark of its respective owners. This page is not affiliated with or endorsed by them.</footer>
 
 <script>
@@ -1132,6 +1133,7 @@ function tone(type,f,t,dur,vol,dest,att,glide){const c=SND.ctx,o=c.createOscilla
 function noise(t,dur,vol,dest,ft,f0,f1){const c=SND.ctx,s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();s.buffer=SND.nb;fl.type=ft;fl.frequency.setValueAtTime(f0,t);if(f1)fl.frequency.exponentialRampToValueAtTime(f1,t+dur);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(fl);fl.connect(g);g.connect(dest);s.start(t,Math.random()*.5);s.stop(t+dur+.02)}
 const SCN={
  p3(i,t,b){
+  if(bgmOK)return;
   if(i%64===0)P3N.forEach((f,k)=>tone('triangle',f*(1+k*.002),t,10,.05,b,3));
   if(i%2===0&&Math.random()<.08){const f=rnd(900,1700);[[0,.12],[.3,.05],[.62,.025]].forEach(([d,v])=>tone('sine',f,t+d,.3,v,b,.003,f*.5))}
   if($('#p3').classList.contains('dh')&&i%16===0)tone('sine',60,t,.3,.3,b,.005,35);
@@ -1158,11 +1160,15 @@ const SCN={
  }
 };
 function sTick(){const c=SND.ctx;while(SND.next<c.currentTime+.15){const z=SND.zone;if(SCN[z])SCN[z](SND.step,SND.next,SND.bus[z]);SND.next+=SD;SND.step++}}
-function applyZone(){if(!SND.ctx)return;let z=document.body.dataset.zone;if(z==='hero')z='velvet';SND.zone=z;SND.step=0;Object.entries(SND.bus).forEach(([k,g])=>g.gain.setTargetAtTime(k===z?1:0,SND.ctx.currentTime,.5))}
+const bgm=$('#bgm3');let bgmOK=true,bgmT=0;
+bgm.addEventListener('error',()=>{bgmOK=false});
+function bgmFade(target,done){clearInterval(bgmT);bgmT=setInterval(()=>{const v=bgm.volume,d=target-v;if(Math.abs(d)<.03){bgm.volume=target;clearInterval(bgmT);done&&done();return}bgm.volume=Math.max(0,Math.min(1,v+Math.sign(d)*.03))},50)}
+function bgmSet(on){if(on&&bgmOK){bgm.play().then(()=>bgmFade(.65)).catch(()=>{bgmOK=false})}else if(!bgm.paused)bgmFade(0,()=>bgm.pause())}
+function applyZone(){if(!SND.ctx)return;let z=document.body.dataset.zone;bgmSet(z==='p3');if(z==='hero')z='velvet';SND.zone=z;SND.step=0;Object.entries(SND.bus).forEach(([k,g])=>g.gain.setTargetAtTime(k===z?1:0,SND.ctx.currentTime,.5))}
 function sOn(on){
  const b=$('#snd');
  if(on){if(!sInit())return;SND.ctx.resume();SND.on=true;SND.master.gain.setTargetAtTime(.7,SND.ctx.currentTime,.1);SND.next=SND.ctx.currentTime+.05;clearInterval(SND.timer);SND.timer=setInterval(sTick,30);applyZone()}
- else{SND.on=false;if(SND.ctx)SND.master.gain.setTargetAtTime(0,SND.ctx.currentTime,.08);clearInterval(SND.timer)}
+ else{SND.on=false;bgmSet(false);if(SND.ctx)SND.master.gain.setTargetAtTime(0,SND.ctx.currentTime,.08);clearInterval(SND.timer)}
  b.setAttribute('aria-pressed',SND.on);b.textContent='Sound: '+(SND.on?'on':'off');SAVE.put('snd',SND.on);
 }
 function sfx(n,a){
