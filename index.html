@@ -540,6 +540,54 @@ body.shake{animation:shake .12s linear 4}
 body.konami{animation:kh 2.4s ease-in-out}
 @keyframes kh{50%{filter:hue-rotate(180deg) saturate(1.4)}}
 @media (prefers-reduced-motion:reduce){.shaft .sil{animation:none}body.konami{animation:none}}
+
+#sum{position:fixed;inset:0;z-index:125;display:none;overflow:hidden;cursor:pointer;background:#000}
+#sum.on{display:block}
+#sum .bgl,#sum .nm,#sum .sub,#sum .sl{position:absolute}
+#sum .nm{left:0;right:0;top:50%;text-align:center;font:italic 900 clamp(60px,15vw,230px)/1 var(--body);transform:translateY(-50%) skewX(-10deg);opacity:0}
+#sum .sub{left:0;right:0;top:calc(50% + clamp(40px,9vw,140px));text-align:center;font:800 clamp(14px,2vw,24px) var(--body);letter-spacing:.5em;text-transform:uppercase;opacity:0}
+#sum .bgl{inset:0}
+#sum .sh{position:absolute;pointer-events:none}
+#sum.z3{background:#02081a}
+#sum.z3 .bgl{background:radial-gradient(circle,#bcd8ff 0,#0057B8 35%,#02081a 75%);animation:s3bg 2.6s ease-out forwards}
+#sum.z3 .nm{color:#fff;text-shadow:0 0 40px #4aa3ff;animation:snm .9s .9s cubic-bezier(.2,1.4,.3,1) forwards}
+#sum.z3 .sub{color:#bcd8ff;animation:sfade .6s 1.4s forwards}
+@keyframes s3bg{0%{opacity:0;transform:scale(.2)}30%{opacity:1}100%{opacity:.85;transform:scale(1.6)}}
+#sum.z4{background:#ffd500}
+#sum.z4 .bgl{background:conic-gradient(from 0deg,#ffd500,#fff,#ffd500,#ff7bd8,#ffd500,#3a7bff,#ffd500,#fff,#ffd500);animation:s4bg 2.6s linear forwards}
+#sum.z4 .nm{color:#181818;text-shadow:6px 6px 0 #fff;animation:snm .8s .6s cubic-bezier(.2,1.4,.3,1) forwards}
+#sum.z4 .sub{color:#181818;animation:sfade .6s 1.2s forwards}
+#sum.z4 .sl{left:-10%;top:50%;width:120%;height:10px;background:#181818;transform:rotate(-24deg) scaleX(0);transform-origin:left;box-shadow:0 0 0 4px #fff;animation:slash .35s .25s ease-out forwards}
+@keyframes s4bg{from{transform:rotate(0) scale(2)}to{transform:rotate(90deg) scale(2)}}
+@keyframes slash{to{transform:rotate(-24deg) scaleX(1)}}
+#sum.z5{background:#000}
+#sum.z5 .bgl{background:#d90019;clip-path:polygon(0 0,100% 0,100% 0,0 0);animation:s5bg 2.6s ease-out forwards}
+#sum.z5 .nm{color:#fff;text-shadow:8px 8px 0 #000;animation:snm .7s .5s cubic-bezier(.2,1.4,.3,1) forwards}
+#sum.z5 .sub{color:#fff;animation:sfade .5s 1.1s forwards}
+@keyframes s5bg{0%{clip-path:polygon(0 0,0 0,0 100%,0 100%)}25%{clip-path:polygon(0 0,70% 0,40% 100%,0 100%)}50%,100%{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+#sum.za{background:#000}
+#sum.za .bgl{background:repeating-linear-gradient(115deg,#d90019 0 40px,#000 40px 80px);animation:saa 1.9s linear forwards}
+#sum.za .nm{color:#fff;font-size:clamp(46px,11vw,170px);text-shadow:8px 8px 0 #d90019;animation:snm .5s .35s cubic-bezier(.2,1.4,.3,1) forwards}
+#sum.za .sub{color:#fff;animation:sfade .4s .9s forwards}
+@keyframes saa{0%{opacity:0;background-position:0 0}20%{opacity:1}100%{opacity:.9;background-position:800px 0}}
+@keyframes snm{0%{opacity:0;transform:translateY(-50%) skewX(-10deg) scale(2.4)}100%{opacity:1;transform:translateY(-50%) skewX(-10deg) scale(1)}}
+@keyframes sfade{to{opacity:1}}
+#sum .sh{width:22px;height:60px;animation:shf 1.4s ease-out forwards}
+@keyframes shf{from{opacity:1;transform:translate(0,0) rotate(0)}to{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r))}}
+.sumb{margin-left:12px}
+.aoc{display:inline-block;margin-left:8px;font-size:.8em;opacity:.8}
+#qz{position:fixed;inset:0;z-index:128;background:rgba(2,6,20,.92);display:none;align-items:center;justify-content:center;padding:20px}
+#qz.on{display:flex}
+.qzp{background:var(--velvet);border:1px solid var(--gold);max-width:640px;width:100%;max-height:92vh;overflow:auto;padding:28px;color:#e8dfc2;font-family:var(--serif);text-align:center;box-shadow:0 0 60px rgba(230,211,161,.2)}
+.qzp h3{font:500 28px var(--serif);letter-spacing:.14em;color:var(--gold2);text-transform:uppercase;margin-bottom:6px}
+.qzp .qn{font:600 12px var(--body);letter-spacing:.3em;color:var(--gold)}
+.qzp .qq{font:italic 500 24px/1.3 var(--serif);margin:14px 0 18px}
+.qzp .qo{display:block;width:100%;margin:8px 0;padding:12px 16px;background:transparent;border:1px solid var(--gold);color:#e8dfc2;font:500 18px var(--serif);cursor:pointer;transition:background .2s,color .2s}
+.qzp .qo:hover,.qzp .qo:focus-visible{background:var(--gold2);color:#101e42}
+.qzp canvas{width:min(100%,320px);height:auto;border:1px solid var(--gold);margin:10px 0}
+.qzp .qa{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.qzp .qa button{padding:10px 20px;background:transparent;border:1px solid var(--gold);color:var(--gold2);font:600 14px var(--body);letter-spacing:.15em;text-transform:uppercase;cursor:pointer}
+@media (prefers-reduced-motion:reduce){#sum *{animation-duration:.01s!important;animation-delay:0s!important}}
 </style>
 </head>
 <body data-zone="hero">
@@ -642,7 +690,7 @@ body.konami{animation:kh 2.4s ease-in-out}
         <p class="fine" style="margin-bottom:10px">Each floor may hide a shadow. Fight with the menu: Strike, Persona (4 SP), Guard or Item. Every tenth floor has a guardian.</p>
         <div class="hud"><span>HP <i><b id="php"></b></i> <em id="hpn">30</em></span><span>SP <i><b id="psp"></b></i> <em id="spn">12</em></span><span>ITEMS <em id="itn">3</em></span></div>
         <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="btn blue" id="up" type="button"><span>Climb</span></button></div>
-        <div class="fmenu" id="fmenu"><button class="btn" id="fb-strike" type="button"><span>Strike</span></button><button class="btn blue" id="fb-persona" type="button"><span>Persona (4 SP)</span></button><button class="btn" id="fb-guard" type="button"><span>Guard</span></button><button class="btn" id="fb-item" type="button"><span>Item</span></button></div>
+        <div class="fmenu" id="fmenu"><button class="btn" id="fb-strike" type="button"><span>Strike</span></button><button class="btn blue" id="fb-persona" type="button"><span>Persona (4 SP)</span></button><button class="btn" id="fb-guard" type="button"><span>Guard</span></button><button class="btn" id="fb-item" type="button"><span>Item</span></button><button class="btn red" id="fb-all" type="button" disabled><span>All-Out<b class="aoc" id="aoc">0/3</b></span></button></div>
         <p class="status" id="cmsg" style="text-align:left;margin-top:12px" aria-live="polite">The tower stretches upward.</p>
       </div>
     </div>
@@ -755,7 +803,7 @@ body.konami{animation:kh 2.4s ease-in-out}
     <div class="vh rv"><div class="vhost"><i><svg viewBox="0 0 120 170"><use href="#sil"/></svg></i><small>Attendant</small></div><h2>The Velvet Room</h2><p id="vline" class="talk">Choose your reality.</p></div>
     <div class="cards" id="cards"></div>
     <div class="fusion" id="fusion" aria-live="polite">Select two cards to begin a fusion.</div>
-    <div style="text-align:center"><button class="reset" id="vreset" type="button">Clear</button></div>
+    <div style="text-align:center"><button class="reset" id="vreset" type="button">Clear</button> <button class="reset" id="qzb" type="button">Which arcana are you?</button></div>
     <div class="jbx rv" id="jbx">
       <h3 class="jh">The Jukebox</h3>
       <canvas id="jbviz" width="640" height="140" aria-hidden="true"></canvas>
@@ -768,6 +816,8 @@ body.konami{animation:kh 2.4s ease-in-out}
   </div>
 </section>
 
+<div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
+<div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey000"><i></i><span><small>MADE BY</small><b data-t="MIKEY000">MIKEY000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
@@ -785,7 +835,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1127,12 +1177,12 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
 /* ---------- P3: tower climb with fight menu ---------- */
 (function(){
  const MH=30,MS=12;
- let fl=SAVE.get('floor',1),php=SAVE.get('php',MH),psp=SAVE.get('psp',MS),items=SAVE.get('items',3),shHp=0,shMax=0,boss=false,guard=false,busy=false;
+ let aoc=0,fl=SAVE.get('floor',1),php=SAVE.get('php',MH),psp=SAVE.get('psp',MS),items=SAVE.get('items',3),shHp=0,shMax=0,boss=false,guard=false,busy=false;
  const sh=$('#shaft'),sd=$('#shadow'),up=$('#up'),msg=$('#cmsg'),fm=$('#fmenu');
  sd.innerHTML='<i><b style="width:100%"></b></i>';
  const save=()=>{SAVE.put('floor',fl);SAVE.put('php',php);SAVE.put('psp',psp);SAVE.put('items',items)};
  function hud(){$('#php').style.width=(php/MH*100)+'%';$('#psp').style.width=(psp/MS*100)+'%';$('#hpn').textContent=php;$('#spn').textContent=psp;$('#itn').textContent=items;
-  $('#fb-strike').disabled=busy;$('#fb-guard').disabled=busy;$('#fb-persona').disabled=busy||psp<4;$('#fb-item').disabled=busy||items<1||php>=MH}
+  $('#fb-strike').disabled=busy;$('#fb-guard').disabled=busy;$('#fb-persona').disabled=busy||psp<4;$('#fb-item').disabled=busy||items<1||php>=MH;$('#fb-all').disabled=busy||aoc<3;$('#aoc').textContent=Math.min(aoc,3)+'/3'}
  const floorView=()=>{$('#floor').textContent=fl;sh.style.backgroundPositionY=(fl*43)+'px'};
  function num(t,col){const d=document.createElement('div');d.className='dmg';d.textContent=t;d.style.color=col||'#fff';d.style.left=(30+Math.random()*40)+'%';sh.append(d);setTimeout(()=>d.remove(),900)}
  const setSH=()=>{sd.querySelector('b').style.width=Math.max(0,shHp/shMax*100)+'%'};
@@ -1144,11 +1194,11 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
   setTimeout(()=>{
    let dmg=boss?3+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);if(guard){dmg=Math.ceil(dmg/2);guard=false}
    php=Math.max(0,php-dmg);sh.classList.remove('hurt');void sh.offsetWidth;sh.classList.add('hurt');num('-'+dmg,'#ff6b86');sfx('caught');
-   if(php<=0){fl=Math.max(1,fl-3);php=MH;psp=MS;floorView();end();say('You were knocked out and woke up on floor '+fl+'.');return}
+   if(php<=0){aoc=0;fl=Math.max(1,fl-3);php=MH;psp=MS;floorView();end();say('You were knocked out and woke up on floor '+fl+'.');return}
    busy=false;hud();save();say('It hits for '+dmg+'. Your move.')
   },520)}
  function dealt(d,label){
-  shHp-=d;setSH();sd.classList.remove('hit');void sd.offsetWidth;sd.classList.add('hit');num(String(d));
+  if(label!=='All-Out')aoc=Math.min(3,aoc+1);shHp-=d;setSH();sd.classList.remove('hit');void sd.offsetWidth;sd.classList.add('hit');num(String(d));
   if(shHp<=0){if(boss)award('guardian');psp=Math.min(MS,psp+2);php=Math.min(MH,php+(boss?10:2));end();say((boss?'Guardian':'Shadow')+' defeated. You recover a little.');const r=sh.getBoundingClientRect();if(boss)burst('p3',r.left+r.width/2,r.top+r.height/2);return}
   say(label+' for '+d+'.');shadowTurn()}
  $('#fb-strike').addEventListener('click',()=>{if(busy)return;sfx('hit');dealt(2+Math.floor(Math.random()*2),'Strike')});
@@ -1157,6 +1207,7 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
   const r=sh.getBoundingClientRect();burst('p3',r.left+r.width/2,r.top+r.height/2);
   const c=document.createElement('div');c.className='pcast';c.textContent='PERSONA!';sh.append(c);setTimeout(()=>c.remove(),700);
   setTimeout(()=>dealt(5+Math.floor(Math.random()*3),'Persona'),450)});
+ $('#fb-all').addEventListener('click',()=>{if(busy||aoc<3)return;aoc=0;busy=true;hud();sfx('boom');award('allout');window.__summon('aa',()=>{dealt(shHp+boss*6,'All-Out')})});
  $('#fb-guard').addEventListener('click',()=>{if(busy)return;guard=true;psp=Math.min(MS,psp+1);say('You brace for the next hit.');hud();shadowTurn()});
  $('#fb-item').addEventListener('click',()=>{if(busy||items<1||php>=MH)return;items--;php=Math.min(MH,php+10);num('+10','#8ff5d5');say('You recover some strength.');hud();save();shadowTurn()});
  up.addEventListener('click',()=>{
@@ -1441,6 +1492,70 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  /* world tour */
  const V=SAVE.get('zones',{});
  new MutationObserver(()=>{const z=document.body.dataset.zone;if(z&&z!=='hero'&&!V[z]){V[z]=1;SAVE.put('zones',V);if(['p3','p4','p5','velvet'].every(x=>V[x]))award('tour')}}).observe(document.body,{attributes:true,attributeFilter:['data-zone']});
+})();
+
+/* ---------- summons ---------- */
+(function(){
+ const o=document.getElementById('sum'),nm=o.querySelector('.nm'),sb=o.querySelector('.sub');let tm=0,cb=null;
+ const T={z3:['AWAKEN','Memento mori'],z4:['REACH OUT','Persona!'],z5:['REBEL','Show them'],za:['ALL-OUT ATTACK','Finish them']};
+ const COL={z3:['#bcd8ff','#4aa3ff','#fff'],z4:['#181818','#fff','#ff7bd8'],z5:['#d90019','#000','#fff'],za:['#d90019','#fff','#000']};
+ function done(){clearTimeout(tm);o.classList.remove('on');o.querySelectorAll('.sh').forEach(n=>n.remove());const f=cb;cb=null;if(f)f()}
+ function summon(z,after){
+  const k='z'+z.replace('p','');const t=T[k];if(!t)return;cb=after||null;
+  nm.textContent=t[0];sb.textContent=t[1];o.className='';void o.offsetWidth;o.className='on '+k;
+  const n=RM?0:26;for(let i=0;i<n;i++){const d=document.createElement('i');d.className='sh';const a=Math.random()*6.283,r=200+Math.random()*600;
+   d.style.cssText='left:50%;top:50%;background:'+COL[k][i%3]+';--dx:'+Math.cos(a)*r+'px;--dy:'+Math.sin(a)*r+'px;--r:'+(Math.random()*720-360)+'deg;animation-delay:'+(.5+Math.random()*.4)+'s';o.append(d)}
+  try{sfx('boom');setTimeout(()=>sfx('win'),700)}catch(e){}
+  clearTimeout(tm);tm=setTimeout(done,k==='za'?1900:2600)}
+ window.__summon=summon;o.addEventListener('click',done);
+ const seen=SAVE.get('summons',{});
+ function mk(host,z,cls){if(!host)return;const b=document.createElement('button');b.type='button';b.className='btn sumb '+cls;b.innerHTML='<span>Summon a Persona</span>';
+  b.addEventListener('click',()=>{summon(z);seen[z]=1;SAVE.put('summons',seen);if(seen.p3&&seen.p4&&seen.p5)award('summon')});host.append(b)}
+ mk(document.getElementById('wreplay').parentNode,'p3','blue');
+ mk(document.getElementById('tune').parentNode,'p4','dark');
+ mk(document.getElementById('over-btn').parentNode,'p5','red');
+})();
+
+/* ---------- arcana quiz ---------- */
+(function(){
+ const Q=[
+  ['A friend is in trouble late at night. You...',[['Drop everything and go',1],['Call and listen',2],['Work out a plan',3]]],
+  ['Pick a place to spend a free afternoon.',[['A quiet rooftop',4],['A busy street full of strangers',0],['A library corner',3]]],
+  ['What do you value most?',[['Hope',4],['Freedom',0],['Understanding',5]]],
+  ['A rule makes no sense. You...',[['Break it, carefully',1],['Question it openly',0],['Follow it and wait',2]]],
+  ['Which sound do you like best?',[['Rain on glass',3],['A distant clock',2],['A crowd cheering',5]]],
+  ['When the night is darkest you...',[['Keep walking',0],['Look for a light',4],['Accept the ending and begin again',3]]]
+ ];
+ const AR=[['0','The Fool','Every road begins with one step.'],['I','The Magician','Will, shaped into a tool.'],['III','The Empress','Care that makes things grow.'],['XIII','Death','An ending that clears the ground.'],['XVII','The Star','Hope that outlasts the night.'],['XXI','The World','The whole picture, at last.']];
+ const el=document.getElementById('qz'),p=document.getElementById('qzp');let i=0,sc=[0,0,0,0,0,0];
+ function ask(){
+  if(i>=Q.length)return res();
+  const q=Q[i];p.innerHTML='<h3>The Velvet Room</h3><div class="qn">QUESTION '+(i+1)+' OF '+Q.length+'</div><div class="qq"></div>';
+  p.querySelector('.qq').textContent=q[0];
+  q[1].forEach(o=>{const b=document.createElement('button');b.type='button';b.className='qo';b.textContent=o[0];b.addEventListener('click',()=>{sc[o[1]]++;try{sfx('click')}catch(e){}i++;ask()});p.append(b)})}
+ function card(a){
+  const c=document.createElement('canvas');c.width=600;c.height=900;const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,900);g.addColorStop(0,'#27407f');g.addColorStop(1,'#101e42');x.fillStyle=g;x.fillRect(0,0,600,900);
+  x.strokeStyle='#b6a16a';x.lineWidth=6;x.strokeRect(24,24,552,852);x.lineWidth=2;x.strokeRect(42,42,516,816);
+  x.fillStyle='#e6d3a1';x.textAlign='center';x.font='500 64px Georgia,serif';x.fillText(a[0],300,150);
+  x.fillStyle='#b6a16a';x.beginPath();x.arc(300,400,120,0,6.283);x.lineWidth=3;x.stroke();
+  x.save();x.translate(300,400);for(let k=0;k<12;k++){x.rotate(Math.PI/6);x.beginPath();x.moveTo(0,-120);x.lineTo(0,-170);x.stroke()}x.restore();
+  x.beginPath();x.arc(300,372,36,0,6.283);x.fill();x.beginPath();x.moveTo(250,430);x.lineTo(350,430);x.lineTo(375,500);x.lineTo(225,500);x.closePath();x.fill();
+  x.fillStyle='#e6d3a1';x.font='700 44px Georgia,serif';x.fillText(a[1].toUpperCase(),300,660);
+  x.fillStyle='#d8cfae';x.font='italic 26px Georgia,serif';
+  const w=a[2].split(' ');let l='',y=720;w.forEach(t=>{if(x.measureText(l+t).width>440){x.fillText(l,300,y);y+=36;l=''}l+=t+' '});x.fillText(l,300,y);
+  x.fillStyle='#b6a16a';x.font='600 18px Arial,sans-serif';x.fillText('MIKEY000  /  BEYOND THE MASK',300,836);
+  return c}
+ function res(){
+  let m=0;sc.forEach((v,k)=>{if(v>sc[m])m=k});const a=AR[m];SAVE.put('arcana',a[1]);award('quiz');
+  p.innerHTML='<h3>You are</h3><div class="qq" style="margin:4px 0">'+a[1]+'</div>';p.append(card(a));
+  const d=document.createElement('div');d.className='qa';d.innerHTML='<button type="button" id="qs">Save card</button><button type="button" id="qr">Retake</button><button type="button" id="qx">Close</button>';p.append(d);
+  document.getElementById('qs').onclick=()=>{try{const l=document.createElement('a');l.download='my-arcana.png';l.href=p.querySelector('canvas').toDataURL('image/png');l.click()}catch(e){}};
+  document.getElementById('qr').onclick=start;document.getElementById('qx').onclick=()=>el.classList.remove('on')}
+ function start(){i=0;sc=[0,0,0,0,0,0];ask()}
+ document.getElementById('qzb').addEventListener('click',()=>{el.classList.add('on');start()});
+ el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('on')});
+ addEventListener('keydown',e=>{if(e.key==='Escape'){el.classList.remove('on');document.getElementById('sum').click()}});
 })();
 })();
 
