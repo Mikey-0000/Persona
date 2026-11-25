@@ -1135,9 +1135,9 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 <div class="mk" aria-label="Made by Mikey0000"><i></i><span><small>MADE BY</small><b data-t="MIKEY0000">MIKEY0000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
 
-<audio id="bgm3" src="audio/persona-3-time.mp3" loop preload="none"></audio>
-<audio id="bgm4" src="audio/persona-4-heartbeat-heartbreak.mp3" loop preload="none"></audio>
-<audio id="bgm5" src="audio/beneath-the-mask.mp3" loop preload="none"></audio>
+<audio id="bgm3" src="audio/wake-up-get-up-get-out-there.mp3" loop preload="none"></audio>
+<audio id="bgm4" src="audio/your-affection.mp3" loop preload="none"></audio>
+<audio id="bgm5" src="audio/color-your-night.mp3" loop preload="none"></audio>
 <footer><button class="wipe" id="wipe" type="button">Reset saved progress</button><div class="bigtag" aria-label="Mikey0000">MIKEY0000</div>A fan-made tribute with original artwork and placeholder silhouettes. Persona is a trademark of its respective owners. This page is not affiliated with or endorsed by them.</footer>
 
 <script>
@@ -1703,7 +1703,7 @@ function trans(z,href){
 
 /* ---------- Jukebox ---------- */
 (function(){
- const TRK=[{t:'Persona 3 Time',s:'Persona 3',src:'audio/persona-3-time.mp3',c:'#4aa3ff'},{t:'Heartbeat, Heartbreak',s:'Persona 4',src:'audio/persona-4-heartbeat-heartbreak.mp3',c:'#ffd500'},{t:'Beneath the Mask',s:'Persona 5',src:'audio/beneath-the-mask.mp3',c:'#ff2a40'}];
+ const TRK=[{t:'Wake Up, Get Up, Get Out There',s:'Persona 3',src:'audio/wake-up-get-up-get-out-there.mp3',c:'#4aa3ff'},{t:'Your Affection',s:'Persona 4',src:'audio/your-affection.mp3',c:'#ffd500'},{t:'Color Your Night',s:'Persona 5',src:'audio/color-your-night.mp3',c:'#ff2a40'}];
  const jb=new Audio();jb.preload='none';jb.volume=.7;let cur=0,col=TRK[0].c;const heard=new Set(SAVE.get('heard',[]));
  const fmt=n=>isFinite(n)&&n>0?Math.floor(n/60)+':'+pad(Math.floor(n%60)):'0:00';
  const list=$('#jbl');
