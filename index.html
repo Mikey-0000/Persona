@@ -777,6 +777,18 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 @keyframes cfl{0%{opacity:.95}100%{opacity:0}}
 @keyframes cbd{0%{transform:skewY(-6deg) translateX(-110%)}22%,78%{transform:skewY(-6deg) translateX(0)}100%{transform:skewY(-6deg) translateX(110%)}}
 @keyframes cln{from{transform:scaleX(0)}to{transform:scaleX(1);opacity:0}}
+
+.shadow.reaper{width:100px;height:90px;margin-left:-50px;background:#000;box-shadow:0 0 30px 10px #8a0014,0 0 80px 20px rgba(138,0,20,.6)}
+.shadow.reaper:before,.shadow.reaper:after{background:#ff1a3c;width:16px;height:16px;top:30px;box-shadow:0 0 12px #ff1a3c}
+.shadow.reaper:before{left:22px}.shadow.reaper:after{right:22px}
+.shaft.dim{filter:brightness(.5);transition:filter .3s}
+#linger{margin-left:12px}
+.cmp{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:760px;margin:22px auto 0}
+.cmp div{border:1px solid var(--gold);background:rgba(16,30,66,.6);padding:8px 6px;font:600 12px/1.25 var(--serif);color:#8a8366;text-align:center;min-height:54px;display:flex;flex-direction:column;justify-content:center}
+.cmp div.got{color:var(--gold2);background:rgba(230,211,161,.12)}
+.cmp div small{display:block;font:600 10px var(--body);letter-spacing:.14em;opacity:.7;margin-bottom:2px}
+.cmpt{text-align:center;font:600 13px var(--body);letter-spacing:.3em;color:var(--gold);margin-top:18px;text-transform:uppercase}
+@media (max-width:600px){.cmp{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body data-zone="hero">
@@ -878,7 +890,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
         <h3 style="font:400 30px var(--cond);letter-spacing:.1em;margin:4px 0 6px">CLIMB THE TOWER</h3>
         <p class="fine" style="margin-bottom:10px">Each floor may hide a shadow. Fight with the menu: Strike, Persona (4 SP), Guard or Item. Every tenth floor has a guardian.</p>
         <div class="hud"><span>HP <i><b id="php"></b></i> <em id="hpn">30</em></span><span>SP <i><b id="psp"></b></i> <em id="spn">12</em></span><span>ITEMS <em id="itn">3</em></span></div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="btn blue" id="up" type="button"><span>Climb</span></button></div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="btn blue" id="up" type="button"><span>Climb</span></button><button class="btn" id="linger" type="button"><span>Linger</span></button></div>
         <div class="fmenu" id="fmenu"><button class="btn" id="fb-strike" type="button"><span>Strike</span></button><button class="btn blue" id="fb-persona" type="button"><span>Persona (4 SP)</span></button><button class="btn" id="fb-guard" type="button"><span>Guard</span></button><button class="btn" id="fb-item" type="button"><span>Item</span></button><button class="btn red" id="fb-all" type="button" disabled><span>All-Out<b class="aoc" id="aoc">0/3</b></span></button></div>
         <p class="status" id="cmsg" style="text-align:left;margin-top:12px" aria-live="polite">The tower stretches upward.</p>
       </div>
@@ -1064,6 +1076,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
     <div class="vh rv"><div class="vhost"><i><svg viewBox="0 0 120 170"><use href="#sil"/></svg></i><small>Attendant</small></div><h2>The Velvet Room</h2><p id="vline" class="talk">Choose your reality.</p></div>
     <div class="cards" id="cards"></div>
     <div class="fusion" id="fusion" aria-live="polite">Select two cards to begin a fusion.</div>
+    <div class="cmpt" id="cmpt">Compendium 0/15</div><div class="cmp" id="cmp"></div>
     <div style="text-align:center"><button class="reset" id="vreset" type="button">Clear</button> <button class="reset" id="qzb" type="button">Which arcana are you?</button></div>
     <div class="jbx rv" id="jbx">
       <h3 class="jh">The Jukebox</h3>
@@ -1097,7 +1110,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1368,7 +1381,7 @@ AR.forEach((a,i)=>{const b=document.createElement('button');b.type='button';b.cl
 function refresh(){$$('.card',cw).forEach((c,i)=>{const on=sel.includes(i);c.classList.toggle('sel',on);c.setAttribute('aria-pressed',on)});
  const f=$('#fusion');
  if(sel.length<2){f.textContent=sel.length?'Select one more card.':'Select two cards to begin a fusion.';$('#vline').textContent='Choose your reality.'}
- else{const r=AR[(sel[0]+sel[1]+1)%AR.length];f.innerHTML='Fusion complete<b>'+r[1]+'</b>';$('#vline').textContent=r[2];award('fusion');const bb=f.getBoundingClientRect();burst('velvet',bb.left+bb.width/2,bb.top)}}
+ else{const r=AR[(sel[0]+sel[1]+1)%AR.length];f.innerHTML='Fusion complete<b>'+r[1]+'</b>';$('#vline').textContent=r[2];award('fusion');window.__cmp&&window.__cmp(sel[0],sel[1],r[1]);const bb=f.getBoundingClientRect();burst('velvet',bb.left+bb.width/2,bb.top)}}
 $('#vreset').addEventListener('click',()=>{sel=[];refresh()});
 
 
@@ -1439,8 +1452,8 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
 /* ---------- P3: tower climb with fight menu ---------- */
 (function(){
  const MH=30,MS=12;
- let aoc=0,fl=SAVE.get('floor',1),php=SAVE.get('php',MH),psp=SAVE.get('psp',MS),items=SAVE.get('items',3),shHp=0,shMax=0,boss=false,guard=false,busy=false;
- const sh=$('#shaft'),sd=$('#shadow'),up=$('#up'),msg=$('#cmsg'),fm=$('#fmenu');
+ let aoc=0,fl=SAVE.get('floor',1),php=SAVE.get('php',MH),psp=SAVE.get('psp',MS),items=SAVE.get('items',3),shHp=0,shMax=0,boss=false,reaper=false,dread=0,guard=false,busy=false;
+ const lg=$('#linger'),sh=$('#shaft'),sd=$('#shadow'),up=$('#up'),msg=$('#cmsg'),fm=$('#fmenu');
  sd.innerHTML='<i><b style="width:100%"></b></i>';
  const save=()=>{SAVE.put('floor',fl);SAVE.put('php',php);SAVE.put('psp',psp);SAVE.put('items',items)};
  function hud(){$('#php').style.width=(php/MH*100)+'%';$('#psp').style.width=(psp/MS*100)+'%';$('#hpn').textContent=php;$('#spn').textContent=psp;$('#itn').textContent=items;
@@ -1449,19 +1462,19 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
  function num(t,col){const d=document.createElement('div');d.className='dmg';d.textContent=t;d.style.color=col||'#fff';d.style.left=(30+Math.random()*40)+'%';sh.append(d);setTimeout(()=>d.remove(),900)}
  const setSH=()=>{sd.querySelector('b').style.width=Math.max(0,shHp/shMax*100)+'%'};
  const say=t=>{msg.textContent=t};
- function encounter(b){boss=b;shMax=shHp=b?18+Math.floor(fl/2):3+Math.floor(fl/5);sd.classList.toggle('boss',b);sd.classList.add('on');setSH();up.disabled=true;fm.classList.add('on');guard=false;busy=false;hud();say(b?'A guardian fills the floor.':'A shadow blocks the way.')}
- function end(){sd.classList.remove('on');fm.classList.remove('on');up.disabled=false;busy=false;hud();save()}
+ function encounter(b,rp){reaper=!!rp;dread=0;boss=b||reaper;shMax=shHp=reaper?45:b?18+Math.floor(fl/2):3+Math.floor(fl/5);sd.classList.toggle('boss',boss);sd.classList.toggle('reaper',reaper);lg.disabled=true;sd.classList.add('on');setSH();up.disabled=true;fm.classList.add('on');guard=false;busy=false;hud();say(reaper?'Chains drag across the floor. It is here.':b?'A guardian fills the floor.':'A shadow blocks the way.')}
+ function end(){lg.disabled=false;sd.classList.remove('reaper');sd.classList.remove('on');fm.classList.remove('on');up.disabled=false;busy=false;hud();save()}
  function shadowTurn(){
   if(shHp<=0)return;busy=true;hud();
   setTimeout(()=>{
-   let dmg=boss?3+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);if(guard){dmg=Math.ceil(dmg/2);guard=false}
+   let dmg=reaper?5+Math.floor(Math.random()*5):boss?3+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);if(guard){dmg=Math.ceil(dmg/2);guard=false}
    php=Math.max(0,php-dmg);sh.classList.remove('hurt');void sh.offsetWidth;sh.classList.add('hurt');num('-'+dmg,'#ff6b86');sfx('caught');
    if(php<=0){aoc=0;fl=Math.max(1,fl-3);php=MH;psp=MS;floorView();end();say('You were knocked out and woke up on floor '+fl+'.');return}
    busy=false;hud();save();say('It hits for '+dmg+'. Your move.')
   },520)}
  function dealt(d,label){
   if(label!=='All-Out')aoc=Math.min(3,aoc+1);shHp-=d;setSH();sd.classList.remove('hit');void sd.offsetWidth;sd.classList.add('hit');num(String(d));
-  if(shHp<=0){if(boss)award('guardian');psp=Math.min(MS,psp+2);php=Math.min(MH,php+(boss?10:2));end();say((boss?'Guardian':'Shadow')+' defeated. You recover a little.');const r=sh.getBoundingClientRect();if(boss)burst('p3',r.left+r.width/2,r.top+r.height/2);return}
+  if(shHp<=0){if(reaper){award('reaper');items=Math.min(9,items+3);php=MH;psp=MS;end();say('The Reaper falls. You feel stronger. +3 items.');const r0=sh.getBoundingClientRect();burst('p3',r0.left+r0.width/2,r0.top+r0.height/2);return}if(boss)award('guardian');psp=Math.min(MS,psp+2);php=Math.min(MH,php+(boss?10:2));end();say((boss?'Guardian':'Shadow')+' defeated. You recover a little.');const r=sh.getBoundingClientRect();if(boss)burst('p3',r.left+r.width/2,r.top+r.height/2);return}
   say(label+' for '+d+'.');shadowTurn()}
  $('#fb-strike').addEventListener('click',()=>{if(busy)return;sfx('hit');dealt(2+Math.floor(Math.random()*2),'Strike')});
  $('#fb-persona').addEventListener('click',()=>{
@@ -1470,6 +1483,8 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
   const c=document.createElement('div');c.className='pcast';c.textContent='PERSONA!';sh.append(c);setTimeout(()=>c.remove(),700);
   setTimeout(()=>dealt(5+Math.floor(Math.random()*3),'Persona'),450)});
  $('#fb-all').addEventListener('click',()=>{if(busy||aoc<3)return;aoc=0;busy=true;hud();sfx('boom');award('allout');window.__summon('aa',()=>{dealt(shHp+boss*6,'All-Out')})});
+ lg.addEventListener('click',()=>{if(sd.classList.contains('on'))return;dread++;try{sfx('click')}catch(e){}sh.classList.add('dim');setTimeout(()=>sh.classList.remove('dim'),500);
+  if(dread>=3){try{sfx('boom')}catch(e){}save();encounter(true,true)}else say(['The air grows heavy.','Something is watching you from the dark.'][dread-1])});
  $('#fb-guard').addEventListener('click',()=>{if(busy)return;guard=true;psp=Math.min(MS,psp+1);say('You brace for the next hit.');hud();shadowTurn()});
  $('#fb-item').addEventListener('click',()=>{if(busy||items<1||php>=MH)return;items--;php=Math.min(MH,php+10);num('+10','#8ff5d5');say('You recover some strength.');hud();save();shadowTurn()});
  up.addEventListener('click',()=>{
@@ -1955,6 +1970,18 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    try{sfx('boom');setTimeout(()=>sfx('win'),500)}catch(e){}if(window.__vib)window.__vib([30,40,60]);
    done[z]=1;SAVE.put('awk',done);if(done.pc3&&done.pc4&&done.pc5)award('faces')});
  });
+})();
+
+/* ---------- compendium ---------- */
+(function(){
+ const NM=['0','I','III','XIII','XVII','XXI'],found=SAVE.get('cmp',{}),pairs=[];
+ for(let a=0;a<6;a++)for(let b=a+1;b<6;b++)pairs.push([a,b]);
+ const box=document.getElementById('cmp'),ttl=document.getElementById('cmpt');
+ const AR2=['The Fool','The Magician','The Empress','Death','The Star','The World'];
+ function draw(){box.innerHTML=pairs.map(([a,b])=>{const k=a+'-'+b,f=found[k];return '<div class="'+(f?'got':'')+'"><small>'+NM[a]+' + '+NM[b]+'</small>'+(f||'???')+'</div>'}).join('');
+  const n=Object.keys(found).length;ttl.textContent='Compendium '+n+'/15';if(n>=15)award('compendium')}
+ window.__cmp=(i,j,name)=>{const a=Math.min(i,j),b=Math.max(i,j);found[a+'-'+b]=name;SAVE.put('cmp',found);draw()};
+ draw();
 })();
 })();
 
