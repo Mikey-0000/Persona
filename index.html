@@ -637,7 +637,7 @@ body[data-tod="night"] #tod{background:#0a1a4a;opacity:.28}
 </head>
 <body data-zone="hero">
 <div id="toasts" aria-live="polite"></div>
-<div id="tw" role="dialog" aria-label="Trophies"><div class="twp"><h2>TROPHIES <span id="twn"></span></h2><div class="twg" id="twg"></div><button class="btn red" id="twx" type="button"><span>Close</span></button></div></div>
+<div id="tw" role="dialog" aria-label="Trophies"><div class="twp"><h2>TROPHIES <span id="twn"></span></h2><div class="twg" id="twg"></div><button class="btn red" id="twx" type="button"><span>Close</span></button> <button class="btn" id="twc" type="button"><span>Progress card</span></button><div id="twcard"></div></div></div>
 <div id="title" role="dialog" aria-label="Title screen"><div class="tb tb3"></div><div class="tb tb4"></div><div class="tb tb5"></div>
  <div class="tcn"><p class="eyebrow" style="color:#fff;text-shadow:0 2px 0 #000">An interactive fan board by Mikey0000</p><h1 class="tt" id="tt" aria-label="Persona"></h1><p class="ts">BEYOND THE MASK</p>
  <div class="tbtn"><button class="btn red" id="tSound" type="button"><span>Enter with sound</span></button><button class="btn" id="tSilent" type="button"><span>Enter silent</span></button></div><p class="press">or press any key</p></div></div>
@@ -1637,6 +1637,28 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  ib.addEventListener('click',()=>{if(!dp)return;dp.prompt();dp.userChoice.finally(()=>{dp=null;ib.hidden=true})});
  addEventListener('appinstalled',()=>{ib.hidden=true;try{award('app')}catch(e){}});
  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))addEventListener('load',()=>{try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}});
+})();
+
+/* ---------- progress card ---------- */
+(function(){
+ const host=document.getElementById('twcard');
+ document.getElementById('twc').addEventListener('click',()=>{
+  const c=document.createElement('canvas');c.width=900;c.height=520;const x=c.getContext('2d');
+  x.fillStyle='#101015';x.fillRect(0,0,900,520);
+  [['#0057B8',[0,0,330,0,230,520,0,520]],['#FFD500',[330,0,600,0,500,520,230,520]],['#D90019',[600,0,900,0,900,520,500,520]]].forEach(([col,pt])=>{x.fillStyle=col;x.globalAlpha=.9;x.beginPath();x.moveTo(pt[0],pt[1]);for(let i=2;i<8;i+=2)x.lineTo(pt[i],pt[i+1]);x.closePath();x.fill()});
+  x.globalAlpha=1;x.fillStyle='rgba(0,0,0,.72)';x.fillRect(40,40,820,440);
+  x.fillStyle='#fff';x.font='italic 900 56px Arial,sans-serif';x.fillText('MIKEY0000',70,115);
+  x.font='700 18px Arial,sans-serif';x.fillStyle='#bbb';x.fillText('PERSONA / BEYOND THE MASK  -  PROGRESS',70,148);
+  const n=Object.keys(TRS).length,st=[['TROPHIES',n+'/'+TR.length],['TOWER FLOOR',SAVE.get('floor',1)],['TREASURES',SAVE.get('wins',0)],['ARCANA',SAVE.get('arcana','-')]];
+  st.forEach((t,i)=>{const px=70+i*195;x.fillStyle='#FFD500';x.font='700 15px Arial,sans-serif';x.fillText(t[0],px,215);x.fillStyle='#fff';x.font='italic 900 '+(String(t[1]).length>6?26:48)+'px Arial,sans-serif';x.fillText(String(t[1]),px,270)});
+  x.fillStyle='#333';x.fillRect(70,320,720,18);x.fillStyle='#D90019';x.fillRect(70,320,720*n/TR.length,18);
+  x.font='600 16px Arial,sans-serif';x.fillStyle='#ddd';x.fillText(TR.filter(t=>TRS[t[0]]).slice(0,6).map(t=>t[1]).join('  /  ')||'No trophies yet',70,380);
+  x.fillStyle='#888';x.font='14px Arial,sans-serif';x.fillText('A fan-made tribute. Persona is a trademark of its respective owners.',70,450);
+  c.style.cssText='width:100%;max-width:520px;border:2px solid #fff;margin-top:14px;display:block';
+  host.innerHTML='';host.append(c);
+  const a=document.createElement('button');a.className='btn';a.type='button';a.style.marginTop='12px';a.innerHTML='<span>Save image</span>';
+  a.onclick=()=>{try{const l=document.createElement('a');l.download='my-persona-progress.png';l.href=c.toDataURL('image/png');l.click()}catch(e){}};host.append(a);
+ });
 })();
 })();
 
