@@ -814,7 +814,10 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 #fp,.rc{width:100%;height:auto;display:block;outline:none;cursor:crosshair}
 #fp:focus-visible,.rc:focus-visible{box-shadow:inset 0 0 0 3px #fff}
 #fpm,.rcm{position:absolute;right:8px;top:8px;width:26%;max-width:150px;height:auto;border:2px solid rgba(255,255,255,.6);background:rgba(0,0,0,.55);image-rendering:pixelated}
-.fp-c{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+.fp-c{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.fp-c .btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rc{touch-action:none;-webkit-tap-highlight-color:transparent}
+@media (pointer:coarse),(max-width:700px){.fp{padding:10px}.fp-w{border-width:2px}.fp-c{display:grid;grid-template-columns:repeat(4,1fr);grid-template-areas:'l f f r' 'x x b b';gap:8px}.fp-c [data-k=l]{grid-area:l}.fp-c [data-k=f]{grid-area:f}.fp-c [data-k=r]{grid-area:r}.fp-c [data-k=b]{grid-area:b}.fp-c [data-k=x]{grid-area:x}.fp .fp-c .btn{min-height:60px;padding:8px 6px;font-size:15px;width:100%}#fpm,.rcm{width:24%}}
 .fp-c .btn{padding:10px 18px;font-size:14px;min-height:44px}
 
 #ks{position:fixed;inset:0;z-index:129;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:20px}
@@ -936,7 +939,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="fp-h"><h3>TARTARUS: FIRST PERSON</h3><span class="fine rci" id="fpinfo">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" id="fp" width="640" height="360" tabindex="0" aria-label="First-person maze. Use arrow keys or WASD."></canvas><canvas class="rcm" id="fpm" width="150" height="150" aria-hidden="true"></canvas></div>
       <div class="fp-c"><button class="btn blue" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn blue" data-k="f" type="button"><span>Forward</span></button><button class="btn blue" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
-      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Click the view, then use arrow keys or WASD (one square per press, hold to keep going). Swipe on phones. Space or X swings your sword.</p>
+      <p class="fine">Find the glowing door at the end of the maze and avoid the shadows. Phone: swipe the view or use the buttons (hold to keep moving), tap the view to swing your sword. Computer: click the view, then arrows or WASD, Space to attack.</p>
     </div>
     <article class="pc pc3 rv holo" data-z="pc3" aria-label="Makoto Yuki">
       <svg class="pc-wire" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 160 C80 200 90 60 190 100 S330 180 420 70" fill="none" stroke="#5a6999" stroke-width="1.5"/><path d="M-10 40 C60 10 140 90 230 40 S350 0 420 30" fill="none" stroke="#c1c9db" stroke-width="1.5"/></svg>
@@ -1113,7 +1116,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="fp-h"><h3>PALACE: FIRST PERSON</h3><span class="fine rci">Floor 1</span></div>
       <div class="fp-w"><canvas class="rc" width="640" height="360" tabindex="0" aria-label="First-person palace. Use arrow keys or WASD."></canvas><canvas class="rcm" width="150" height="150" aria-hidden="true"></canvas></div>
       <div class="fp-c"><button class="btn red" data-k="l" type="button"><span>&#8592; Turn</span></button><button class="btn red" data-k="f" type="button"><span>Forward</span></button><button class="btn red" data-k="r" type="button"><span>Turn &#8594;</span></button><button class="btn" data-k="b" type="button"><span>Back</span></button><button class="btn red" data-k="x" type="button"><span>Attack</span></button></div>
-      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Click the view, then use arrow keys or WASD (one square per press, hold to keep going). Swipe on phones. Space or X swings your sword.</p>
+      <p class="fine">Reach the treasure at the end of the corridors without touching a guard. Phone: swipe the view or use the buttons (hold to keep moving), tap the view to swing your sword. Computer: click the view, then arrows or WASD, Space to attack.</p>
     </div>
     <article class="pc pc5 rv holo" data-z="pc5" aria-label="Ren Amamiya">
       <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
@@ -2102,15 +2105,17 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
     return {w:brickTex(o),x:brickTex({...o,deco:x=>{x.fillStyle='#f5c542';x.fillRect(9,5,46,54);x.fillStyle='#8a6410';x.fillRect(9,5,46,2);x.fillStyle='#0a0102';x.fillRect(13,9,38,46);x.fillStyle='#e8222a';star(x,32,32,15,6);x.fillStyle='#fff';x.fillRect(28,30,3,2);x.fillRect(35,30,3,2)}}),f:floorTex({a:'#0a0002',b:'#1c0409',line:'#8a1020'})}},door:[255,255,255],en:'guard',tro:'palace',key:'fqwon',cau:'fqcaught',label:'Palace floor '}};
  function mk(box){
   const t=TH[box.dataset.t],cv=box.querySelector('.rc'),mm=box.querySelector('.rcm'),info=box.querySelector('.rci');
-  const c=cv.getContext('2d'),m2=mm.getContext('2d');const W=cv.width,H=cv.height,cols=W,cw=1,FW=320,FH=180;
+  const NARROW=matchMedia('(max-width:700px)').matches,COARSE=matchMedia('(pointer:coarse)').matches;if(NARROW){cv.width=480;cv.height=360}
+  const c=cv.getContext('2d'),m2=mm.getContext('2d');const W=cv.width,H=cv.height;let cols=W,cw=1,FW=320,FH=180,Q=-1,slow=0,ema=16,frm=0;
   const TX={n:t.mk(false),d:t.mk===undefined?null:(t.en==='shadow'&&box.dataset.t==='p3'?t.mk(true):null)};
   [TX.n,TX.d].forEach(q=>{if(q){q.wd=dark(q.w);q.xd=dark(q.x)}});
   const lp=t.lamp,gl=c.createRadialGradient(W/2,H*.6,10,W/2,H*.6,W*.55);gl.addColorStop(0,'rgba('+lp.join(',')+',.2)');gl.addColorStop(1,'rgba('+lp.join(',')+',0)');
   const door=cvs(64,64),dx0=door.getContext('2d');{const g=dx0.createRadialGradient(32,32,2,32,32,40);g.addColorStop(0,'#fff');g.addColorStop(.5,'rgb('+t.door.join(',')+')');g.addColorStop(1,'rgba(0,0,0,.9)');dx0.fillStyle=g;dx0.fillRect(0,0,64,64);dx0.strokeStyle='rgba(255,255,255,.8)';dx0.lineWidth=3;dx0.strokeRect(10,6,44,58)}
   const S0=spr(t.en,false),S1=spr(t.en,true);
-  const fc=cvs(FW,FH),fx=fc.getContext('2d'),fimg=fx.createImageData(FW,FH);
+  let fc=cvs(FW,FH),fx=fc.getContext('2d'),fimg=fx.createImageData(FW,FH);
+  function setQ(l){Q=l;cols=Math.round(W/[1,2,3][l]);cw=W/cols;FW=[320,240,160][l];FH=Math.round(FW*H/W);fc=cvs(FW,FH);fx=fc.getContext('2d');fimg=fx.createImageData(FW,FH);zb=new Array(cols).fill(99)}
   const vig=c.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,W*.62);vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,.6)');
-  let hp=5,swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],gx=1,gy=1,gd=0,px=1.5,py=1.5,ang=0,tang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=new Array(cols).fill(99),inv=0,pendCmd=null;
+  let hp=5,swing=0,kills=SAVE.get('kills',0),pend=[],N=11,map=[],gx=1,gy=1,gd=0,px=1.5,py=1.5,ang=0,tang=0,fl=1,won=SAVE.get(t.key,0),caught=SAVE.get(t.cau,0),en=[],flash=0,msg='',zb=[],inv=0,pendCmd=null;
   const DXS=[1,0,-1,0],DYS=[0,1,0,-1],keys={};
   const dhOn=()=>box.dataset.t==='p3'&&document.getElementById('p3').classList.contains('dh');
   const cell=(x,y)=>x<0||y<0||x>=N||y>=N?1:map[y|0][x|0];
@@ -2193,7 +2198,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    c.font='26px Arial';c.textAlign='left';c.lineWidth=4;c.strokeStyle='rgba(0,0,0,.85)';for(let i=0;i<5;i++){c.strokeText('♥',12+i*28,36);c.fillStyle=i<hp?'#ff2a40':'rgba(255,255,255,.22)';c.fillText('♥',12+i*28,36)}
    {c.font='italic 800 15px Arial,sans-serif';c.textAlign='center';const lab=(t.label+fl).toUpperCase(),tw=c.measureText(lab).width+30;c.fillStyle='rgba(0,0,0,.6)';c.fillRect(W/2-tw/2,10,tw,26);c.fillStyle='rgb('+lp.join(',')+')';c.fillRect(W/2-tw/2,34,tw,2);c.fillText(lab,W/2,29);c.textAlign='left'}
    if(flash>0){c.fillStyle='rgba(223,26,33,'+Math.min(.6,flash/40)+')';c.fillRect(0,0,W,H);c.fillStyle='#fff';c.font='italic 900 44px Arial,sans-serif';c.textAlign='center';c.fillText(msg,W/2,H/2);flash--}
-   const sc=150/N;m2.clearRect(0,0,150,150);
+   if(++frm%3)return;const sc=150/N;m2.clearRect(0,0,150,150);
    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const v=map[y][x];m2.fillStyle=v===1?'rgba(255,255,255,.2)':v===2?'#ffe14a':'rgba(0,0,0,.25)';m2.fillRect(x*sc,y*sc,sc,sc)}
    en.forEach(e=>{m2.fillStyle='#ff2a40';m2.fillRect(e.x*sc-2,e.y*sc-2,4,4)});
    m2.fillStyle='#fff';m2.beginPath();m2.arc(px*sc,py*sc,Math.max(2,sc*.32),0,TAU);m2.fill();
@@ -2212,7 +2217,10 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   cv.addEventListener('keyup',e=>{const k=KM[e.key];if(k)keys[k]=0});
   cv.addEventListener('blur',()=>{for(const k in keys)keys[k]=0});
   cv.addEventListener('click',()=>{if(document.activeElement===cv)attack();else cv.focus()});
-  box.querySelectorAll('.fp-c [data-k]').forEach(b=>b.addEventListener('click',()=>{cmd(b.dataset.k);if(RM||!vis)render()}));
+  box.querySelectorAll('.fp-c [data-k]').forEach(b=>{const k=b.dataset.k;let dn=0;
+   b.addEventListener('pointerdown',e=>{e.preventDefault();dn=1;if(k==='x')attack();else{keys[k]=1;cmd(k)}if(window.__vib)window.__vib(8);if(RM||!vis)render()});
+   const up=()=>{keys[k]=0};['pointerup','pointercancel','pointerleave'].forEach(n=>b.addEventListener(n,up));
+   b.addEventListener('click',e=>{if(dn){dn=0;return}cmd(k);if(RM||!vis)render()})});
   // swipe on canvas for touch
   let tsx=0,tsy=0,tst=0;cv.addEventListener('touchstart',e=>{const q=e.touches[0];tsx=q.clientX;tsy=q.clientY;tst=performance.now()},{passive:true});
   cv.addEventListener('touchend',e=>{const q=e.changedTouches[0],dx=q.clientX-tsx,dy=q.clientY-tsy;if(Math.max(Math.abs(dx),Math.abs(dy))<30){if(performance.now()-tst<300)attack();return}
@@ -2226,8 +2234,8 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    arrive();
    en.forEach(e=>stepEn(e,.0016*dt*(1+fl*.06)));
    if(pend.length&&performance.now()>pend[0]){pend.shift();const free=spawnFree(5);if(free.length){const [x,y]=free[Math.floor(Math.random()*free.length)];en.push({x:x+.5,y:y+.5,tx:x+.5,ty:y+.5,px:-1,py:-1,hp:2,hit:0});updInfo()}}
-   catchCheck();render();raf=requestAnimationFrame(loop)}
-  gen();render();
+   catchCheck();render();ema=ema*.95+dt*.05;if(ema>30&&Q<2&&++slow>60){slow=0;ema=16;setQ(Q+1)}raf=requestAnimationFrame(loop)}
+  setQ(COARSE||NARROW?1:0);gen();render();
   (window.__rc=window.__rc||[]).push({en:()=>en,put:(x,y,a)=>{gx=x|0;gy=y|0;px=gx+.5;py=gy+.5;gd=((Math.round(a/(Math.PI/2))%4)+4)%4;ang=tang=gd*Math.PI/2},kills:()=>kills});
  }
  document.querySelectorAll('.fp[data-t]').forEach(mk);
