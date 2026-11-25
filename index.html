@@ -844,6 +844,8 @@ p5:[
 ['Palace gate',SV('Palace gate',GR('c2','#d90019','#280009')+'<g class="beam" style="transform-origin:120px 267px"><polygon points="120,267 80,0 150,0" fill="#fff" opacity=".28"/></g><g class="beam" style="transform-origin:290px 267px;animation-direction:alternate-reverse"><polygon points="290,267 250,0 330,0" fill="#fff" opacity=".24"/></g>'+LY(8,'<path d="M0 267V190h40v-50l20-30 20 30v50h30v-70l30-40 30 40v70h40V150h60v-30l-30-30-30 30v30h40v117z" fill="#000"/><path d="M130 267v-50a30 30 0 0 1 60 0v50z" fill="#d90019"/><path d="M230 267V200h50v-60l25-40 25 40v127z" fill="#000"/>')+'<ellipse cx="90" cy="60" rx="70" ry="14" fill="#000" opacity=".5"/>')],
 ['Rooftop escape',SV('Rooftop escape',GR('c3','#0b0b0d','#280009')+LY(6,'<circle cx="285" cy="86" r="62" fill="#d90019"/><path d="M230 74h110M226 96h118M232 118h106" stroke="#0b0b0d" stroke-width="4"/>')+LY(12,'<path d="M0 190h30v-40h30v40h26v-60h34v60h40v-30h30v30h30v-50h30v50h44v-25h40v25h36v77H0z" fill="#000"/>')+LY(18,'<rect y="214" width="400" height="53" fill="#050505"/><rect y="208" width="400" height="8" fill="#d90019"/><g transform="translate(120 206)"><path d="M-14 -34l-26 40 16 4 18-16 18 16 16-4z" fill="#d90019"/><circle cx="0" cy="-48" r="10" fill="#000"/><path d="M-12 -38h24l8 38h-40z" fill="#000"/><ellipse cx="0" cy="-48" rx="9" ry="6" fill="#fff"/><rect x="-6" y="-50" width="4" height="2" fill="#000"/><rect x="2" y="-50" width="4" height="2" fill="#000"/></g>'))]
 ]};
+/* Your own pictures: save files into the images/ folder next to index.html, then list them here. */
+const MY_IMAGES={p3:[],p4:[],p5:[]};
 const lb=document.createElement('div');lb.id='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-label','Enlarged picture');document.body.append(lb);
 function openLB(t){const m=t.querySelector('svg,img').cloneNode(true);m.removeAttribute('style');$$('.px',m).forEach(g=>g.style.transform='');lb.innerHTML='';lb.append(m);lb.classList.add('on')}
 lb.addEventListener('click',()=>lb.classList.remove('on'));addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
@@ -855,7 +857,10 @@ function bindTile(t){
 $$('.gal').forEach(host=>{
  const row=$('.gal-row',host);
  scenes[host.dataset.g].forEach(([name,svg])=>{const f=document.createElement('figure');f.className='tile';f.tabIndex=0;f.innerHTML=svg+'<figcaption>'+name+'</figcaption>';row.append(f);bindTile(f)});
- const add=document.createElement('label');add.className='tile add';add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</small></span><input class="sr" type="file" accept="image/*" multiple>';row.append(add);
+ const add=document.createElement('label');add.className='tile add';
+ function mine(src){const t=document.createElement('figure');t.className='tile';t.tabIndex=0;t.innerHTML='<img alt=""><figcaption>My collection</figcaption>';const im=t.querySelector('img');im.onerror=()=>t.remove();im.src=src;row.insertBefore(t,add);bindTile(t)}
+ setTimeout(()=>(MY_IMAGES[host.dataset.g]||[]).forEach(mine),0);
+add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</small></span><input class="sr" type="file" accept="image/*" multiple>';row.append(add);
  function addFiles(fl){[...fl].filter(f=>f.type.startsWith('image/')).forEach(f=>{const t=document.createElement('figure');t.className='tile';t.tabIndex=0;t.innerHTML='<img alt="Your photo"><figcaption>Your photo</figcaption>';t.querySelector('img').src=URL.createObjectURL(f);row.insertBefore(t,add);bindTile(t)})}
  $('input',add).addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
  host.addEventListener('dragover',e=>e.preventDefault());host.addEventListener('drop',e=>{e.preventDefault();addFiles(e.dataTransfer.files)});
