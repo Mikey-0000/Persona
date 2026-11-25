@@ -87,7 +87,8 @@ body[data-zone="p3"] a[href="#p3"],body[data-zone="p4"] a[href="#p4"],body[data-
 .bigmoon{position:absolute;right:6%;top:6%;width:clamp(130px,22vw,300px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#bcd8ff 55%,#4a86d8);box-shadow:0 0 80px 20px rgba(120,170,255,.35);z-index:2;transition:all 1.4s}
 #p3.dh .bigmoon{background:radial-gradient(circle at 35% 35%,#fffbd0,#d9e87a 55%,#6a9a2a);box-shadow:0 0 140px 40px rgba(200,255,120,.4);transform:scale(1.18)}
 .bigmoon.pulse{animation:pulse 1.2s ease-out}
-.coffins{position:absolute;left:0;right:0;bottom:0;height:150px;display:flex;justify-content:space-around;align-items:flex-end;z-index:2;pointer-events:none}
+.coffins{position:absolute;left:0;right:0;bottom:0;height:150px;display:flex;justify-content:space-around;align-items:flex-end;z-index:2;pointer-events:none;opacity:0;transition:opacity .6s}
+#p3.dh .coffins{opacity:1}
 .coffins i{width:clamp(18px,3vw,36px);height:clamp(70px,10vw,120px);background:linear-gradient(90deg,#0b4a3c,#1fbf94 50%,#0b4a3c);clip-path:polygon(32% 0,68% 0,100% 24%,70% 100%,30% 100%,0 24%);transform:translateY(115%);transition:transform .9s cubic-bezier(.2,.9,.2,1)}
 #p3.dh .coffins i{transform:translateY(0);animation:flick 3s infinite}
 .sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:12px}
@@ -339,15 +340,15 @@ footer{padding:36px 16px 84px;text-align:center;color:#8d92a6;font-size:13px;bac
 /* WATERMARK */
 .mk{position:fixed;left:14px;bottom:14px;z-index:85;display:flex;align-items:stretch;transform:skewX(-14deg);background:#0b0b0d;border:2px solid var(--accent);box-shadow:5px 5px 0 var(--accent);overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .25s;cursor:default}
 .mk:hover{transform:skewX(-14deg) translate(-2px,-3px)}
-.mk i{display:block;width:12px;background:linear-gradient(180deg,#0057B8 0 33.3%,#FFD500 33.3% 66.6%,#D90019 66.6%)}
+.mk i{display:block;width:10px;background:var(--accent);transition:background .4s}
 .mk span{display:block;padding:4px 14px 5px 10px;transform:skewX(14deg)}
 .mk small{display:block;font:800 8px var(--body);letter-spacing:.4em;color:#9aa0b4;line-height:1.2}
 .mk b{position:relative;display:block;font:italic 900 20px/1 var(--body);letter-spacing:.08em;color:#fff}
 .mk b:before,.mk b:after{content:attr(data-t);position:absolute;left:0;top:0;opacity:0}
-.mk:hover b:before{opacity:.9;color:#4aa3ff;transform:translate(-2px,1px);animation:glitch .35s steps(2) infinite}
-.mk:hover b:after{opacity:.9;color:#ff2a40;transform:translate(2px,-1px);animation:glitch .35s steps(2) infinite reverse}
+.mk:hover b:before{opacity:.9;color:var(--accent);transform:translate(-2px,1px);animation:glitch .35s steps(2) infinite}
+.mk:hover b:after{opacity:.9;color:#9aa0b4;transform:translate(2px,-1px);animation:glitch .35s steps(2) infinite reverse}
 .mk:after{content:"";position:absolute;top:0;bottom:0;width:36px;left:-60px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:mkshine 4.5s ease-in-out infinite}
-.bigtag{font:italic 900 clamp(48px,14vw,170px)/1 var(--body);letter-spacing:.04em;margin-bottom:16px;background:linear-gradient(90deg,#0057B8,#4aa3ff,#FFD500,#D90019,#0057B8);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.25);animation:mkflow 8s linear infinite;user-select:none}
+.bigtag{font:italic 900 clamp(48px,14vw,170px)/1 var(--body);letter-spacing:.04em;margin-bottom:16px;background:linear-gradient(90deg,#4f5469,#fff,#4f5469,#fff,#4f5469);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.25);animation:mkflow 8s linear infinite;user-select:none}
 @media (max-width:520px){.mk b{font-size:16px}.mk small{display:none}}
 
 
@@ -368,6 +369,44 @@ body[data-zone="p4"] #curp .k4{animation:spinslow 4s linear infinite}
 body.cc,body.cc *{cursor:none!important}
 body.cc input[type=text]{cursor:text!important}
 
+
+/* TITLE, TRANSITIONS, FIGHT MENU */
+#title{position:fixed;inset:0;z-index:130;background:#08080b;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+#title.out{animation:tout .75s cubic-bezier(.7,0,.2,1) forwards}
+.tb{position:absolute;top:-10%;bottom:-10%;width:36%;transform:skewX(-14deg) translateY(-115%);animation:tbin .9s cubic-bezier(.2,.9,.2,1) forwards}
+.tb3{left:0;background:#0057B8;animation-delay:.1s}.tb4{left:32%;background:#FFD500;animation-delay:.25s}.tb5{left:64%;background:#D90019;animation-delay:.4s}
+.tc{position:relative;z-index:2;padding:0 16px}
+.tt{font:italic 900 clamp(56px,15vw,210px)/1 var(--body);letter-spacing:-.02em;margin:8px 0 4px}
+.tt span{display:inline-block;color:#fff;-webkit-text-stroke:5px #000;paint-order:stroke fill;text-shadow:7px 7px 0 #000;transform:rotate(var(--r,0deg));animation:slam .5s cubic-bezier(.2,1.6,.4,1) backwards}
+.ts{font:700 clamp(16px,3vw,30px) var(--cond);letter-spacing:.4em;color:#fff;background:#000;display:inline-block;padding:4px 18px 4px 30px;margin-bottom:28px;animation:slam .5s 1.1s cubic-bezier(.2,1.6,.4,1) backwards}
+.tbtn{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;animation:slam .5s 1.3s cubic-bezier(.2,1.6,.4,1) backwards}
+.press{margin-top:18px;font:800 12px var(--body);letter-spacing:.4em;color:#fff;text-shadow:0 2px 0 #000;animation:shim 1s ease-in-out infinite alternate}
+.tr-p4{position:fixed;inset:0;z-index:125;pointer-events:none;background:#000;animation:trp4 .7s forwards}
+.tr-p4 .bars{position:absolute;inset:0;display:flex}.tr-p4 .bars span{flex:1}
+.tr-p4:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 2px,transparent 2px 5px)}
+.tr-p4 b{position:absolute;left:24px;top:70px;z-index:2;font:italic 900 40px var(--body);color:#fff;background:#000;padding:2px 12px}
+.tr-p5,.tr-velvet{position:fixed;inset:0;z-index:125;pointer-events:none;overflow:hidden}
+.tr-p5 .a{position:absolute;inset:0;background:#000;clip-path:polygon(0 0,100% 0,0 100%);animation:trA 1s cubic-bezier(.7,0,.3,1) forwards}
+.tr-p5 .b{position:absolute;inset:0;background:var(--p5);clip-path:polygon(100% 0,100% 100%,0 100%);animation:trB 1s .05s cubic-bezier(.7,0,.3,1) forwards}
+.tr-velvet .l,.tr-velvet .r{position:absolute;top:0;bottom:0;width:50.5%;background:#101e42}
+.tr-velvet .l{left:0;border-right:3px solid #b6a16a;animation:trL 1s cubic-bezier(.7,0,.3,1) forwards}
+.tr-velvet .r{right:0;border-left:3px solid #b6a16a;animation:trR 1s cubic-bezier(.7,0,.3,1) forwards}
+.tr-velvet:after{content:"";position:absolute;left:50%;top:50%;width:60px;height:96px;margin:-48px 0 0 -30px;background:#b6a16a;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);animation:trD 1s forwards}
+.hud{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 10px;font:800 12px var(--body);letter-spacing:.15em;align-items:center}
+.hud i{display:inline-block;width:100px;height:10px;background:#0b1a33;border:2px solid #4aa3ff;vertical-align:middle;margin:0 4px}
+.hud b{display:block;height:100%;transition:width .3s}
+.hud em{font-style:normal;color:#fff}
+#php{background:#3fe08a;width:100%}#psp{background:#4aa3ff;width:100%}
+.fmenu{display:none;grid-template-columns:repeat(2,max-content);gap:10px;margin-top:12px}
+.fmenu.on{display:grid}
+.fmenu .btn{padding:8px 18px;font-size:14px}
+.btn:disabled{opacity:.35;pointer-events:none}
+.shadow.boss{width:112px;height:92px;margin-left:-56px;box-shadow:0 0 30px 10px #c0392b}
+.shadow.boss:before,.shadow.boss:after{top:30px}
+.shaft.hurt{animation:shake .25s linear}
+.dmg{position:absolute;top:40px;font:italic 900 28px var(--body);color:#fff;text-shadow:2px 2px 0 #000;animation:dmgf .85s forwards;pointer-events:none;z-index:3}
+.pcast{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:italic 900 26px var(--body);color:#fff;background:rgba(74,163,255,.55);animation:flashb .65s forwards;z-index:4}
+
 /* KEYFRAMES */
 @keyframes rippl{from{transform:scale(.4);opacity:1}to{transform:scale(4);opacity:0}}
 @keyframes shim{to{opacity:.25}}
@@ -378,6 +417,17 @@ body.cc input[type=text]{cursor:text!important}
 @keyframes crt{0%{transform:scale(1,.02);filter:brightness(5)}55%{transform:scale(1,1);filter:brightness(2.2)}100%{filter:none}}
 @keyframes mkshine{0%,60%{left:-60px}100%{left:130%}}
 @keyframes mkflow{to{background-position:300% 0}}
+@keyframes tbin{to{transform:skewX(-14deg) translateY(0)}}
+@keyframes tout{to{clip-path:polygon(135% 0,135% 0,115% 100%,115% 100%)}}
+@keyframes slam{from{transform:scale(4) rotate(18deg);opacity:0}}
+@keyframes trp4{0%{opacity:0}12%{opacity:1}70%{opacity:1}100%{opacity:0}}
+@keyframes trA{0%{transform:translate(-100%,-100%)}40%,60%{transform:translate(0)}100%{transform:translate(100%,100%)}}
+@keyframes trB{0%{transform:translate(100%,100%)}40%,60%{transform:translate(0)}100%{transform:translate(-100%,-100%)}}
+@keyframes trL{0%{transform:translateX(-100%)}40%,60%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+@keyframes trR{0%{transform:translateX(100%)}40%,60%{transform:translateX(0)}100%{transform:translateX(100%)}}
+@keyframes trD{0%,30%{opacity:0;transform:scale(.2)}45%,58%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+@keyframes dmgf{from{transform:translateY(0)}to{transform:translateY(-55px);opacity:0}}
+@keyframes flashb{from{filter:brightness(3);opacity:1}to{opacity:0}}
 @keyframes breathe{50%{transform:scale(1.03)}}
 @keyframes slide{from{transform:translateX(-40px)}to{transform:translateX(40px)}}
 @keyframes twinkle{50%{transform:scale(1.3) rotate(20deg)}}
@@ -424,6 +474,9 @@ body.shake{animation:shake .12s linear 4}
 </style>
 </head>
 <body data-zone="hero">
+<div id="title" role="dialog" aria-label="Title screen"><div class="tb tb3"></div><div class="tb tb4"></div><div class="tb tb5"></div>
+ <div class="tc"><p class="eyebrow" style="color:#fff;text-shadow:0 2px 0 #000">An interactive fan board by Mikey000</p><h1 class="tt" id="tt" aria-label="Persona"></h1><p class="ts">BEYOND THE MASK</p>
+ <div class="tbtn"><button class="btn red" id="tSound" type="button"><span>Enter with sound</span></button><button class="btn" id="tSilent" type="button"><span>Enter silent</span></button></div><p class="press">or press any key</p></div></div>
 <div id="curr" aria-hidden="true"></div>
 <div id="curp" aria-hidden="true"><svg class="k k0" viewBox="0 0 28 28"><circle cx="14" cy="14" r="5" fill="#fff"/></svg><svg class="k k3" viewBox="0 0 28 28"><polygon points="14,1 24,20 12,27 4,14" fill="#4aa3ff" stroke="#fff" stroke-width="1.5"/></svg><svg class="k k4" viewBox="0 0 28 28"><polygon points="14,1 17.5,10 27,10.5 19.5,16.5 22,26 14,20.5 6,26 8.5,16.5 1,10.5 10.5,10" fill="#ffd500" stroke="#181818" stroke-width="2"/></svg><svg class="k k5" viewBox="0 0 28 28"><polygon points="2,2 26,10 14,14 10,26" fill="#d90019" stroke="#fff" stroke-width="1.5"/></svg><svg class="k kv" viewBox="0 0 28 28"><polygon points="14,1 25,14 14,27 3,14" fill="none" stroke="#e6d3a1" stroke-width="2"/><polygon points="14,8 19,14 14,20 9,14" fill="#e6d3a1"/></svg></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -511,8 +564,10 @@ body.shake{animation:shake .12s linear 4}
       <div>
         <div class="flr"><small>FLOOR</small><b id="floor">1</b></div>
         <h3 style="font:400 30px var(--cond);letter-spacing:.1em;margin:4px 0 6px">CLIMB THE TOWER</h3>
-        <p class="fine" style="margin-bottom:14px">Each floor may hide a shadow. Strike it down before you climb on. Every tenth floor has a guardian.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="btn blue" id="up" type="button"><span>Climb</span></button><button class="btn" id="hit" type="button" disabled><span>Strike</span></button></div>
+        <p class="fine" style="margin-bottom:10px">Each floor may hide a shadow. Fight with the menu: Strike, Persona (4 SP), Guard or Item. Every tenth floor has a guardian.</p>
+        <div class="hud"><span>HP <i><b id="php"></b></i> <em id="hpn">30</em></span><span>SP <i><b id="psp"></b></i> <em id="spn">12</em></span><span>ITEMS <em id="itn">3</em></span></div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="btn blue" id="up" type="button"><span>Climb</span></button></div>
+        <div class="fmenu" id="fmenu"><button class="btn" id="fb-strike" type="button"><span>Strike</span></button><button class="btn blue" id="fb-persona" type="button"><span>Persona (4 SP)</span></button><button class="btn" id="fb-guard" type="button"><span>Guard</span></button><button class="btn" id="fb-item" type="button"><span>Item</span></button></div>
         <p class="status" id="cmsg" style="text-align:left;margin-top:12px" aria-live="polite">The tower stretches upward.</p>
       </div>
     </div>
@@ -965,24 +1020,46 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
  host.addEventListener('dragover',e=>e.preventDefault());host.addEventListener('drop',e=>{e.preventDefault();addFiles(e.dataTransfer.files)});
 });
 
-/* ---------- P3: tower climb ---------- */
+/* ---------- P3: tower climb with fight menu ---------- */
 (function(){
- let fl=SAVE.get('floor',1),hp=0,max=0;const sh=$('#shaft'),sd=$('#shadow'),up=$('#up'),hit=$('#hit'),msg=$('#cmsg');
+ const MH=30,MS=12;
+ let fl=SAVE.get('floor',1),php=SAVE.get('php',MH),psp=SAVE.get('psp',MS),items=SAVE.get('items',3),shHp=0,shMax=0,boss=false,guard=false,busy=false;
+ const sh=$('#shaft'),sd=$('#shadow'),up=$('#up'),msg=$('#cmsg'),fm=$('#fmenu');
  sd.innerHTML='<i><b style="width:100%"></b></i>';
- $('#floor').textContent=fl;sh.style.backgroundPositionY=(fl*43)+'px';if(fl>1)msg.textContent='Welcome back. You were on floor '+fl+'.';
- const setHP=()=>{sd.querySelector('b').style.width=(hp/max*100)+'%'};
+ const save=()=>{SAVE.put('floor',fl);SAVE.put('php',php);SAVE.put('psp',psp);SAVE.put('items',items)};
+ function hud(){$('#php').style.width=(php/MH*100)+'%';$('#psp').style.width=(psp/MS*100)+'%';$('#hpn').textContent=php;$('#spn').textContent=psp;$('#itn').textContent=items;
+  $('#fb-strike').disabled=busy;$('#fb-guard').disabled=busy;$('#fb-persona').disabled=busy||psp<4;$('#fb-item').disabled=busy||items<1||php>=MH}
+ const floorView=()=>{$('#floor').textContent=fl;sh.style.backgroundPositionY=(fl*43)+'px'};
+ function num(t,col){const d=document.createElement('div');d.className='dmg';d.textContent=t;d.style.color=col||'#fff';d.style.left=(30+Math.random()*40)+'%';sh.append(d);setTimeout(()=>d.remove(),900)}
+ const setSH=()=>{sd.querySelector('b').style.width=Math.max(0,shHp/shMax*100)+'%'};
+ const say=t=>{msg.textContent=t};
+ function encounter(b){boss=b;shMax=shHp=b?18+Math.floor(fl/2):3+Math.floor(fl/5);sd.classList.toggle('boss',b);sd.classList.add('on');setSH();up.disabled=true;fm.classList.add('on');guard=false;busy=false;hud();say(b?'A guardian fills the floor.':'A shadow blocks the way.')}
+ function end(){sd.classList.remove('on');fm.classList.remove('on');up.disabled=false;busy=false;hud();save()}
+ function shadowTurn(){
+  if(shHp<=0)return;busy=true;hud();
+  setTimeout(()=>{
+   let dmg=boss?3+Math.floor(Math.random()*4):1+Math.floor(Math.random()*3);if(guard){dmg=Math.ceil(dmg/2);guard=false}
+   php=Math.max(0,php-dmg);sh.classList.remove('hurt');void sh.offsetWidth;sh.classList.add('hurt');num('-'+dmg,'#ff6b86');sfx('caught');
+   if(php<=0){fl=Math.max(1,fl-3);php=MH;psp=MS;floorView();end();say('You were knocked out and woke up on floor '+fl+'.');return}
+   busy=false;hud();save();say('It hits for '+dmg+'. Your move.')
+  },520)}
+ function dealt(d,label){
+  shHp-=d;setSH();sd.classList.remove('hit');void sd.offsetWidth;sd.classList.add('hit');num(String(d));
+  if(shHp<=0){psp=Math.min(MS,psp+2);php=Math.min(MH,php+(boss?10:2));end();say((boss?'Guardian':'Shadow')+' defeated. You recover a little.');const r=sh.getBoundingClientRect();if(boss)burst('p3',r.left+r.width/2,r.top+r.height/2);return}
+  say(label+' for '+d+'.');shadowTurn()}
+ $('#fb-strike').addEventListener('click',()=>{if(busy)return;sfx('hit');dealt(2+Math.floor(Math.random()*2),'Strike')});
+ $('#fb-persona').addEventListener('click',()=>{
+  if(busy||psp<4)return;psp-=4;busy=true;hud();sfx('boom');
+  const r=sh.getBoundingClientRect();burst('p3',r.left+r.width/2,r.top+r.height/2);
+  const c=document.createElement('div');c.className='pcast';c.textContent='PERSONA!';sh.append(c);setTimeout(()=>c.remove(),700);
+  setTimeout(()=>dealt(5+Math.floor(Math.random()*3),'Persona'),450)});
+ $('#fb-guard').addEventListener('click',()=>{if(busy)return;guard=true;psp=Math.min(MS,psp+1);say('You brace for the next hit.');hud();shadowTurn()});
+ $('#fb-item').addEventListener('click',()=>{if(busy||items<1||php>=MH)return;items--;php=Math.min(MH,php+10);num('+10','#8ff5d5');say('You recover some strength.');hud();save();shadowTurn()});
  up.addEventListener('click',()=>{
-  fl++;SAVE.put('floor',fl);$('#floor').textContent=fl;sh.style.backgroundPositionY=(fl*43)+'px';
-  const boss=fl%10===0;
-  if(boss||Math.random()<.32){max=hp=boss?7:3;sd.classList.add('on');setHP();up.disabled=true;hit.disabled=false;msg.textContent=boss?'A guardian fills the floor.':'A shadow blocks the way.';}
-  else msg.textContent=['Quiet. Keep climbing.','The air is cold here.','Another floor down the dark.'][fl%3];
- });
- hit.addEventListener('click',e=>{
-  hp--;sfx('hit');setHP();sd.classList.remove('hit');void sd.offsetWidth;sd.classList.add('hit');
-  const r=sd.getBoundingClientRect();burst('p3',r.left+r.width/2,r.top+r.height/2);
-  if(hp<=0){sd.classList.remove('on');up.disabled=false;hit.disabled=true;msg.textContent='Shadow defeated. The way is clear.'}
-  else msg.textContent='Hit. '+hp+' more.';
- });
+  fl++;floorView();const b=fl%10===0;
+  if(b||Math.random()<.32){save();encounter(b)}
+  else{if(php<MH)php++;if(Math.random()<.25&&items<5)items++;hud();save();say(['Quiet. Keep climbing.','The air is cold here.','Another floor into the dark.'][fl%3])}});
+ floorView();hud();if(fl>1)say('Welcome back. You were on floor '+fl+'.');
 })();
 
 /* ---------- P4: stats radar ---------- */
@@ -1116,6 +1193,33 @@ if(SAVE.get('snd',false)){const once=e=>{if(e.target.closest&&e.target.closest('
  (function f(){rx+=(x-rx)*.2;ry+=(y-ry)*.2;cr.style.transform='translate('+rx+'px,'+ry+'px)';requestAnimationFrame(f)})();
 })();
 $('#wipe').addEventListener('click',()=>{try{localStorage.removeItem(SAVE.k)}catch(e){}location.reload()});
+
+/* ---------- Title screen ---------- */
+(function(){
+ const t=$('#title');let seen=false;try{seen=sessionStorage.getItem('pbm_seen')==='1'}catch(e){}
+ if(seen||location.hash){t.remove();return}
+ document.documentElement.style.overflow='hidden';
+ const tt=$('#tt');[...'PERSONA'].forEach((ch,i)=>{const sp=document.createElement('span');sp.textContent=ch;sp.style.animationDelay=(.5+i*.07)+'s';sp.style.setProperty('--r',rnd(-5,5).toFixed(1)+'deg');tt.append(sp)});
+ let done=false;
+ function go(snd){if(done)return;done=true;try{sessionStorage.setItem('pbm_seen','1')}catch(e){}
+  if(snd)sOn(true);else if(SND.on)sOn(false);
+  t.classList.add('out');setTimeout(()=>{t.remove();document.documentElement.style.overflow=''},800)}
+ $('#tSound').addEventListener('click',()=>go(true));$('#tSilent').addEventListener('click',()=>go(false));
+ addEventListener('keydown',function k(e){if(e.key==='Tab'||e.metaKey||e.ctrlKey||e.altKey)return;removeEventListener('keydown',k);go(SAVE.get('snd',false))});
+})();
+
+/* ---------- Section transitions ---------- */
+let trBusy=false;
+function trans(z,href){
+ if(RM||trBusy)return false;
+ trBusy=true;const o=document.createElement('div');o.className='tr-'+z;o.setAttribute('aria-hidden','true');
+ o.innerHTML=z==='p4'?'<div class="bars">'+['#fff','#ffd500','#00c2c8','#1fbf3a','#e100d4','#e0102a','#1a3fd0'].map(c=>'<span style="background:'+c+'"></span>').join('')+'</div><b>CH 04</b>':z==='p5'?'<div class="a"></div><div class="b"></div>':'<div class="l"></div><div class="r"></div>';
+ document.body.append(o);sfx('click');
+ setTimeout(()=>{const h=document.documentElement;h.style.scrollBehavior='auto';$(href).scrollIntoView();h.style.scrollBehavior=''},z==='p4'?260:420);
+ setTimeout(()=>{o.remove();trBusy=false},z==='p4'?700:1000);
+ return true;
+}
+['p4','p5','velvet'].forEach(z=>$$('a[href="#'+z+'"]').forEach(a=>a.addEventListener('click',e=>{if(trans(z,'#'+z))e.preventDefault()})));
 
 /* ---------- Water loading screen ---------- */
 const wo=$('#water'),wc=wo.querySelector('canvas'),wx=wc.getContext('2d');let wRun=false;
