@@ -144,6 +144,10 @@ body[data-zone="p3"] a[href="#p3"],body[data-zone="p4"] a[href="#p4"],body[data-
 .screen:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none}
 .ghost{position:absolute;left:50%;bottom:-6%;width:34%;color:#000;opacity:0;transform:translateX(-50%);transition:opacity 1s;animation:sway 3s ease-in-out infinite;mix-blend-mode:multiply}
 .tv[data-s="2"] .ghost{opacity:.9}
+.screen #prog4{image-rendering:auto}.screen #static{transition:opacity .2s}
+.tv[data-s="0"] #prog4{opacity:0}
+.tv[data-s="1"] #static{opacity:0}.tv[data-s="1"].burst #static{opacity:1}
+.screen.on{animation:crt .55s ease-out}
 .tvcap{position:absolute;left:14px;top:12px;font:700 12px var(--body);letter-spacing:.2em;color:#fff;background:rgba(0,0,0,.6);padding:2px 8px;z-index:2}
 .tvfoot{display:flex;justify-content:space-between;align-items:center;padding-top:12px;color:#aaa;font:600 12px var(--body);letter-spacing:.1em}
 .tvfoot i{display:inline-block;width:14px;height:14px;border-radius:50%;background:#555;margin-left:8px;transition:background .3s}
@@ -338,6 +342,7 @@ footer{padding:36px 16px;text-align:center;color:#8d92a6;font-size:13px;backgrou
 @keyframes wob{50%{transform:translateY(-8px) scaleY(1.08)}}
 @keyframes drifty{to{transform:translateX(40px)}}
 @keyframes sweep{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+@keyframes crt{0%{transform:scale(1,.02);filter:brightness(5)}55%{transform:scale(1,1);filter:brightness(2.2)}100%{filter:none}}
 @keyframes breathe{50%{transform:scale(1.03)}}
 @keyframes slide{from{transform:translateX(-40px)}to{transform:translateX(40px)}}
 @keyframes twinkle{50%{transform:scale(1.3) rotate(20deg)}}
@@ -488,7 +493,7 @@ body.shake{animation:shake .12s linear 4}
       <div class="rv">
         <button class="tv" id="tv" data-s="0" type="button" aria-label="Television. Press to change channel.">
           <span class="tvcap" id="tvcap">OFF</span>
-          <div class="screen"><canvas id="static"></canvas><svg class="ghost"><use href="#sil"/></svg></div>
+          <div class="screen" id="screen"><canvas id="prog4"></canvas><canvas id="static"></canvas><svg class="ghost"><use href="#sil"/></svg></div>
           <div class="tvfoot"><span>CH. 00:00</span><span>POWER<i></i></span></div>
         </button>
         <div class="ctl" style="justify-content:center;margin-top:30px">
@@ -694,8 +699,54 @@ setMoon(0);
 
 /* ---------- P4: TV ---------- */
 const tv=$('#tv'),sc=$('#static'),sx=sc.getContext('2d');sc.width=160;sc.height=120;
-const img=sx.createImageData(160,120);let tvs=0,tvLast=0,tvVis=true;
-const caps=['OFF','STATIC','MIDNIGHT CHANNEL'],btxt=['Tune in','Tune further','Switch off'];
+const pc=$('#prog4'),px=pc.getContext('2d');pc.width=320;pc.height=240;
+const img=sx.createImageData(160,120);let tvs=0,tvLast=0,tvVis=true,prog0=0,looping=false,ac;
+const caps=['OFF','ON AIR','MIDNIGHT CHANNEL'],btxt=['Switch on','Midnight channel','Switch off'];
+const FT="Rubik,sans-serif";
+function txt(t,x,y,size,col,al,w){px.font='italic '+(w||800)+' '+size+'px '+FT;px.textAlign=al||'left';px.fillStyle=col;px.fillText(t,x,y)}
+function bar(label,col,tc){px.fillStyle=col;px.beginPath();px.moveTo(0,16);px.lineTo(160,16);px.lineTo(146,46);px.lineTo(0,46);px.fill();txt(label,12,38,20,tc)}
+function cloud(x,y,k){px.fillStyle='#fff';px.beginPath();px.arc(x,y,12*k,0,6.283);px.arc(x+13*k,y-6*k,15*k,0,6.283);px.arc(x+28*k,y,11*k,0,6.283);px.fill()}
+function weather(t){
+ const g=px.createLinearGradient(0,0,0,214);g.addColorStop(0,'#5fa8ff');g.addColorStop(1,'#d6ecff');px.fillStyle=g;px.fillRect(0,0,320,214);
+ px.save();px.translate(252,86);px.rotate(t/2000);px.strokeStyle='#ffd500';px.lineWidth=5;for(let i=0;i<12;i++){px.rotate(Math.PI/6);px.beginPath();px.moveTo(36,0);px.lineTo(52,0);px.stroke()}px.restore();
+ px.fillStyle='#ffe527';px.beginPath();px.arc(252,86,28,0,6.283);px.fill();
+ for(let i=0;i<3;i++)cloud(((t/40+i*130)%440)-70,74+i*26,1.2);
+ px.strokeStyle='#3a7bff';px.lineWidth=2;for(let i=0;i<26;i++){const x=(i*37+t/6)%170,y=(i*53+t/3)%150+50;px.beginPath();px.moveTo(x,y);px.lineTo(x-4,y+10);px.stroke()}
+ bar('FORECAST','#ff2d95','#fff');
+ [['TUE',0,'21'],['WED',1,'17'],['THU',2,'13']].forEach((d,i)=>{const x=14+i*100,y=146;px.fillStyle='#fff';px.fillRect(x,y,90,60);px.strokeStyle='#181818';px.lineWidth=3;px.strokeRect(x,y,90,60);txt(d[0],x+8,y+20,14,'#181818');txt(d[2]+'°',x+84,y+52,24,'#ff2d95','right');
+  if(d[1]===0){px.fillStyle='#ffd500';px.beginPath();px.arc(x+26,y+38,11,0,6.283);px.fill()}else{cloud(x+12,y+40,.8);if(d[1]===2){px.strokeStyle='#3a7bff';px.lineWidth=2;for(let k=0;k<3;k++){px.beginPath();px.moveTo(x+14+k*10,y+50);px.lineTo(x+10+k*10,y+58);px.stroke()}}}});
+}
+function quiz(t,tt){
+ px.save();px.translate(160,107);px.rotate(t/3000);for(let i=0;i<16;i++){px.fillStyle=i%2?'#ffe527':'#ff7bd8';px.beginPath();px.moveTo(0,0);px.arc(0,0,320,i*Math.PI/8,(i+1)*Math.PI/8);px.fill()}px.restore();
+ px.fillStyle='#fff';px.fillRect(30,64,260,100);px.strokeStyle='#181818';px.lineWidth=4;px.strokeRect(30,64,260,100);
+ bar('QUIZ TIME','#00c2b8','#181818');
+ if(tt<3600){txt('What falls but never',160,98,20,'#181818','center');txt('gets hurt?',160,122,20,'#181818','center');const n=3-Math.floor(tt/1200);txt(String(n),160,154,26,'#ff2d95','center',900)}
+ else{const k=Math.min(1,(tt-3600)/250);px.save();px.translate(160,128);px.scale(k,k);txt('RAIN!',0,16,50,'#ff2d95','center',900);px.restore()}
+}
+function cook(t){
+ const g=px.createLinearGradient(0,0,0,214);g.addColorStop(0,'#ffc27a');g.addColorStop(1,'#ff7a4a');px.fillStyle=g;px.fillRect(0,0,320,214);
+ px.fillStyle='#8a4b1f';px.fillRect(0,172,320,42);
+ px.fillStyle='#2b2b3a';px.fillRect(100,112,120,62);px.fillRect(90,106,140,10);
+ px.fillStyle='#ff9a3d';px.beginPath();px.ellipse(160,110,58,8,0,0,6.283);px.fill();
+ px.strokeStyle='#fff';px.lineWidth=2;for(let i=0;i<7;i++){const ph=(t/700+i*.37)%1;px.beginPath();px.arc(118+i*14,110-ph*16,2+ph*3,0,6.283);px.stroke()}
+ px.strokeStyle='rgba(255,255,255,.75)';px.lineWidth=5;px.lineCap='round';for(let i=0;i<5;i++){px.beginPath();for(let y=0;y<60;y+=4){const x=124+i*18+Math.sin(y/10+t/300+i)*6;y?px.lineTo(x,96-y):px.moveTo(x,96)}px.stroke()}
+ bar('COOKING HOUR','#7ac70c','#181818');txt('TODAY: HOT POT',160,200,18,'#fff','center');
+}
+function stage(t){
+ px.fillStyle='#12061f';px.fillRect(0,0,320,240);
+ for(let r=0;r<5;r++)for(let c=0;c<9;c++){px.fillStyle=(r+c)%2?'rgba(255,45,149,.35)':'rgba(0,194,184,.3)';px.fillRect(c*40-20+r*8,150+r*20,40,20)}
+ px.fillStyle='rgba(255,255,255,'+(.14+.05*Math.sin(t/200))+')';px.beginPath();px.moveTo(150,0);px.lineTo(170,0);px.lineTo(250,240);px.lineTo(70,240);px.fill();
+}
+const TK='RAIN EXPECTED THIS EVENING   //   SHOPPING STREET SALE ON NOW   //   FOG ALONG THE RIVER TONIGHT   //   ';
+function ticker(t){px.fillStyle='rgba(0,0,0,.78)';px.fillRect(0,214,320,26);px.font='700 13px '+FT;px.textAlign='left';px.fillStyle='#ffe527';const w=px.measureText(TK).width,o=(t/28)%w;px.fillText(TK+TK,-o,232)}
+function progFrame(t){
+ px.clearRect(0,0,320,240);
+ if(tvs===2){stage(t);return}
+ if(tvs!==1)return;
+ const el=Math.max(0,t-prog0),seg=Math.floor(el/7000)%3,tt=el%7000;
+ [weather,quiz,cook][seg](t,tt);ticker(t);txt('CH 04',308,36,12,'#fff','right');
+ if(tt<160){px.fillStyle='rgba(255,255,255,'+(1-tt/160)+')';px.fillRect(0,0,320,240)}
+}
 function tvFrame(t){
  if(tvs===0){sx.fillStyle='#050505';sx.fillRect(0,0,160,120);return}
  const d=img.data,a=tvs===1?255:140;
@@ -703,8 +754,14 @@ function tvFrame(t){
  sx.putImageData(img,0,0);
  if(tvs===2){sx.fillStyle='rgba(255,213,0,.16)';sx.fillRect(0,(t/10)%140-10,160,14)}
 }
-function tvLoop(t){if(tvs>0&&tvVis&&t-tvLast>40){tvLast=t;tvFrame(t)}if(tvs>0)requestAnimationFrame(tvLoop)}
-function setTV(s){tvs=s;tv.dataset.s=s;$('#tvcap').textContent=caps[s];$('#tune').firstChild.textContent=btxt[s];tvFrame(0);if(s>0&&!RM)requestAnimationFrame(tvLoop);else if(s>0)tvFrame(0)}
+function tvLoop(t){if(tvs>0&&tvVis&&t-tvLast>33){tvLast=t;tvFrame(t);progFrame(t)}if(tvs>0)requestAnimationFrame(tvLoop);else looping=false}
+function chime(){try{if(RM)return;ac=ac||new (window.AudioContext||window.webkitAudioContext)();const t=ac.currentTime;[[523,0],[659,.12],[784,.24],[1047,.36]].forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.12,t+d+.02);g.gain.exponentialRampToValueAtTime(.001,t+d+.3);o.connect(g);g.connect(ac.destination);o.start(t+d);o.stop(t+d+.32)})}catch(e){}}
+function setTV(s){
+ tvs=s;tv.dataset.s=s;$('#tvcap').textContent=caps[s];$('#tune').firstChild.textContent=btxt[s];
+ prog0=performance.now();tvFrame(0);progFrame(prog0+1);
+ if(s===1){tv.classList.add('burst');setTimeout(()=>tv.classList.remove('burst'),450);const sn=$('#screen');sn.classList.remove('on');void sn.offsetWidth;sn.classList.add('on');chime()}
+ if(s>0&&!RM&&!looping){looping=true;requestAnimationFrame(tvLoop)}
+}
 const next=()=>setTV((tvs+1)%3);
 $('#tune').addEventListener('click',next);tv.addEventListener('click',next);
 new IntersectionObserver(es=>{tvVis=es[0].isIntersecting}).observe(tv);
