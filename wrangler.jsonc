@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "persona-beyond-the-mask",
+  "name": "persona",
+  "workers_dev": true,
   "compatibility_date": "2025-11-01",
   "assets": {
     "directory": ".",
