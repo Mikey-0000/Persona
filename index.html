@@ -992,6 +992,21 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .callcard:not(.play):hover .stamp{animation:stampspin .9s cubic-bezier(.3,1.5,.4,1)}@keyframes stampspin{from{transform:rotate(-360deg) scale(.4)}}
 .callcard:not(.play):hover .sm{letter-spacing:.4em;transition:letter-spacing .3s}.callcard .sm{transition:letter-spacing .3s}
 @media(prefers-reduced-motion:reduce){.callcard:hover,.callcard:hover *{animation:none!important}}
+.callcard{background-color:#f6eed9;overflow:visible}
+.callcard>*{position:relative;z-index:2}
+.callcard>.cc-slash,.callcard>.cc-dots,.callcard>.cc-wm,.callcard>.cc-mask,.callcard>.cc-tape{position:absolute;pointer-events:none}
+.cc-slash{z-index:0!important;right:-6%;top:-8%;bottom:-8%;width:34%;background:linear-gradient(180deg,#df1a21,#9c0a12);transform:skewX(-16deg);opacity:.95;box-shadow:-10px 0 0 #111}
+.cc-dots{z-index:0!important;left:0;bottom:0;width:58%;height:48%;background:radial-gradient(circle,#111 1.4px,transparent 1.8px) 0 0/9px 9px;opacity:.16;-webkit-mask-image:linear-gradient(45deg,#000,transparent 75%);mask-image:linear-gradient(45deg,#000,transparent 75%)}
+.cc-wm{z-index:1!important;left:6%;bottom:5%;font:900 italic clamp(22px,4.2vw,46px)/1 var(--display);letter-spacing:.04em;color:transparent;-webkit-text-stroke:1.5px rgba(17,17,17,.2);white-space:nowrap;transform:rotate(-2deg)}
+.cc-mask{z-index:1!important;right:5%;top:7%;width:34%;fill:#111;transform:rotate(8deg);filter:drop-shadow(3px 3px 0 #fff);animation:ccmask 3.2s ease-in-out infinite}
+@keyframes ccmask{50%{transform:rotate(3deg) translateY(-5px) scale(1.05)}}
+.cc-tape{z-index:3!important;width:74px;height:22px;background:rgba(255,236,160,.82);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.cc-tape.t1{left:-18px;top:14px;transform:rotate(-38deg)}.cc-tape.t2{right:-16px;bottom:16px;transform:rotate(-34deg)}
+.callcard .stamp{z-index:3;width:84px;height:84px;filter:drop-shadow(4px 4px 0 #111);color:#fff}
+.callcard .stamp{animation:ccstar 2.4s ease-in-out infinite}@keyframes ccstar{50%{transform:rotate(12deg) scale(1.12)}}
+.callcard .big{text-shadow:3px 3px 0 rgba(223,26,33,.28)}
+.callcard .big em{display:inline-block;transform:skewX(-8deg) rotate(-2deg);box-shadow:5px 5px 0 #111;border:2px solid #111}
+.callcard .sm:last-of-type{background:#111;color:#f6eed9;padding:4px 10px;align-self:flex-start;transform:skewX(-10deg)}
 </style>
 </head>
 <body data-zone="hero">
@@ -1235,6 +1250,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
     <div class="cardrow">
       <div class="rv">
         <div class="callcard play" id="card">
+          <i class="cc-slash" aria-hidden="true"></i><i class="cc-dots" aria-hidden="true"></i><b class="cc-wm" aria-hidden="true">TAKE YOUR HEART</b><svg class="cc-mask" viewBox="0 0 200 80" aria-hidden="true"><path fill-rule="evenodd" d="M6 30C38 2 80 18 100 28C120 18 162 2 194 30C198 58 160 78 124 60C112 54 106 50 100 50C94 50 88 54 76 60C40 78 2 58 6 30ZM44 34C54 28 72 34 80 42C70 52 50 50 44 34ZM156 34C146 28 128 34 120 42C130 52 150 50 156 34Z"/></svg><i class="cc-tape t1" aria-hidden="true"></i><i class="cc-tape t2" aria-hidden="true"></i>
           <span class="sm">CALLING CARD</span>
           <div class="big">The heart of <em id="cname">Someone</em> will be taken.</div>
           <span class="sm">SEE YOU SOON. — THE THIEVES</span>
