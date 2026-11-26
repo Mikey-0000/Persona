@@ -2415,7 +2415,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  addEventListener('keydown',e=>{if(e.target.matches&&e.target.matches('input,textarea'))return;if(e.key==='?')k.classList.toggle('on');if(e.key==='Escape')k.classList.remove('on')});
  document.getElementById('ksx').addEventListener('click',()=>k.classList.remove('on'));
  k.addEventListener('click',e=>{if(e.target===k)k.classList.remove('on')});
- const f=document.getElementById('wipe');if(f){const b=document.createElement('button');b.type='button';b.className='wipe';b.textContent='Controls';b.style.marginRight='14px';b.addEventListener('click',()=>k.classList.add('on'));f.before(b)}
+ const f=document.getElementById('wipe');if(f){const b=document.createElement('button');b.type='button';b.className='wipe';b.textContent='Controls';b.style.right='170px';b.addEventListener('click',()=>k.classList.add('on'));f.before(b)}
 })();
 })();
 
