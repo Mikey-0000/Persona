@@ -148,7 +148,7 @@ body[data-zone="p3"] a[href="#p3"],body[data-zone="p4"] a[href="#p4"],body[data-
 .screen{position:relative;aspect-ratio:4/3;border-radius:46% / 12%;overflow:hidden;background:#050505;box-shadow:inset 0 0 40px #000}
 .screen canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
 .screen:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none}
-.ghost{position:absolute;left:50%;bottom:-6%;width:34%;color:#000;opacity:0;transform:translateX(-50%);transition:opacity 1s;animation:sway 3s ease-in-out infinite;mix-blend-mode:multiply}
+.ghost{position:absolute;left:50%;bottom:-4%;height:86%;width:auto;aspect-ratio:1/2;color:#000;opacity:0;transform:translateX(-50%);transition:opacity 1s;animation:sway 3s ease-in-out infinite;mix-blend-mode:multiply}
 .tv[data-s="2"] .ghost{opacity:.9}
 .screen #prog4{image-rendering:auto}.screen #static{transition:opacity .2s}
 .tv[data-s="0"] #prog4{opacity:0}
@@ -943,7 +943,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 #cut .cbg{position:absolute;inset:-20%;background:linear-gradient(115deg,#000 0 30%,#df1a21 30% 56%,#000 56% 64%,#fff 64% 66%,#000 66%);transform:translateX(-100%)}
 #cut.on .cbg{animation:cslide .3s cubic-bezier(.2,.9,.2,1) forwards}@keyframes cslide{to{transform:none}}
 #cut .csky{position:absolute;left:0;right:0;bottom:0;width:100%;height:40%;fill:#050506}
-#cut .cjk{position:absolute;left:12%;bottom:5%;height:62vh;width:auto;color:#000;filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 -3px 0 #fff);transform:translateY(130%)}
+#cut .cjk{position:absolute;left:12%;bottom:5%;height:70vh;width:auto;color:#000;filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 -3px 0 #fff);transform:translateY(130%)}
 #cut.on .cjk{animation:cup .35s .15s cubic-bezier(.2,1.4,.4,1) forwards}@keyframes cup{to{transform:none}}
 #cut .cban{position:absolute;left:-5%;right:-5%;top:12%;padding:14px 0 14px 14%;background:#fff;color:#0b0b0d;font:italic 900 clamp(26px,6vw,72px)/1 var(--body);transform:skewX(-12deg) translateX(115%);box-shadow:0 8px 0 #df1a21;white-space:nowrap}
 #cut.on .cban{animation:cban .3s .2s cubic-bezier(.2,1.2,.4,1) forwards}@keyframes cban{to{transform:skewX(-12deg)}}
@@ -1058,7 +1058,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 @keyframes roll{to{background-position:0 0,0 -200%}}
 .tv[data-s="2"] .screen{box-shadow:inset 0 0 50px #000,0 0 0 3px #555,0 0 30px rgba(255,45,149,.7)}
 .tv[data-s="1"] .screen{box-shadow:inset 0 0 50px #000,0 0 0 3px #555,0 0 24px rgba(255,229,39,.55)}
-.tv[data-s="2"] .ghost{filter:drop-shadow(0 0 10px #ff2d95) drop-shadow(0 0 22px #ff2d95)}
+.tv[data-s="2"] .ghost{filter:drop-shadow(0 0 8px #ff2d95) drop-shadow(0 0 20px #ff2d95);animation:sway 3s ease-in-out infinite,ghg 4s steps(1) infinite}@keyframes ghg{0%,92%,100%{translate:0}94%{translate:5px 0;opacity:.6}96%{translate:-4px 0}}
 .tv[data-s="2"] #static{opacity:.38}
 .tvk{position:absolute;right:-10px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ddd,#555 60%,#222);border:2px solid #111;box-shadow:2px 3px 0 #000;transition:transform .5s cubic-bezier(.2,1.5,.4,1)}
 .tvk:after{content:"";position:absolute;left:50%;top:2px;width:2px;height:8px;margin-left:-1px;background:#111}
@@ -1083,6 +1083,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 <div id="prog"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sil2" viewBox="0 0 120 240"><ellipse cx="60" cy="30" rx="14" ry="18" fill="currentColor"/><path d="M44 28C44 8 64 0 80 14C70 11 60 14 54 22C52 26 50 30 44 36Z" fill="currentColor"/><path d="M54 46h12v12c14 2 24 6 27 18l5 44-9 4-5-34-2 40 3 98H68l-6-86h-4l-6 86H36l3-98-2-40-5 34-9-4 5-44c3-12 13-16 27-18z" fill="currentColor"/><path d="M52 28l7 2M68 28l-7 2" stroke="#ff2d95" stroke-width="2.4" stroke-linecap="round"/></symbol>
   <symbol id="sil" viewBox="0 0 120 170"><circle cx="60" cy="38" r="26" fill="currentColor"/><path d="M26 82h68l24 88H2z" fill="currentColor"/></symbol>
   <symbol id="diamond" viewBox="0 0 64 100"><path d="M32 4l28 46-28 46L4 50z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M32 22l15 28-15 28-15-28z" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".6"/></symbol>
   <symbol id="star" viewBox="0 0 100 100"><path d="M50 2l14 34 36 3-28 24 9 36-31-20-31 20 9-36L0 39l36-3z" fill="currentColor"/></symbol>
@@ -1196,7 +1197,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
       <div class="rv">
         <button class="tv" id="tv" data-s="0" type="button" aria-label="Television. Press to change channel.">
           <i class="tvk k1" aria-hidden="true"></i><i class="tvk k2" aria-hidden="true"></i><span class="tvgr" aria-hidden="true"></span><span class="tvcap" id="tvcap">OFF</span>
-          <div class="screen" id="screen"><canvas id="prog4"></canvas><canvas id="static"></canvas><svg class="ghost"><use href="#sil"/></svg></div>
+          <div class="screen" id="screen"><canvas id="prog4"></canvas><canvas id="static"></canvas><svg class="ghost" viewBox="0 0 120 240"><use href="#sil2"/></svg></div>
           <div class="tvfoot"><span>CH. 00:00</span><span>POWER<i></i></span></div>
         </button>
         <div class="ctl" style="justify-content:center;margin-top:30px">
@@ -1391,7 +1392,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 <button class="inst" id="inst" type="button" hidden>Install app</button>
 <div id="lore" role="dialog" aria-modal="true" aria-labelledby="lore-t" hidden><img class="lbg" alt="" aria-hidden="true"><div class="lw"><div class="ltop"><button type="button" id="lore-back" class="lbk">&#9664; BACK</button><nav id="lore-nav" aria-label="Lore pages"></nav></div><small id="lore-k"></small><h2 id="lore-t"></h2><p class="lsub" id="lore-s"></p><div id="lore-b"></div></div></div>
 <div id="shotlb" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden><button type="button" id="shotx" aria-label="Close">&times;</button><img id="shoti" alt=""><p id="shotc"></p></div>
-<div id="cut" aria-hidden="true"><div class="cbg"></div><svg class="csky" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 300V190h60v-40h50v60h40v-90h70v100h50v-60h60v80h80v-130h60v140h70v-70h80v90h60v-110h70v120h60v-50h90v70h70v-100h60v110h60V300z"/></svg><svg class="cjk" viewBox="0 0 120 170"><use href="#sil"/></svg><div class="cban">TIME TO TAKE YOUR HEART</div><div class="ccard"><small>CALLING CARD</small>The heart of <i id="cutn">Someone</i> will be taken.<svg viewBox="0 0 100 100"><use href="#star"/></svg></div></div>
+<div id="cut" aria-hidden="true"><div class="cbg"></div><svg class="csky" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 300V190h60v-40h50v60h40v-90h70v100h50v-60h60v80h80v-130h60v140h70v-70h80v90h60v-110h70v120h60v-50h90v70h70v-100h60v110h60V300z"/></svg><svg class="cjk" viewBox="0 0 120 240"><use href="#sil2"/></svg><div class="cban">TIME TO TAKE YOUR HEART</div><div class="ccard"><small>CALLING CARD</small>The heart of <i id="cutn">Someone</i> will be taken.<svg viewBox="0 0 100 100"><use href="#star"/></svg></div></div>
 <div id="wi" aria-hidden="true"><canvas id="wic" width="160" height="90"></canvas><b id="wit"></b></div>
 <div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move through the Persona 5 menu</li><li><b>D F J K</b>Play Velvet Beat (or tap the lanes)</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
