@@ -134,8 +134,8 @@ body[data-zone="p3"] a[href="#p3"],body[data-zone="p4"] a[href="#p4"],body[data-
 /* P4 */
 #p4{background:#ffe527;color:#181818;overflow:clip}
 .p4bg{position:absolute;inset:0;z-index:0;pointer-events:none}.p4stick{position:sticky;top:0;height:100vh;overflow:hidden}.p4stick svg{width:100%;height:100%;display:block}
-.rg{transform-origin:960px 540px;animation:breathe 9s ease-in-out infinite}
-.sl{animation:slide 8s ease-in-out infinite alternate}
+.rg{transform-origin:960px 540px}
+.sl{}
 .oc{transform-box:fill-box;transform-origin:center}
 .st{transform-box:fill-box;transform-origin:center;animation:twinkle 3.4s ease-in-out infinite}
 #p4 .sec-head .n,#p4 .sec-head h2{color:#181818}
@@ -897,6 +897,8 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .cfine{padding:0 14px;font:600 11px var(--body);color:#aaa;margin:0}
 @media (max-width:700px){.ph{transform:none}}
 @media (prefers-reduced-motion:reduce){.phs.on,.phb2{animation:none}}
+.ted{position:absolute;left:50%;top:50%;height:min(78vh,720px);width:auto;max-width:90vw;transform:translate(-50%,-50%) rotate(-5deg);filter:drop-shadow(10px 12px 0 rgba(24,24,24,.28));pointer-events:none;user-select:none}
+@media (max-width:700px){.ted{height:58vh}}
 </style>
 </head>
 <body data-zone="hero">
@@ -1015,7 +1017,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 
 <!-- P4 -->
 <section id="p4" class="world" data-zone="p4">
-  <div class="p4bg" aria-hidden="true"><div class="p4stick"><svg id="p4svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg></div></div>
+  <div class="p4bg" aria-hidden="true"><div class="p4stick"><svg id="p4svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><img class="ted" src="images/teddie.png" alt="" decoding="async"></div></div>
   <canvas id="rain" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="sec-head rv"><span class="n">P4</span><h2>REACH OUT</h2></div>
