@@ -8,7 +8,7 @@ All artwork is original placeholder art. Persona is a trademark of its respectiv
 
 No build step. Everything is static.
 
-**Git integration (easiest):** Cloudflare dashboard > Workers & Pages > Create > Import a repository > pick `mikey101101/Persona`. Leave the build command empty. For Workers, the deploy command is `npx wrangler deploy` (uses `wrangler.jsonc`). For Pages, set the output directory to `/`.
+**Git integration (easiest):** Cloudflare dashboard > Workers & Pages > Create > Import a repository > pick `Mikey-0000/Persona`. Leave the build command empty. For Workers, the deploy command is `npx wrangler deploy` (uses `wrangler.jsonc`). For Pages, set the output directory to `/`.
 
 **CLI:** `npx wrangler login` then `npx wrangler deploy`.
 
