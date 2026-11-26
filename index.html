@@ -1170,6 +1170,12 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .btstamp.on{animation:btstamp 1.15s cubic-bezier(.2,1.5,.4,1)}
 @keyframes btstamp{0%{opacity:0;transform:translate(-50%,-50%) scale(4) rotate(-14deg)}18%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}75%{opacity:1;transform:translate(-50%,-50%) scale(1.04) rotate(-6deg)}100%{opacity:0;transform:translate(-50%,-70%) scale(1.15) rotate(-6deg)}}
 @media(max-width:700px){.btf .bthero{left:-3%!important;bottom:150px!important;height:26%!important;z-index:4}}
+.bthero.dash{animation:btdash .7s cubic-bezier(.2,.8,.2,1)!important}
+@keyframes btdash{0%{transform:translateX(0)}22%{transform:translateX(-24px) scale(.97)}42%{transform:translateX(190px) scale(1.08) skewX(-10deg);filter:drop-shadow(0 0 22px #fff) brightness(1.6)}60%{transform:translateX(190px) scale(1.08) skewX(-10deg)}100%{transform:translateX(0)}}
+.btghost{position:absolute;z-index:3;pointer-events:none;opacity:0;filter:drop-shadow(0 0 10px var(--bc)) brightness(1.6);animation:btgh .55s ease-out both}.btghost svg{width:100%;height:100%;overflow:visible}.btghost .hb,.btghost .coat{fill:var(--bc)}
+@keyframes btgh{0%{opacity:0;transform:translateX(0)}30%{opacity:.5;transform:translateX(120px)}100%{opacity:0;transform:translateX(250px) skewX(-10deg)}}
+.bthero.hurt{animation:bthh2 .5s!important}@keyframes bthh2{20%{transform:translateX(-34px) rotate(-8deg);filter:brightness(5) drop-shadow(0 0 14px #f00)}60%{transform:translateX(-14px) rotate(-3deg)}}
+@media(max-width:700px){@keyframes btdash{0%{transform:none}42%,60%{transform:translateX(120px) scale(1.08) skewX(-10deg)}100%{transform:none}}}
 @media(prefers-reduced-motion:reduce){.btf *{animation:none!important}}
 .pc-img{cursor:pointer}.pc-img:after{content:"READ THEIR STORY \25B6";position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#fff;font:italic 900 13px var(--body);letter-spacing:.1em;text-align:center;transform:translateY(100%);transition:transform .25s cubic-bezier(.2,1.2,.4,1)}
 .pc-img:hover:after,.pc-img:focus-visible:after{transform:none}.pc-img img{transition:transform .5s}.pc-img:hover img{transform:scale(1.06)}
@@ -2758,6 +2764,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   for(let i=0;i<10;i++)later(()=>{for(let j=0;j<10;j++){const a=rnd(0,6.283),v=rnd(4,12);sp({k:'star',x:x+rnd(-70,70),y:y+rnd(-70,70),vx:Math.cos(a)*v,vy:Math.sin(a)*v,rot:rnd(0,6),vr:rnd(-.3,.3),s:rnd(10,24),c:j%2?'#fff':'#000',c2:j%2?'#000':pick(['#ffd500','#fff']),life:rnd(24,40)|0})}},i*90)}
  function fxDie(){const[x,y]=ctr();for(let i=0;i<60;i++){const a=rnd(0,6.283),v=rnd(1,8);sp({k:'dot',x:x+rnd(-40,40),y:y+rnd(-50,50),vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,g:-.04,s:rnd(5,12),c:pick(['#fff',EC.ice,'#ffd500']),life:rnd(40,80)|0})}}
  f.addEventListener('pointermove',e=>{if(RM)return;const r=f.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;f.style.setProperty('--px',(x*-14).toFixed(1)+'px');f.style.setProperty('--py',(y*-8).toFixed(1)+'px')});
+ function dash(){hero.classList.remove('cast','dash');void hero.offsetWidth;hero.classList.add('dash');setTimeout(()=>hero.classList.remove('dash'),700);if(RM)return;const hb=hero.getBoundingClientRect(),fb=f.getBoundingClientRect();for(let i=0;i<4;i++){const g=document.createElement('div');g.className='btghost';g.innerHTML=hero.innerHTML;g.style.cssText='left:'+(hb.left-fb.left)+'px;top:'+(hb.top-fb.top)+'px;width:'+hb.width+'px;height:'+hb.height+'px;animation-delay:'+(i*45)+'ms';f.appendChild(g);setTimeout(()=>g.remove(),900)}const[x,y]=ctr();for(let i=0;i<3;i++)sp({k:'line',x,y,a:-.9+i*.9,r0:10,len:rnd(120,220),s:rnd(3,6),c:i%2?'#fff':EC.fire,life:10})}
  function hitstop(ms){stopUntil=performance.now()+ms;f.classList.add('stop');setTimeout(()=>f.classList.remove('stop'),ms)}
  function zoom(k){f.style.setProperty('--z',k);f.classList.remove('zm');void f.offsetWidth;f.classList.add('zm')}
  function speed(){const[x,y]=ctr();for(let i=0;i<44;i++)sp({k:'line',x,y,a:rnd(0,6.283),r0:rnd(40,120),len:rnd(60,200),s:rnd(1,4),c:i%3?'#fff':EC.fire,life:12})}
@@ -2789,7 +2796,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   sk.textContent=SKN[el]+'!';sk.style.background=EC[el];sk.classList.remove('on');void sk.offsetWidth;sk.classList.add('on');hero.classList.remove('cast');void hero.offsetWidth;hero.classList.add('cast');flash(EC[el])}
  function act(k,el){if(locked||over)return;let dmg=0,one=false,t='',was=E.down;
   if(k==='skill'){if(P.sp<8)return;P.sp-=8;dmg=Math.round(rnd(25,32));cine(()=>{summon(el);fxEl(el)});if(E.weak===el){dmg=Math.round(dmg*1.6);if(!E.down){E.down=true;one=true}t='WEAKNESS! ';E.known=true;sfx('boom')}else if(E.res===el){dmg=Math.round(dmg*.3);t='Resisted... ';E.known=true;sfx('hit')}else{t=EN[el]+'! ';sfx('hit')}sub=false}
-  else if(k==='atk'){dmg=Math.round(rnd(11,16));hero.classList.remove('cast');void hero.offsetWidth;hero.classList.add('cast');fxHit();if(Math.random()<.15){dmg=Math.round(dmg*1.7);t='CRITICAL! ';if(!E.down){E.down=true;one=true}}else t='Slash! ';sfx('hit')}
+  else if(k==='atk'){dmg=Math.round(rnd(11,16));dash();fxHit();if(Math.random()<.15){dmg=Math.round(dmg*1.7);t='CRITICAL! ';if(!E.down){E.down=true;one=true}}else t='Slash! ';sfx('hit')}
   else if(k==='allout'){dmg=Math.round(rnd(58,70));E.down=false;aoUsed=true;t='ALL-OUT ATTACK! ';award('allout');const a=$('#btao');a.classList.remove('on');void a.offsetWidth;a.classList.add('on');flash('#fff');fxAll();sfx('win');sfx('boom')}
   else if(k==='scan'){E.known=true;t='Analyzed. Weak to '+EN[E.weak]+'.';sfx('chime');const[x,y]=ctr();sp({k:'ring',x,y,s:70,c:'#7fffd4',life:34})}
   else if(k==='guard'){P.guard=true;P.sp=Math.min(40,P.sp+5);t='You brace yourself.'}
