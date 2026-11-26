@@ -1047,6 +1047,28 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .ap:hover svg{animation:apw .5s ease}@keyframes apw{30%{transform:skewX(8deg) rotate(-14deg) scale(1.15)}70%{transform:skewX(8deg) rotate(8deg) scale(1.1)}}
 .ap span{transition:letter-spacing .2s}.ap:hover span{letter-spacing:.16em}
 @media(prefers-reduced-motion:reduce){.hwall *,.phclk b,#ph-home .ap i{animation:none!important}}
+.tv{background:linear-gradient(160deg,#3a3a3e,#1a1a1d 40%,#0f0f11);border:2px solid #555;box-shadow:inset 0 2px 0 rgba(255,255,255,.18),inset 0 -4px 0 #000,0 12px 0 #725500,0 24px 40px rgba(0,0,0,.4);transition:transform .2s}
+.tv:hover{transform:translateY(-3px) rotate(-.6deg)}
+.tv:before,.tv:after{height:52px;width:4px;background:linear-gradient(#bbb,#444);border-radius:2px;box-shadow:0 -4px 0 #ff2d95;animation:ant 3.4s ease-in-out infinite}
+.tv:after{animation-delay:-1.7s}@keyframes ant{50%{rotate:5deg}}
+.tv .screen{border:6px solid #000;box-shadow:inset 0 0 50px #000,inset 0 0 0 2px #333,0 0 0 3px #555}
+.tv .screen:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(120% 90% at 30% 10%,rgba(255,255,255,.22),transparent 40%),linear-gradient(180deg,transparent 0,rgba(255,255,255,.05) 50%,transparent 100%);border-radius:inherit}
+.tv:not([data-s="0"]) .screen{animation:crtf 4s infinite steps(1)}@keyframes crtf{0%,96%,100%{filter:none}97%{filter:brightness(1.4) contrast(1.2)}98%{filter:hue-rotate(40deg)}}
+.tv:not([data-s="0"]) .screen:after{background:repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 3px),linear-gradient(180deg,transparent 0 40%,rgba(255,255,255,.1) 50%,transparent 60% 100%) 0 0/100% 200%;animation:roll 5s linear infinite}
+@keyframes roll{to{background-position:0 0,0 -200%}}
+.tv[data-s="2"] .screen{box-shadow:inset 0 0 50px #000,0 0 0 3px #555,0 0 30px rgba(255,45,149,.7)}
+.tv[data-s="1"] .screen{box-shadow:inset 0 0 50px #000,0 0 0 3px #555,0 0 24px rgba(255,229,39,.55)}
+.tv[data-s="2"] .ghost{filter:drop-shadow(0 0 10px #ff2d95) drop-shadow(0 0 22px #ff2d95)}
+.tv[data-s="2"] #static{opacity:.38}
+.tvk{position:absolute;right:-10px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ddd,#555 60%,#222);border:2px solid #111;box-shadow:2px 3px 0 #000;transition:transform .5s cubic-bezier(.2,1.5,.4,1)}
+.tvk:after{content:"";position:absolute;left:50%;top:2px;width:2px;height:8px;margin-left:-1px;background:#111}
+.tvk.k1{top:30%}.tvk.k2{top:50%}
+.tv[data-s="1"] .k1{transform:rotate(90deg)}.tv[data-s="2"] .k1{transform:rotate(180deg)}.tv[data-s="1"] .k2{transform:rotate(-70deg)}.tv[data-s="2"] .k2{transform:rotate(-150deg)}
+.tvgr{position:absolute;left:-4px;top:30%;width:8px;height:64px;background:repeating-linear-gradient(0deg,#000 0 3px,#444 3px 6px);border-radius:4px}
+.tv[data-s="1"] .tvfoot i,.tv[data-s="2"] .tvfoot i{animation:led 1.2s ease-in-out infinite;box-shadow:0 0 10px currentColor}
+.tv[data-s="1"] .tvfoot i{color:#ffd500}.tv[data-s="2"] .tvfoot i{color:#ff2a40}@keyframes led{50%{opacity:.5}}
+.tvcap{z-index:4}.tv[data-s="2"] .tvcap{animation:capg 2.4s steps(1) infinite;text-shadow:2px 0 #ff2d95,-2px 0 #00c2b8}@keyframes capg{0%,90%{transform:none}93%{transform:translateX(4px)}96%{transform:translateX(-3px) skewX(-8deg)}}
+@media(prefers-reduced-motion:reduce){.tv,.tv *,.tv:before,.tv:after{animation:none!important}}
 </style>
 </head>
 <body data-zone="hero">
@@ -1173,7 +1195,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
     <div class="grid2">
       <div class="rv">
         <button class="tv" id="tv" data-s="0" type="button" aria-label="Television. Press to change channel.">
-          <span class="tvcap" id="tvcap">OFF</span>
+          <i class="tvk k1" aria-hidden="true"></i><i class="tvk k2" aria-hidden="true"></i><span class="tvgr" aria-hidden="true"></span><span class="tvcap" id="tvcap">OFF</span>
           <div class="screen" id="screen"><canvas id="prog4"></canvas><canvas id="static"></canvas><svg class="ghost"><use href="#sil"/></svg></div>
           <div class="tvfoot"><span>CH. 00:00</span><span>POWER<i></i></span></div>
         </button>
@@ -1598,8 +1620,13 @@ function cook(t){
  px.strokeStyle='rgba(255,255,255,.75)';px.lineWidth=5;px.lineCap='round';for(let i=0;i<5;i++){px.beginPath();for(let y=0;y<60;y+=4){const x=124+i*18+Math.sin(y/10+t/300+i)*6;y?px.lineTo(x,96-y):px.moveTo(x,96)}px.stroke()}
  bar('COOKING HOUR','#7ac70c','#181818');txt('TODAY: HOT POT',160,200,18,'#fff','center');
 }
+const PI={};['p4-studio','p4-street','p4-roof'].forEach(n=>{const i=new Image();i.src='images/shots/'+n+'.webp';PI[n]=i});
+function cover(im,t,k){if(!im.complete||!im.naturalWidth)return false;const z=1.08+.06*Math.sin(t/2500),w=im.naturalWidth,h=im.naturalHeight,sc=Math.max(320/w,240/h)*z,dw=w*sc,dh=h*sc;px.drawImage(im,160-dw/2+Math.sin(t/3200)*10,120-dh/2,dw,dh);return true}
+function photo(t,tt,seg){const nm=seg%2?'p4-street':'p4-roof';cover(PI[nm],t);bar(seg%2?'SHOPPING NEWS':'LUNCH BREAK',seg%2?'#ff2d95':'#00c2b8','#fff')}
 function stage(t){
  px.fillStyle='#12061f';px.fillRect(0,0,320,240);
+ if(cover(PI['p4-studio'],t)){px.globalCompositeOperation='multiply';px.fillStyle='#b060ff';px.fillRect(0,0,320,240);px.globalCompositeOperation='screen';px.fillStyle='rgba(255,45,149,.22)';px.fillRect(0,0,320,240);px.globalCompositeOperation='source-over';
+  const g=px.createRadialGradient(160,120,40,160,120,210);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(10,0,25,.75)');px.fillStyle=g;px.fillRect(0,0,320,240);px.fillStyle='rgba(255,255,255,'+(.05+.04*Math.sin(t/200))+')';px.beginPath();px.moveTo(150,0);px.lineTo(170,0);px.lineTo(250,240);px.lineTo(70,240);px.fill();return}
  for(let r=0;r<5;r++)for(let c=0;c<9;c++){px.fillStyle=(r+c)%2?'rgba(255,45,149,.35)':'rgba(0,194,184,.3)';px.fillRect(c*40-20+r*8,150+r*20,40,20)}
  px.fillStyle='rgba(255,255,255,'+(.14+.05*Math.sin(t/200))+')';px.beginPath();px.moveTo(150,0);px.lineTo(170,0);px.lineTo(250,240);px.lineTo(70,240);px.fill();
 }
@@ -1609,8 +1636,8 @@ function progFrame(t){
  px.clearRect(0,0,320,240);
  if(tvs===2){stage(t);return}
  if(tvs!==1)return;
- const el=Math.max(0,t-prog0),seg=Math.floor(el/7000)%3,tt=el%7000;
- [weather,quiz,cook][seg](t,tt);ticker(t);txt('CH 04',308,36,12,'#fff','right');
+ const el=Math.max(0,t-prog0),seg=Math.floor(el/7000)%5,tt=el%7000;
+ if(seg>2)photo(t,tt,seg);else [weather,quiz,cook][seg](t,tt);ticker(t);txt('CH 04',308,36,12,'#fff','right');
  if(tt<160){px.fillStyle='rgba(255,255,255,'+(1-tt/160)+')';px.fillRect(0,0,320,240)}
 }
 function tvFrame(t){
