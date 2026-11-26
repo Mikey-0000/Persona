@@ -825,7 +825,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .phbar b{font-style:italic}
 .phs>.pht{margin-top:26px;padding:10px 16px 8px;background:#df1a21;clip-path:polygon(0 0,100% 0,100% 70%,96% 100%,0 100%);font:italic 900 22px var(--body);letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
 #ph-home{background:#0b0b0d}
-#ph-home::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#df1a21 40%,#df1a21 58%,transparent 58%),linear-gradient(115deg,transparent 64%,rgba(255,255,255,.12) 64%,rgba(255,255,255,.12) 66%,transparent 66%);opacity:.9;pointer-events:none}
+#ph-home::before{display:none}
 .phclk{position:relative;margin-top:44px;padding:0 22px}
 .phclk b{display:block;font:italic 900 62px/1 var(--body);letter-spacing:-.02em;text-shadow:3px 3px 0 #df1a21}
 .phclk small{font:800 14px var(--body);letter-spacing:.14em;background:#fff;color:#0b0b0d;padding:2px 10px;display:inline-block;transform:skewX(-12deg);margin-top:6px}
@@ -1007,6 +1007,34 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .callcard .big{text-shadow:3px 3px 0 rgba(223,26,33,.28)}
 .callcard .big em{display:inline-block;transform:skewX(-8deg) rotate(-2deg);box-shadow:5px 5px 0 #111;border:2px solid #111}
 .callcard .sm:last-of-type{background:#111;color:#f6eed9;padding:4px 10px;align-self:flex-start;transform:skewX(-10deg)}
+.hwall{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:radial-gradient(120% 70% at 50% 100%,#3a0509,#0b0b0d 70%)}
+.hwall>*{position:absolute}
+.hs1{top:-10%;bottom:-10%;left:22%;width:30%;background:linear-gradient(180deg,#e8212a,#8d0810);transform:skewX(-18deg);box-shadow:14px 0 0 #000,-6px 0 0 rgba(255,255,255,.14);animation:hsl 6s ease-in-out infinite}
+@keyframes hsl{50%{transform:skewX(-18deg) translateX(14px)}}
+.hs2{top:-10%;bottom:-10%;left:66%;width:3%;background:rgba(255,255,255,.16);transform:skewX(-18deg)}
+.hstars{inset:0;background:radial-gradient(circle,#fff 1px,transparent 1.5px) 0 0/34px 34px,radial-gradient(circle,#fff 1px,transparent 1.5px) 17px 17px/46px 46px;opacity:.35;animation:hst 3s ease-in-out infinite alternate;-webkit-mask-image:linear-gradient(180deg,#000,transparent 60%);mask-image:linear-gradient(180deg,#000,transparent 60%)}
+@keyframes hst{to{opacity:.12}}
+.hwm{left:-12px;top:34%;font:900 italic 40px/1 var(--display);letter-spacing:.05em;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.2);white-space:nowrap;transform:rotate(-90deg) translateX(-100%);transform-origin:0 0;left:16px;top:96%}
+.hfl{width:26px;height:26px;fill:#fff;filter:drop-shadow(2px 2px 0 #000);animation:hfl 5s ease-in-out infinite}
+.hfl.f1{left:12%;top:30%}.hfl.f2{left:78%;top:42%;width:18px;height:18px;animation-delay:-1.5s;fill:#df1a21}.hfl.f3{left:56%;top:58%;width:14px;height:14px;animation-delay:-3s}
+@keyframes hfl{50%{transform:translateY(-12px) rotate(30deg)}}
+.hcity{left:0;right:0;bottom:0;width:100%;height:28%;fill:#050506;filter:drop-shadow(0 -2px 0 rgba(223,26,33,.6))}
+.phclk,.phgrid{z-index:2}
+.phclk b{animation:phg 5s steps(1) infinite}@keyframes phg{0%,92%,100%{text-shadow:3px 3px 0 #df1a21}94%{text-shadow:-4px 0 #00e5ff,4px 0 #df1a21}96%{text-shadow:4px -2px #00e5ff,-3px 3px #df1a21}}
+.phsig{display:flex;gap:2px;align-items:flex-end;height:10px;margin-left:auto;margin-right:8px}.phsig u{width:3px;background:#fff;display:block}.phsig u:nth-child(1){height:3px}.phsig u:nth-child(2){height:5px}.phsig u:nth-child(3){height:7px}.phsig u:nth-child(4){height:10px;opacity:.4}
+.ph{transform:perspective(900px) rotate(-2.5deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out}
+.ph::after{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent calc(var(--gx,30%) - 14%),rgba(255,255,255,.13) var(--gx,30%),transparent calc(var(--gx,30%) + 14%))}
+.ph.boot::before{content:"";position:absolute;inset:0;z-index:8;background:#df1a21;pointer-events:none;animation:phboot .9s ease-out forwards;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+@keyframes phboot{0%{transform:translateX(0)}60%{transform:translateX(0)}100%{transform:translateX(105%)}}
+#ph-home.on .ap i{animation:appop .5s cubic-bezier(.2,1.6,.4,1) backwards}
+#ph-home.on .ap:nth-child(1) i{animation-delay:.05s}#ph-home.on .ap:nth-child(2) i{animation-delay:.1s}#ph-home.on .ap:nth-child(3) i{animation-delay:.15s}#ph-home.on .ap:nth-child(4) i{animation-delay:.2s}#ph-home.on .ap:nth-child(5) i{animation-delay:.25s}#ph-home.on .ap:nth-child(6) i{animation-delay:.3s}
+@keyframes appop{from{transform:skewX(-8deg) rotate(-3deg) scale(0)}}
+.ap i{transition:transform .15s cubic-bezier(.2,1.6,.4,1),box-shadow .15s}
+.ap:hover i,.ap:focus-visible i{box-shadow:7px 7px 0 #fff}
+.ap:active i{transform:skewX(-8deg) rotate(0) scale(.88);box-shadow:1px 1px 0 #df1a21}
+.ap:hover svg{animation:apw .5s ease}@keyframes apw{30%{transform:skewX(8deg) rotate(-14deg) scale(1.15)}70%{transform:skewX(8deg) rotate(8deg) scale(1.1)}}
+.ap span{transition:letter-spacing .2s}.ap:hover span{letter-spacing:.16em}
+@media(prefers-reduced-motion:reduce){.hwall *,.phclk b,#ph-home .ap i{animation:none!important}}
 </style>
 </head>
 <body data-zone="hero">
@@ -1276,9 +1304,9 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
       <h3 class="hh">THE PHONE</h3>
       <p class="fine" style="color:#f1d9dd;margin-bottom:6px">Chat with the Phantom Thieves, search for a Palace in Meta-Nav, check your contacts and plan the month. Tap an app.</p>
       <div class="phw"><div class="ph" id="ph" data-app="home" aria-label="Persona 5 style smartphone">
-        <div class="phbar"><b>PHANTOM</b><span id="ph-bt">00:00</span></div>
+        <div class="phbar"><b>PHANTOM</b><span class="phsig"><u></u><u></u><u></u><u></u></span><span id="ph-bt">00:00</span></div>
         <button class="phban" id="ph-banner" type="button"><small>NEW MESSAGE</small><b>Futaba: Leader! Check the chat!</b></button>
-        <section class="phs on" id="ph-home"><div class="phclk"><b id="ph-time">00:00</b><small id="ph-date">--</small></div>
+        <section class="phs on" id="ph-home"><div class="hwall" aria-hidden="true"><i class="hs1"></i><i class="hs2"></i><s class="hstars"></s><b class="hwm">PHANTOM THIEVES</b><svg class="hfl f1" viewBox="0 0 24 24"><use href="#star"/></svg><svg class="hfl f2" viewBox="0 0 24 24"><use href="#star"/></svg><svg class="hfl f3" viewBox="0 0 24 24"><use href="#star"/></svg><svg class="hcity" viewBox="0 0 340 120" preserveAspectRatio="none"><path d="M0 120V70h18V50h14v26h10V38h16v34h12V58h14v-22h12v40h16V44h10V24h12v44h14V54h16v18h12V40h14v36h10V60h18V30h12v46h14V52h16v24h12V62h14V120z"/></svg></div><div class="phclk"><b id="ph-time">00:00</b><small id="ph-date">--</small></div>
           <div class="phgrid"><button class="ap" type="button" data-a="chat"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v12H10l-5 4v-4H3z"/></svg></i><span>Chat</span><em id="ph-badge"></em></button><button class="ap" type="button" data-a="navi"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 9 7 1-6 4 2 8-6-5-6 5 2-8-6-4 7-1z"/></svg></i><span>Meta-Nav</span></button><button class="ap" type="button" data-a="cont"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.5"/><path d="M3 21c0-5 4-8 9-8s9 3 9 8z"/></svg></i><span>Thieves</span></button><button class="ap" type="button" data-a="cal"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v16H3zM3 5h18v4H3z" fill-rule="evenodd"/><rect x="7" y="2" width="3" height="5"/><rect x="14" y="2" width="3" height="5"/></svg></i><span>Calendar</span></button><button class="ap" type="button" data-a="sound"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l6 5V4L7 9zM16 8a5 5 0 010 8l1.4 1.4a7 7 0 000-10.8z"/></svg></i><span>Sound</span></button><button class="ap" type="button" data-a="trophy"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v5a5 5 0 01-4 4.9V17h3v3H8v-3h3v-4.1A5 5 0 017 8zM3 4h3v5a3 3 0 01-3-3zM21 4h-3v5a3 3 0 003-3z"/></svg></i><span>Trophies</span></button></div></section>
         <section class="phs" id="ph-chat"><div class="pht">Chat</div><div id="ph-list" class="on"></div>
           <div id="ph-thread"><div class="pht" style="margin-top:0;font-size:18px"><span id="ph-tn"></span></div><div id="ph-msgs"></div><div id="ph-ch"></div></div></section>
@@ -1690,6 +1718,11 @@ function selMenu(i,anim=true){mi5=i;$$('li',menu).forEach((l,k)=>{l.classList.to
 menu.addEventListener('keydown',e=>{if(e.key==='Enter'&&LORE[ITEMS[mi5][0].toLowerCase()]){e.preventDefault();openLore(ITEMS[mi5][0].toLowerCase());return}if(e.key==='ArrowDown'){e.preventDefault();selMenu((mi5+1)%ITEMS.length)}else if(e.key==='ArrowUp'){e.preventDefault();selMenu((mi5+ITEMS.length-1)%ITEMS.length)}});
 selMenu(0,false);
 
+/* phone tilt + boot */
+(function(){const ph=document.getElementById('ph');if(!ph||RM)return;const w=ph.parentElement;
+ w.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=ph.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ph.style.setProperty('--rx',(-y*9).toFixed(1)+'deg');ph.style.setProperty('--ry',(x*12).toFixed(1)+'deg');ph.style.setProperty('--gx',(50+x*90).toFixed(0)+'%')});
+ w.addEventListener('pointerleave',()=>{ph.style.removeProperty('--rx');ph.style.removeProperty('--ry');ph.style.removeProperty('--gx')});
+ const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){ph.classList.add('boot');io.disconnect();setTimeout(()=>ph.classList.remove('boot'),1000)}},{threshold:.5});io.observe(ph)})();
 /* ---------- P5 lore pages ---------- */
 const loreEl=$('#lore');let loreOpen=false;
 function paintLore(id){const L=LORE[id];$('#lore-k').textContent=L.k;$('#lore-t').textContent=L.t;$('#lore-s').textContent=L.s;loreEl.querySelector('.lbg').src='images/shots/'+L.img+'.webp';
