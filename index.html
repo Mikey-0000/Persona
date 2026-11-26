@@ -11,7 +11,7 @@
 <title>Persona Beyond the Mask</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Rubik:ital,wght@0,400;0,600;0,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Rubik:ital,wght@0,400;0,600;0,800;1,900&family=Bagel+Fat+One&family=Fredoka:wght@400;500;600;700&family=Dela+Gothic+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Layout idea: slanted three-panel opener from the concept board, then one full-bleed world per game, then the Velvet Room. */
@@ -1165,6 +1165,23 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 #cpg .cspoil{margin-top:14px;padding:18px 20px;border:2px dashed var(--ac);background:var(--pn);font-size:16px;line-height:1.6}#cpg .cspoil[hidden]{display:none}
 @media(max-width:780px){#cpg .chero,#cpg .cgrid{grid-template-columns:1fr}#cpg .cside{position:static}#cpg .cch{grid-template-columns:48px 1fr}#cpg .cch i{font-size:32px}#cpg[data-t=p5] .cch:nth-child(even){margin-left:0}#cpg .cdeco i:nth-child(1){opacity:.5}}
 @media(prefers-reduced-motion:reduce){#cpg *{animation:none!important}}
+#cpg{--cf:'Fredoka',var(--body);--ch:'Fredoka',var(--body)}
+#cpg[data-t=p4]{--ch:'Bagel Fat One','Fredoka',var(--body)}
+#cpg[data-t=p5]{--ch:'Dela Gothic One','Fredoka',var(--body)}
+#cpg[data-t=p3]{--cf:'Quicksand','Fredoka',var(--body);--ch:'Quicksand','Fredoka',var(--body)}
+#cpg,#cpg button,#cpg .cch p,#cpg .cspoil,#cpg #cp-facts li,#cpg .chd p{font-family:var(--cf)}
+#cpg .chd p{font-weight:600;font-style:normal}
+#cpg .cch p,#cpg .cspoil,#cpg #cp-facts li{font-weight:500}
+#cpg h2,#cpg .cch h3,#cpg .cch i,#cpg .cside h3,#cpg .chd small,#cpg #cp-chips li,#cpg nav button,#cpg .cbk,#cpg .cspb,#cpg .cfig figcaption,#cpg .ctr span{font-family:var(--ch)!important}
+#cpg h2{font-weight:400;font-style:normal;letter-spacing:.01em;line-height:1.02;font-size:clamp(34px,6.6vw,80px);word-break:normal;overflow-wrap:break-word}
+#cpg[data-t=p3] h2{font-weight:300;letter-spacing:.14em;font-size:clamp(34px,6.4vw,76px)}
+#cpg[data-t=p5] h2{font-size:clamp(32px,6vw,72px);transform:skewX(-6deg)}
+#cpg .cch h3{font-weight:400;font-style:normal;letter-spacing:.02em;font-size:23px}
+#cpg[data-t=p3] .cch h3,#cpg[data-t=p3] .cch i{font-weight:700}
+#cpg .cch i{font-style:normal;font-weight:400}
+#cpg nav button,#cpg .cbk,#cpg .cspb,#cpg #cp-chips li{font-style:normal;font-weight:400;letter-spacing:.04em}
+#cpg[data-t=p3] nav button,#cpg[data-t=p3] .cbk,#cpg[data-t=p3] .cspb,#cpg[data-t=p3] #cp-chips li{font-weight:700}
+#cpg .cch p{font-size:16.5px}
 </style>
 </head>
 <body data-zone="hero">
