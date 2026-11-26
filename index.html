@@ -1323,7 +1323,6 @@ addEventListener('pointerdown',e=>{
  const sl=e.target.closest('.slab'),lk=e.target.closest('a[href^="#"]'),lz=lk&&['p3','p4','p5','velvet'].includes(lk.getAttribute('href').slice(1))?lk.getAttribute('href').slice(1):null;let z=lz||(sl?'hero'+sl.dataset.g.slice(1):(e.target.closest('[data-zone]')||{dataset:{}}).dataset.zone);
  if(z)burst(z,e.clientX,e.clientY)});
 let lastT=0;
-$('#p5').addEventListener('pointermove',e=>{const n=performance.now();if(n-lastT<70)return;lastT=n;add({k:'slash',x:e.clientX,y:e.clientY,a:-.9,len:rnd(50,110),w:3,c:'#ff2a40',life:14})});
 
 /* ---------- P4: Teddie reacts ---------- */
 (function(){
@@ -1528,7 +1527,7 @@ $('#over-btn').addEventListener('click',()=>{
  if(overOn)return;overOn=true;sfx('boom');award('takeover');
  const o=document.createElement('div');o.id='over';o.setAttribute('aria-hidden','true');o.innerHTML='<div class="a"></div><div class="b"></div><div class="t">TAKE OVER</div>';
  document.body.append(o);
- for(let i=0;i<7;i++)setTimeout(()=>add({k:'slash',x:rnd(W*.2,W*.8),y:rnd(H*.2,H*.8),a:rnd(-1.2,-.4),len:rnd(600,1000),w:rnd(6,14),c:pick(['#fff','#ff2a40']),life:26}),i*110);
+ for(let i=0;i<7;i++)setTimeout(()=>{const x=rnd(W*.2,W*.8),y=rnd(H*.2,H*.8);for(let j=0;j<12;j++){const an=j/12*6.283+rnd(-.2,.2),v=rnd(4,12),w=j%2;add({k:'star',x,y,vx:Math.cos(an)*v,vy:Math.sin(an)*v,rot:rnd(0,6),vr:rnd(-.25,.25),s:rnd(14,34),c:w?'#fff':'#000',c2:w?'#000':'#fff',life:rnd(34,52)|0})}},i*110);
  setTimeout(()=>document.body.classList.add('shake'),500);
  setTimeout(()=>{document.body.classList.remove('shake');o.classList.add('out')},1700);
  setTimeout(()=>{o.remove();overOn=false},2050)});
