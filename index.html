@@ -340,10 +340,6 @@ footer{padding:36px 16px 84px;text-align:center;color:#8d92a6;font-size:13px;bac
 .reset4{background:none;border:0;text-decoration:underline;font:700 13px var(--body);color:#181818}
 .hbox{margin-top:clamp(56px,8vw,100px);background:rgba(0,0,0,.72);border:3px solid #fff;padding:22px;box-shadow:10px 10px 0 var(--p5)}
 .hh{font:italic 900 clamp(32px,5vw,56px)/1 var(--body);color:var(--p5);margin-bottom:6px}
-#heist{display:block;width:100%;max-width:720px;aspect-ratio:12/7;border:4px solid #fff;background:#0b0b0d;touch-action:manipulation}
-#heist:focus-visible{outline:4px solid var(--p5);outline-offset:4px}
-.dpad{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.dpad .btn{padding:8px 18px;font-size:14px}
 
 
 /* WATERMARK */
@@ -595,7 +591,6 @@ body.konami{animation:kh 2.4s ease-in-out}
 @media (prefers-reduced-motion:reduce){#sum *{animation-duration:.01s!important;animation-delay:0s!important}}
 
 button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-#heist{touch-action:none}
 @media (max-width:820px){
   .nav{padding:max(6px,env(safe-area-inset-top)) 8px 6px;gap:6px;flex-wrap:nowrap}
   .nav ul{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1;gap:2px;padding:2px 0;-webkit-overflow-scrolling:touch}
@@ -819,6 +814,89 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .rg-sk .reset.on{background:var(--rg);color:#000;border-color:var(--rg)}
 #rg{width:100%;height:auto;display:block;touch-action:none;cursor:pointer;background:#000;border:3px solid var(--rg);-webkit-tap-highlight-color:transparent;user-select:none}
 .rgx[data-skin=p5]{box-shadow:8px 8px 0 #df1a21}
+
+.phw{display:flex;justify-content:center;padding:18px 0 26px;position:relative}
+.phw::before{content:"";position:absolute;left:50%;top:0;width:min(520px,100%);height:100%;transform:translateX(-50%) skewX(-12deg);background:linear-gradient(180deg,rgba(223,26,33,.0),rgba(223,26,33,.35));z-index:0}
+.ph{position:relative;z-index:1;width:min(340px,86vw);aspect-ratio:9/18.2;background:#050506;border:5px solid #1c1c20;border-radius:34px;box-shadow:0 0 0 3px #df1a21,12px 14px 0 #df1a21,0 30px 60px rgba(0,0,0,.6);overflow:hidden;transform:rotate(-2.5deg);font-family:var(--body);color:#fff;user-select:none;-webkit-user-select:none}
+.phs{position:absolute;inset:0;display:none;flex-direction:column;background:#0b0b0d;padding-bottom:46px}
+.phs.on{display:flex;animation:phin .25s ease-out}
+@keyframes phin{from{transform:translateY(14px);opacity:.2}to{transform:none;opacity:1}}
+.phbar{display:flex;justify-content:space-between;align-items:center;padding:9px 18px 4px;font:700 11px var(--body);letter-spacing:.08em;position:absolute;left:0;right:0;top:0;z-index:5;pointer-events:none}
+.phbar b{font-style:italic}
+.phs>.pht{margin-top:26px;padding:10px 16px 8px;background:#df1a21;clip-path:polygon(0 0,100% 0,100% 70%,96% 100%,0 100%);font:italic 900 22px var(--body);letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+#ph-home{background:#0b0b0d}
+#ph-home::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#df1a21 40%,#df1a21 58%,transparent 58%),linear-gradient(115deg,transparent 64%,rgba(255,255,255,.12) 64%,rgba(255,255,255,.12) 66%,transparent 66%);opacity:.9;pointer-events:none}
+.phclk{position:relative;margin-top:44px;padding:0 22px}
+.phclk b{display:block;font:italic 900 62px/1 var(--body);letter-spacing:-.02em;text-shadow:3px 3px 0 #df1a21}
+.phclk small{font:800 14px var(--body);letter-spacing:.14em;background:#fff;color:#0b0b0d;padding:2px 10px;display:inline-block;transform:skewX(-12deg);margin-top:6px}
+.phgrid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px 10px;padding:30px 20px 0;margin-top:auto;margin-bottom:12px}
+.ap{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:0;color:#fff;cursor:pointer;position:relative}
+.ap i{width:62px;height:62px;background:#0b0b0d;border:3px solid #fff;transform:skewX(-8deg) rotate(-3deg);display:grid;place-items:center;box-shadow:4px 4px 0 #df1a21;transition:transform .12s}
+.ap:nth-child(odd) i{background:#df1a21}
+.ap:hover i,.ap:focus-visible i{transform:skewX(-8deg) rotate(2deg) scale(1.08)}
+.ap svg{width:30px;height:30px;fill:#fff;transform:skewX(8deg)}
+.ap span{font:italic 800 11px var(--body);letter-spacing:.08em;text-transform:uppercase}
+.ap em{position:absolute;top:-4px;right:6px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #df1a21}
+.ap em[hidden]{display:none}
+.phban{position:absolute;left:10px;right:10px;top:30px;z-index:9;background:#fff;color:#0b0b0d;border:0;padding:10px 12px;text-align:left;transform:translateY(-240%) rotate(-1deg);visibility:hidden;transition:transform .35s,visibility .35s cubic-bezier(.2,1.4,.4,1);box-shadow:5px 5px 0 #df1a21;cursor:pointer;font-family:var(--body);clip-path:polygon(0 0,100% 0,100% 78%,97% 100%,0 100%)}
+.phban.on{transform:translateY(0) rotate(-1deg);visibility:visible}.phban small{font:800 10px var(--body);color:#df1a21;letter-spacing:.14em;display:block}.phban b{font:800 13px var(--body)}
+.phnav{position:absolute;left:0;right:0;bottom:0;height:46px;background:#050506;display:flex;justify-content:space-between;align-items:center;padding:0 14px;z-index:6;border-top:2px solid #df1a21}
+.phnav.off{display:none}
+.phnav button{background:#df1a21;color:#fff;border:0;font:italic 900 13px var(--body);letter-spacing:.1em;padding:7px 18px;transform:skewX(-12deg);cursor:pointer;text-transform:uppercase}
+.phnav button+button{background:#fff;color:#0b0b0d}
+.phs.pn .phnav{display:none}
+/* chat */
+#ph-list,#ph-thread{display:none;flex:1;min-height:0;flex-direction:column}
+#ph-list.on,#ph-thread.on{display:flex}
+#ph-list{overflow:auto;padding:12px 12px 8px;gap:10px}
+.phr{display:flex;align-items:center;gap:12px;background:#fff;color:#0b0b0d;border:0;padding:10px 12px;text-align:left;cursor:pointer;transform:skewX(-6deg);box-shadow:4px 4px 0 #df1a21;position:relative}
+.phr>*{transform:skewX(6deg)}
+.phr i{width:38px;height:38px;border-radius:50%;background:#0b0b0d;color:#fff;display:grid;place-items:center;font:italic 900 14px var(--body);flex:none}
+.phr span{display:flex;flex-direction:column;min-width:0}.phr b{font:italic 900 16px var(--body)}.phr small{font:600 11px var(--body);color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phr em{position:absolute;right:12px;width:12px;height:12px;border-radius:50%;background:#df1a21}
+.phm{display:flex;flex-direction:column;gap:9px}
+#ph-msgs{flex:1;min-height:0;overflow:auto;padding:12px}
+.phb2{max-width:82%;align-self:flex-start;background:#fff;color:#0b0b0d;padding:7px 11px 8px;clip-path:polygon(0 0,100% 0,100% 82%,96% 100%,0 100%);font:600 13px/1.35 var(--body);animation:phin .2s ease-out}
+.phb2 small{display:block;font:italic 900 10px var(--body);color:#df1a21;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1px}
+.phb2 p{margin:0}.phb2.me{align-self:flex-end;background:#df1a21;color:#fff}
+.phb2.ty u{display:inline-block;width:6px;height:6px;margin:3px 2px;border-radius:50%;background:#0b0b0d;animation:phd .8s infinite}.phb2.ty u:nth-child(2){animation-delay:.15s}.phb2.ty u:nth-child(3){animation-delay:.3s}
+@keyframes phd{50%{transform:translateY(-4px);opacity:.4}}
+#ph-ch{padding:8px 12px 10px;display:flex;flex-direction:column;gap:7px;background:#050506;border-top:2px solid #df1a21;min-height:44px}
+.phc{background:#df1a21;color:#fff;border:0;padding:9px 12px;font:italic 800 13px var(--body);text-align:left;cursor:pointer;transform:skewX(-6deg);box-shadow:3px 3px 0 #fff}
+.phc:hover,.phc:focus-visible{background:#fff;color:#0b0b0d;box-shadow:3px 3px 0 #df1a21}
+.phend{font:600 11px var(--body);color:#aaa;text-align:center;margin:0}
+.phs .pht .bk{background:none;border:0;color:#fff;font:900 20px var(--body);cursor:pointer;padding:0 4px}
+#ph-thread>.pht{margin-top:0!important;padding:6px 16px;font:italic 900 15px var(--body)!important;color:#df1a21;background:none!important;clip-path:none!important;letter-spacing:.1em}
+/* navi */
+#ph-navi{background:#0b0b0d radial-gradient(circle at 50% 30%,rgba(223,26,33,.3),transparent 60%)}
+#ph-navi::before{content:"";position:absolute;inset:60px 0 46px;background:repeating-linear-gradient(0deg,rgba(223,26,33,.18) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(223,26,33,.18) 0 1px,transparent 1px 28px);pointer-events:none}
+.nbody{position:relative;padding:14px;display:flex;flex-direction:column;gap:10px;flex:1;overflow:auto}
+.nsl{background:#0b0b0d;border:2px solid #fff;color:#fff;padding:9px 12px;text-align:left;cursor:pointer;transform:skewX(-6deg);display:flex;flex-direction:column}
+.nsl small{font:800 10px var(--body);letter-spacing:.16em;color:#df1a21}.nsl b{font:italic 900 17px var(--body)}.nsl.set{background:#fff;color:#0b0b0d;box-shadow:4px 4px 0 #df1a21}
+#ph-ngo,#ph-nr{background:#df1a21;color:#fff;border:0;font:italic 900 16px var(--body);letter-spacing:.1em;padding:11px;cursor:pointer;transform:skewX(-6deg);text-transform:uppercase}
+#ph-ngo:disabled{opacity:.35;cursor:not-allowed}
+#ph-nopt{display:none;flex-direction:column;gap:8px;background:#050506;border:2px solid #df1a21;padding:10px}#ph-nopt.on{display:flex}
+#ph-nopt small{font:800 10px var(--body);letter-spacing:.16em;color:#df1a21}
+#ph-nopt button{background:#fff;color:#0b0b0d;border:0;padding:9px;font:italic 800 14px var(--body);cursor:pointer;transform:skewX(-6deg)}#ph-nopt button:hover{background:#df1a21;color:#fff}
+.nres{display:none;background:#fff;color:#0b0b0d;padding:14px;text-align:center;transform:rotate(-1deg);box-shadow:5px 5px 0 #df1a21;gap:6px;flex-direction:column;align-items:center}.nres.on{display:flex}
+.nres h4{font:italic 900 22px var(--body);color:#df1a21;margin:0}.nres p{margin:0;font:600 12px var(--body)}.nres .np{font:italic 900 18px var(--body)}.nres .nt{color:#555}
+.nres.scan{background:#0b0b0d;color:#fff;box-shadow:5px 5px 0 #fff}.nres .ring{width:60px;height:60px;border-radius:50%;border:4px solid #df1a21;animation:phr 1s infinite}
+@keyframes phr{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.6);opacity:0}}
+/* contacts, calendar */
+#ph-clist{overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pcr{display:flex;align-items:center;gap:12px;background:#fff;color:#0b0b0d;border:0;padding:9px 12px;text-align:left;cursor:pointer;transform:skewX(-6deg);box-shadow:4px 4px 0 #df1a21}.pcr>*{transform:skewX(6deg)}
+.pcr i{width:40px;height:40px;background:#df1a21;color:#fff;display:grid;place-items:center;font:italic 900 18px var(--body);flex:none;transform:skewX(6deg) rotate(-4deg)}
+.pcr span{display:flex;flex-direction:column;gap:2px}.pcr b{font:italic 900 16px var(--body)}.pcr small{font:600 11px var(--body);color:#555;display:none}.pcr.open small{display:block}
+.pcr u{display:flex;gap:3px;text-decoration:none}.pcr s{width:14px;height:6px;background:#df1a21;transform:skewX(-20deg)}.pcr s.o{background:#ddd}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;padding:14px;font-family:var(--body)}
+.cgrid em{font:italic 900 11px var(--body);color:#df1a21;text-align:center}
+.cgrid button{background:#15151a;border:0;color:#fff;font:700 13px var(--body);padding:9px 0;cursor:pointer;position:relative}
+.cgrid button.today{background:#fff;color:#0b0b0d;box-shadow:3px 3px 0 #df1a21}
+.cgrid button.mk::after{content:"\2605";position:absolute;right:2px;top:-2px;color:#df1a21;font-size:12px}
+.cgrid button.today.mk::after{color:#df1a21}
+.cfine{padding:0 14px;font:600 11px var(--body);color:#aaa;margin:0}
+@media (max-width:700px){.ph{transform:none}}
+@media (prefers-reduced-motion:reduce){.phs.on,.phb2{animation:none}}
 </style>
 </head>
 <body data-zone="hero">
@@ -1084,11 +1162,20 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <span class="fine" style="color:#f1d9dd">Arrow keys also move through the menu.</span>
     </div>
     <div class="hbox rv">
-      <h3 class="hh">THE HEIST</h3>
-      <p class="fine" style="color:#f1d9dd;margin-bottom:12px">Sneak to the treasure. Guards see in straight lines, two squares out. Click the board, then use arrow keys or WASD.</p>
-      <canvas id="heist" tabindex="0" aria-label="Heist game board"></canvas>
-      <div class="dpad"><button class="btn red" data-m="0,-1" type="button"><span>Up</span></button><button class="btn red" data-m="-1,0" type="button"><span>Left</span></button><button class="btn red" data-m="0,1" type="button"><span>Down</span></button><button class="btn red" data-m="1,0" type="button"><span>Right</span></button></div>
-      <p class="status" id="hmsg" style="color:#fff;text-align:left" aria-live="polite">Reach the treasure without being seen.</p>
+      <h3 class="hh">THE PHONE</h3>
+      <p class="fine" style="color:#f1d9dd;margin-bottom:6px">Chat with the Phantom Thieves, search for a Palace in Meta-Nav, check your contacts and plan the month. Tap an app.</p>
+      <div class="phw"><div class="ph" id="ph" data-app="home" aria-label="Persona 5 style smartphone">
+        <div class="phbar"><b>PHANTOM</b><span id="ph-bt">00:00</span></div>
+        <button class="phban" id="ph-banner" type="button"><small>NEW MESSAGE</small><b>Futaba: Leader! Check the chat!</b></button>
+        <section class="phs on" id="ph-home"><div class="phclk"><b id="ph-time">00:00</b><small id="ph-date">--</small></div>
+          <div class="phgrid"><button class="ap" type="button" data-a="chat"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v12H10l-5 4v-4H3z"/></svg></i><span>Chat</span><em id="ph-badge"></em></button><button class="ap" type="button" data-a="navi"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 9 7 1-6 4 2 8-6-5-6 5 2-8-6-4 7-1z"/></svg></i><span>Meta-Nav</span></button><button class="ap" type="button" data-a="cont"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.5"/><path d="M3 21c0-5 4-8 9-8s9 3 9 8z"/></svg></i><span>Thieves</span></button><button class="ap" type="button" data-a="cal"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v16H3zM3 5h18v4H3z" fill-rule="evenodd"/><rect x="7" y="2" width="3" height="5"/><rect x="14" y="2" width="3" height="5"/></svg></i><span>Calendar</span></button><button class="ap" type="button" data-a="sound"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l6 5V4L7 9zM16 8a5 5 0 010 8l1.4 1.4a7 7 0 000-10.8z"/></svg></i><span>Sound</span></button><button class="ap" type="button" data-a="trophy"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v5a5 5 0 01-4 4.9V17h3v3H8v-3h3v-4.1A5 5 0 017 8zM3 4h3v5a3 3 0 01-3-3zM21 4h-3v5a3 3 0 003-3z"/></svg></i><span>Trophies</span></button></div></section>
+        <section class="phs" id="ph-chat"><div class="pht">Chat</div><div id="ph-list" class="on"></div>
+          <div id="ph-thread"><div class="pht" style="margin-top:0;font-size:18px"><span id="ph-tn"></span></div><div id="ph-msgs"></div><div id="ph-ch"></div></div></section>
+        <section class="phs" id="ph-navi"><div class="pht">Meta-Nav</div><div class="nbody"><div id="ph-nslots" style="display:flex;flex-direction:column;gap:8px"></div><div id="ph-nopt"></div><button id="ph-ngo" type="button" disabled>Navigate</button><div class="nres" id="ph-nres"></div></div></section>
+        <section class="phs" id="ph-cont"><div class="pht">Thieves</div><div id="ph-clist"></div></section>
+        <section class="phs" id="ph-cal"><div class="pht" id="ph-cm">Calendar</div><div class="cgrid" id="ph-cgrid"></div><p class="cfine">Tap a day to mark it with a star.</p></section>
+        <nav class="phnav off" id="ph-nav"><button type="button" id="ph-back">Back</button><button type="button" id="ph-home-b">Home</button></nav>
+      </div></div>
     </div>
 
     <article class="pc pc5 rv holo" data-z="pc5" aria-label="Ren Amamiya">
@@ -1130,7 +1217,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 <div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
 <div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
 <button class="inst" id="inst" type="button" hidden>Install app</button>
-<div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move in the heist and the menu</li><li><b>D F J K</b>Play Velvet Beat (or tap the lanes)</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
+<div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move through the Persona 5 menu</li><li><b>D F J K</b>Play Velvet Beat (or tap the lanes)</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
 <div id="kcode" aria-hidden="true"><b>ALL OUT!</b></div>
 <div class="mk" aria-label="Made by Mikey0000"><i></i><span><small>MADE BY</small><b data-t="MIKEY0000">MIKEY0000</b></span></div>
 <div id="water" aria-hidden="true"><canvas></canvas><div class="wt"><div class="wp"><span id="wpct">0</span><small>%</small></div><div class="wl">MEMENTO MORI</div></div></div>
@@ -1148,7 +1235,7 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const SAVE={d:{},k:'pbm_mikey000_v1',init(){try{this.d=JSON.parse(localStorage.getItem(this.k))||{}}catch(e){this.d={}}},put(k,v){this.d[k]=v;try{localStorage.setItem(this.k,JSON.stringify(this.d))}catch(e){}},get(k,def){return this.d[k]===undefined?def:this.d[k]}};SAVE.init();
 
-const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','Sticky Fingers','Steal your first treasure.'],['heist3','Master Thief','Steal three treasures.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['rhythm','Stage Cleared','Clear a Velvet Beat stage.'],['combo','Combo Breaker','Hit a 30 note combo in Velvet Beat.'],['srank','Rank S','Earn an S rank in Velvet Beat.'],['rall','Full Set','Clear Velvet Beat in all three styles.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
+const TR=[['enter','Welcome Aboard','Enter the site.'],['dark','The Hidden Hour','Strike midnight on the P3 clock.'],['full','Full Moon','Advance the calendar to a full moon.'],['floor5','Rising Higher','Reach floor 5 in the tower.'],['persona','Awakening','Use Persona in a tower fight.'],['guardian','Guardian Slayer','Defeat a floor guardian.'],['tv','Midnight Viewer','Tune the P4 TV to the Midnight Channel.'],['bond','Unbreakable Bond','Raise the bond to rank 10.'],['stats','Well Rounded','Get every trait to level 3.'],['heist','First Reply','Send a reply in the phone chat.'],['heist3','Chatterbox','Send 10 replies in the phone chat.'],['navi','Navigator','Find a Palace in Meta-Nav.'],['takeover','Take Over','Press the Take over button.'],['fusion','Velvet Guest','Complete a fusion.'],['water','Deep Dive','Watch the water loading screen.'],['dj','Music Lover','Play all three soundtrack tracks.'],['tour','World Traveller','Visit all four worlds.'],['summon','Triple Summon','Summon a Persona in all three worlds.'],['allout','All-Out Attack','Finish a fight with an All-Out Attack.'],['quiz','Know Thyself','Finish the arcana quiz.'],['junes','Regular','Buy every item at Junes.'],['map','Local Knowledge','Visit every spot on the Inaba map.'],['fish','Reel Deal','Catch 5 fish at the river.'],['cook','Master Chef','Cook a perfect meal.'],['rhythm','Stage Cleared','Clear a Velvet Beat stage.'],['combo','Combo Breaker','Hit a 30 note combo in Velvet Beat.'],['srank','Rank S','Earn an S rank in Velvet Beat.'],['rall','Full Set','Clear Velvet Beat in all three styles.'],['requests','Request Cleared','Clear every Mementos request.'],['reaper','Face the Reaper','Linger on a floor until something comes, then defeat it.'],['compendium','Compendium','Discover all 15 fusions.'],['faces','Three Faces','Awaken all three protagonists.'],['app','Home Screen','Install the site as an app.'],['code','Old School','Enter the secret code. Hint: up, up, down, down...']];
 const TRS=SAVE.get('trophies',{});
 const STAR='<svg viewBox="0 0 100 100"><use href="#star"/></svg>';
 function trUpdate(){const n=Object.keys(TRS).length,b=document.getElementById('trbtn');if(b)b.textContent='Trophies '+n+'/'+TR.length;const w=document.getElementById('twn');if(w)w.textContent=n+'/'+TR.length}
@@ -1551,41 +1638,78 @@ add.innerHTML='<span>+<br>Add your own photo<br><small>or drop images here</smal
  $('#sreset').addEventListener('click',()=>{tgt=[1,1,1,1,1];day=1;SAVE.put('stats',tgt);SAVE.put('day',1);$('#day').textContent='Day 1';$('#wx').textContent='Rain';info();RM?(cur=[...tgt],pl.setAttribute('points',pts(cur))):tw()});
 })();
 
-/* ---------- P5: heist ---------- */
+/* ---------- P5: the phone ---------- */
 (function(){
- const cv=$('#heist'),c=cv.getContext('2d'),CS=60,GW=12,GH=7;cv.width=GW*CS;cv.height=GH*CS;
- const walls=new Set('3,1 3,2 3,3 5,3 5,4 5,5 5,6 7,0 7,1 7,2 7,4 9,2 9,3 9,4 9,5 1,4 2,4 11,4'.split(' '));
- const START=[0,6],GOAL=[11,0];
- const pathOf=(a)=>a.map(s=>s.split(',').map(Number));
- const guards=[{p:pathOf(['4,0','4,1','4,2','4,3','4,4','4,5','4,6']),i:0,d:1},{p:pathOf(['6,3','7,3','8,3']),i:0,d:1},{p:pathOf(['10,0','10,1','10,2','10,3','10,4','10,5','10,6']),i:3,d:1}];
- let me={x:START[0],y:START[1]},caught=SAVE.get('caught',0),wins=SAVE.get('wins',0),flash=0,flashT='',last=0,vis=false;
- const msg=$('#hmsg');
- const gpos=g=>g.p[g.i];
- if(wins||caught)msg.textContent='Welcome back. Heists: '+wins+' · Caught: '+caught;
- function sees(g){const [gx,gy]=gpos(g);if(gx===me.x&&gy===me.y)return true;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]])for(let k=1;k<=2;k++){const x=gx+dx*k,y=gy+dy*k;if(walls.has(x+','+y))break;if(x===me.x&&y===me.y)return true}return false}
- function check(){
-  if(guards.some(sees)){caught++;SAVE.put('caught',caught);sfx('caught');me={x:START[0],y:START[1]};flash=40;flashT='SPOTTED';msg.textContent='Spotted. Back to the start. Caught: '+caught+' · Heists: '+wins}
-  else if(me.x===GOAL[0]&&me.y===GOAL[1]){wins++;SAVE.put('wins',wins);sfx('win');award('heist');if(wins>=3)award('heist3');me={x:START[0],y:START[1]};flash=60;flashT='TREASURE STOLEN';msg.textContent='Treasure stolen. The guards move faster now. Heists: '+wins;const r=cv.getBoundingClientRect();burst('p5',r.left+r.width/2,r.top+r.height/2)}
- }
- function move(dx,dy){const x=me.x+dx,y=me.y+dy;if(x<0||y<0||x>=GW||y>=GH||walls.has(x+','+y))return;me={x,y};check();if(RM)draw(0)}
- cv.addEventListener('keydown',e=>{const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(m){e.preventDefault();move(...m)}});
- cv.addEventListener('click',e=>{cv.focus();const r=cv.getBoundingClientRect(),cx=(e.clientX-r.left)/r.width*GW-.5,cy=(e.clientY-r.top)/r.height*GH-.5,dx=cx-me.x,dy=cy-me.y;if(Math.abs(dx)>Math.abs(dy))move(Math.sign(dx),0);else move(0,Math.sign(dy))});
- $$('.dpad .btn').forEach(b=>b.addEventListener('click',()=>{const [dx,dy]=b.dataset.m.split(',').map(Number);move(dx,dy)}));
- function tickG(){guards.forEach(g=>{g.i+=g.d;if(g.i>=g.p.length-1||g.i<=0)g.d*=-1;g.i=Math.max(0,Math.min(g.p.length-1,g.i))});check()}
- function star(x,y,R,col){c.beginPath();for(let k=0;k<10;k++){const r=k%2?R*.42:R,a=(k*36-90)*Math.PI/180;c[k?'lineTo':'moveTo'](x+Math.cos(a)*r,y+Math.sin(a)*r)}c.closePath();c.fillStyle=col;c.fill()}
- function draw(t){
-  c.fillStyle='#0b0b0d';c.fillRect(0,0,cv.width,cv.height);
-  c.strokeStyle='rgba(217,0,25,.35)';c.lineWidth=1;for(let x=0;x<=GW;x++){c.beginPath();c.moveTo(x*CS,0);c.lineTo(x*CS,cv.height);c.stroke()}for(let y=0;y<=GH;y++){c.beginPath();c.moveTo(0,y*CS);c.lineTo(cv.width,y*CS);c.stroke()}
-  walls.forEach(w=>{const [x,y]=w.split(',').map(Number);c.fillStyle='#fff';c.beginPath();c.moveTo(x*CS+8,y*CS+4);c.lineTo(x*CS+CS-2,y*CS+4);c.lineTo(x*CS+CS-8,y*CS+CS-4);c.lineTo(x*CS+2,y*CS+CS-4);c.fill();c.fillStyle='#d90019';c.fillRect(x*CS+12,y*CS+CS-12,CS-24,4)});
-  guards.forEach(g=>{const [gx,gy]=gpos(g);c.fillStyle='rgba(217,0,25,.38)';for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]])for(let k=1;k<=2;k++){const x=gx+dx*k,y=gy+dy*k;if(x<0||y<0||x>=GW||y>=GH||walls.has(x+','+y))break;c.fillRect(x*CS+3,y*CS+3,CS-6,CS-6)}
-   const cx=gx*CS+CS/2,cy=gy*CS+CS/2;c.fillStyle='#000';c.strokeStyle='#d90019';c.lineWidth=4;c.beginPath();c.arc(cx,cy,19,0,6.283);c.fill();c.stroke();c.fillStyle='#fff';c.fillRect(cx-10,cy-4,20,5)});
-  const pul=1+Math.sin(t/220)*.12;star(GOAL[0]*CS+CS/2,GOAL[1]*CS+CS/2,24*pul,'#fff');
-  const mx=me.x*CS+CS/2,my=me.y*CS+CS/2;c.fillStyle='#d90019';c.beginPath();c.arc(mx,my,18,0,6.283);c.fill();c.strokeStyle='#000';c.lineWidth=3;c.stroke();c.fillStyle='#fff';c.beginPath();c.ellipse(mx,my+2,13,9,0,0,6.283);c.fill();c.fillStyle='#000';c.fillRect(mx-8,my,5,3);c.fillRect(mx+3,my,5,3);
-  if(flash>0){c.fillStyle=flashT==='SPOTTED'?'rgba(217,0,25,.55)':'rgba(255,255,255,.18)';c.fillRect(0,0,cv.width,cv.height);c.save();c.translate(cv.width/2,cv.height/2);c.rotate(-.1);c.font='italic 900 74px Rubik,sans-serif';c.textAlign='center';c.fillStyle='#000';c.fillText(flashT,5,29);c.fillStyle='#fff';c.fillText(flashT,0,24);c.restore();flash--}
- }
- function loop(t){if(vis){if(t-last>Math.max(240,520-wins*50)){last=t;tickG()}draw(t)}requestAnimationFrame(loop)}
- new IntersectionObserver(es=>{vis=es[0].isIntersecting}).observe(cv);
- draw(0);if(!RM)requestAnimationFrame(loop);
+ const ph=$('#ph');if(!ph)return;
+ const q=s=>ph.querySelector(s),qa=s=>[...ph.querySelectorAll(s)];
+ const S={home:q('#ph-home'),chat:q('#ph-chat'),navi:q('#ph-navi'),cont:q('#ph-cont'),cal:q('#ph-cal')};
+ const bar=q('#ph-nav');let cur='home',sub='list',tid=null;
+ function go(n){cur=n;Object.entries(S).forEach(([k,e])=>e.classList.toggle('on',k===n));bar.classList.toggle('off',n==='home');ph.dataset.app=n;if(n==='home')q('#ph-badge').hidden=!unread()}
+ function back(){if(cur==='chat'&&sub==='thread'){showList();return}go('home')}
+ q('#ph-back').addEventListener('click',()=>{sfx('click');back()});q('#ph-home-b').addEventListener('click',()=>{sfx('click');sub='list';showList(true);go('home')});
+ /* clock */
+ function tick(){const d=new Date(),p=n=>String(n).padStart(2,'0');q('#ph-time').textContent=p(d.getHours())+':'+p(d.getMinutes());q('#ph-bt').textContent=p(d.getHours())+':'+p(d.getMinutes());
+  q('#ph-date').textContent=(d.getMonth()+1)+'/'+d.getDate()+' '+['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()]}
+ tick();setInterval(tick,15000);
+ /* chat */
+ const TH=[
+  {id:'g',n:'Phantom Thieves',a:'PT',beats:[
+   {m:[['Ryuji','Yo, leader! Heard we have a new target lined up.'],['Ann',"Don't get hyped before we have proof, Ryuji."],['Futaba','Intel is in. Meta-Nav says the place only shows up after midnight. Spooky.']],c:[['Let us scout tonight.',[['Ryuji','Finally, some action!'],['Morgana','Bring supplies. And fish. For me.']]],['Gather more info first.',[['Futaba',"Smart. I'll dig through the forums."],['Ann',"I'll ask around school."]]]]},
+   {m:[['Morgana','Remember the plan: sneak in, find the treasure, leave before anyone notices.']],c:[['Ann takes the lead.',[['Ann','Me? ...Okay. I will not let you down!']]],['Ryuji, stay close.',[['Ryuji','Got it! Probably!']]]]},
+   {m:[['Futaba','Route unlocked. See you in the Metaverse. Do not be late.']],c:[['Ready when you are.',[['Ann','Phantom Thieves, assemble!'],['Ryuji','Time to steal some hearts!']]]]}]},
+  {id:'r',n:'Ryuji',a:'R',beats:[
+   {m:[['Ryuji','Bro, I found a ramen place with extra-large bowls for cheap.'],['Ryuji','You in? I am starving.']],c:[['Lead the way.',[['Ryuji','Yes! Meet at the station in five!']]],['Only if you are paying.',[['Ryuji','...Fine. But you owe me a favour.']]]]},
+   {m:[['Ryuji','Also, track practice is back on. Gonna beat my old record.']],c:[['I will cheer you on.',[['Ryuji','That will boost me for sure!']]],['Do not trip this time.',[['Ryuji','Hey! That was ONE time!']]]]}]},
+  {id:'a',n:'Ann',a:'A',beats:[
+   {m:[['Ann','Just wrapped up a photo shoot. My feet are killing me.'],['Ann','Can we get crepes? I earned it.']],c:[['Strawberry or chocolate?',[['Ann','Both. Obviously.']]],['Treat yourself.',[['Ann','Aww, thanks! You are the best.']]]]},
+   {m:[['Ann','Oh, and thanks for always having my back. Really.']],c:[['Always.',[['Ann','Okay now I am blushing. Stop it!']]],['Same to you.',[['Ann','Teamwork makes the dream work.']]]]}]},
+  {id:'f',n:'Futaba',a:'F',beats:[
+   {m:[['Futaba','Leader. LEADER. I have been awake for 30 hours and I regret nothing.'],['Futaba','Send snacks. The salty kind.']],c:[['Go to sleep.',[['Futaba','Sleep is for the weak. ...Fine, after this boss fight.']]],['Snacks incoming.',[['Futaba','You are my favourite person. Do not tell the others.']]]]},
+   {m:[['Futaba','Found a bug in Meta-Nav. Not a big one. Mostly harmless.']],c:[['Fix it.',[['Futaba','Already on it. Obviously.']]],['Leave it, it is funny.',[['Futaba','Chaos is a feature.']]]]}]}];
+ const st={};TH.forEach(t=>{st[t.id]={i:0,started:false,done:false,el:document.createElement('div'),last:'Tap to chat'};st[t.id].el.className='phm'});
+ let replies=SAVE.get('replies',0),busy=false,readG=false;
+ const unread=()=>!st.g.started;
+ const list=q('#ph-list'),thr=q('#ph-thread'),msgs=q('#ph-msgs'),chs=q('#ph-ch');
+ function showList(keep){sub='list';tid=null;thr.classList.remove('on');list.classList.add('on');list.innerHTML=TH.map(t=>'<button type="button" class="phr" data-t="'+t.id+'"><i>'+t.a+'</i><span><b>'+t.n+'</b><small>'+st[t.id].last+'</small></span>'+(t.id==='g'&&!st.g.started?'<em></em>':'')+'</button>').join('')}
+ list.addEventListener('click',e=>{const b=e.target.closest('.phr');if(b){sfx('click');openT(b.dataset.t)}});
+ function bubble(who,text,me){const d=document.createElement('div');d.className='phb2'+(me?' me':'');d.innerHTML=(me?'':'<small>'+who+'</small>')+'<p></p>';d.querySelector('p').textContent=text;return d}
+ function scroll(){msgs.scrollTop=msgs.scrollHeight}
+ function play(t,list2,cb){busy=true;chs.innerHTML='';let i=0;const next=()=>{if(i>=list2.length){busy=false;cb&&cb();return}
+   const [w,x]=list2[i++],ty=document.createElement('div');ty.className='phb2 ty';ty.innerHTML='<small>'+w+'</small><p><u></u><u></u><u></u></p>';st[t.id].el.appendChild(ty);scroll();
+   setTimeout(()=>{if(tid!==t.id&&!st[t.id].el.isConnected){}ty.replaceWith(bubble(w,x,false));st[t.id].last=w+': '+x;scroll();sfx('click');if(window.__vib)window.__vib(8);next()},RM?60:800)};next()}
+ function choices(t){const s=st[t.id],b=t.beats[s.i];if(!b){s.done=true;chs.innerHTML='<p class="phend">No more messages for now.</p>';return}
+  chs.innerHTML='';b.c.forEach(([lab,resp])=>{const bt=document.createElement('button');bt.type='button';bt.className='phc';bt.textContent=lab;bt.addEventListener('click',()=>{if(busy)return;sfx('click');s.el.appendChild(bubble('',lab,true));scroll();s.last='You: '+lab;
+    replies++;SAVE.put('replies',replies);award('heist');if(replies>=10)award('heist3');s.i++;play(t,resp,()=>{if(tid===t.id)choices(t)})});chs.appendChild(bt)})}
+ function openT(id){const t=TH.find(x=>x.id===id),s=st[id];tid=id;sub='thread';list.classList.remove('on');thr.classList.add('on');q('#ph-tn').textContent=t.n;msgs.innerHTML='';msgs.appendChild(s.el);chs.innerHTML='';
+  if(!s.started){s.started=true;q('#ph-badge').hidden=true;play(t,t.beats[0].m,()=>{if(tid===id)choices(t)})}else if(!busy)choices(t);scroll()}
+ /* navi */
+ const OPT={'LOCATION':['Aoyama','Shibuya','Shinjuku','Akihabara'],'PLACE':['Castle','Casino','Museum','Pyramid'],'DISTORTION':['Greed','Pride','Vanity','Rage']};
+ const sel={};let pick=null;
+ const nSl=q('#ph-nslots'),nOpt=q('#ph-nopt'),nGo=q('#ph-ngo'),nRes=q('#ph-nres');
+ function nRender(){nSl.innerHTML=Object.keys(OPT).map(k=>'<button type="button" class="nsl'+(sel[k]?' set':'')+'" data-k="'+k+'"><small>'+k+'</small><b>'+(sel[k]||'Tap to set')+'</b></button>').join('');nGo.disabled=Object.keys(OPT).some(k=>!sel[k])}
+ nSl.addEventListener('click',e=>{const b=e.target.closest('.nsl');if(!b)return;sfx('click');pick=b.dataset.k;nRes.classList.remove('on');nOpt.innerHTML='<small>'+pick+'</small>'+OPT[pick].map(o=>'<button type="button">'+o+'</button>').join('');nOpt.classList.add('on')});
+ nOpt.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sfx('click');sel[pick]=b.textContent;nOpt.classList.remove('on');nRender()});
+ nGo.addEventListener('click',()=>{sfx('boom');nRes.className='nres on scan';nRes.innerHTML='<div class="ring"></div><p>NAVIGATING...</p>';setTimeout(()=>{nRes.className='nres on';nRes.innerHTML='<h4>PALACE FOUND</h4><p class="np">The '+sel.LOCATION+' '+sel.PLACE+'</p><p>Ruler distortion: <b>'+sel.DISTORTION+'</b></p><p class="nt">Treasure detected at the deepest floor.</p><button type="button" id="ph-nr">Search again</button>';SAVE.put('navi',1);award('navi');sfx('win');q('#ph-nr').addEventListener('click',()=>{Object.keys(sel).forEach(k=>delete sel[k]);nRes.classList.remove('on');nRender()})},RM?100:1500)});
+ nRender();
+ /* contacts */
+ const CT=[['Ryuji','Loud, loyal and always hungry.',4],['Ann','Brave and kind, with a sharp sense of justice.',5],['Morgana','A cat. Do not call him a cat.',3],['Futaba','Genius hacker. Powered by snacks.',4],['Yusuke','An artist who sees beauty everywhere.',3]];
+ q('#ph-clist').innerHTML=CT.map(c=>'<button type="button" class="pcr"><i>'+c[0][0]+'</i><span><b>'+c[0]+'</b><small>'+c[1]+'</small><u>'+'<s></s>'.repeat(c[2])+'<s class="o"></s>'.repeat(5-c[2])+'</u></span></button>').join('');
+ q('#ph-clist').addEventListener('click',e=>{const b=e.target.closest('.pcr');if(b){sfx('click');b.classList.toggle('open')}});
+ /* calendar */
+ const marks=new Set(SAVE.get('calm',[]));const cg=q('#ph-cgrid');
+ function cal(){const d=new Date(),y=d.getFullYear(),m=d.getMonth(),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate();q('#ph-cm').textContent=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][m]+' '+y;
+  let h=['S','M','T','W','T','F','S'].map(x=>'<em>'+x+'</em>').join('');for(let i=0;i<first;i++)h+='<span></span>';for(let k=1;k<=n;k++)h+='<button type="button" data-d="'+k+'" class="'+(k===d.getDate()?'today ':'')+(marks.has(k)?'mk':'')+'">'+k+'</button>';cg.innerHTML=h}
+ cg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sfx('click');const k=+b.dataset.d;marks.has(k)?marks.delete(k):marks.add(k);SAVE.put('calm',[...marks]);b.classList.toggle('mk',marks.has(k))});cal();
+ /* apps */
+ qa('.ap[data-a]').forEach(b=>b.addEventListener('click',()=>{sfx('click');if(window.__vib)window.__vib(10);const a=b.dataset.a;
+  if(a==='trophy'){document.getElementById('trbtn').click();return}
+  if(a==='sound'){document.getElementById('snd').click();b.querySelector('span').textContent=document.getElementById('snd').textContent.replace('Sound: ','Sound ');return}
+  if(a==='chat')showList();go(a)}));
+ q('#ph-banner').addEventListener('click',()=>{q('#ph-banner').classList.remove('on');showList();go('chat');openT('g')});
+ q('#ph-badge').hidden=false;
+ let shown=false;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!shown&&cur==='home'){shown=true;setTimeout(()=>{if(cur!=='home'||st.g.started)return;sfx('chime');if(window.__vib)window.__vib([20,40,20]);q('#ph-banner').classList.add('on');setTimeout(()=>q('#ph-banner').classList.remove('on'),6000)},2200)}},{threshold:.6}).observe(ph);
+ go('home');showList();
+ window.__ph={go,open:openT,list:showList,st};
 })();
 
 /* ---------- Sound engine (all synthesised) ---------- */
@@ -1880,17 +2004,8 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  const vib=n=>{try{if(navigator.vibrate&&!RM)navigator.vibrate(n)}catch(e){}};
  window.__vib=vib;
  document.addEventListener('click',e=>{const b=e.target.closest('#fb-strike,#fb-persona,#fb-all,.sumb,#over-btn,#adv');if(b)vib(b.id==='fb-all'||b.classList.contains('sumb')?[30,40,60]:20)},true);
- const hc=document.getElementById('heist');
- if(hc){let sx=0,sy=0,on=false;
-  hc.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;sx=e.clientX;sy=e.clientY;on=true;e.preventDefault()});
-  hc.addEventListener('pointerup',e=>{if(!on)return;on=false;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;
-   const m=Math.abs(dx)>Math.abs(dy)?[dx>0?1:-1,0]:[0,dy>0?1:-1];const k={'0,-1':'ArrowUp','0,1':'ArrowDown','-1,0':'ArrowLeft','1,0':'ArrowRight'}[m.join(',')];
-   hc.dispatchEvent(new KeyboardEvent('keydown',{key:k,bubbles:true}));vib(10)});
-  hc.addEventListener('pointercancel',()=>{on=false});
- }
  const sf=document.getElementById('shaft');
  if(sf&&touch)sf.addEventListener('click',()=>{const u=document.getElementById('up');if(u&&!u.disabled)u.click()});
- if(touch){const h=document.querySelector('#heist');if(h){const f=h.parentNode.querySelector('.fine,p');}}
  /* mobile: nav scroll active link into view */
  new MutationObserver(()=>{const a=document.querySelector('.nav a.l.on, .nav a[href="#'+(document.body.dataset.zone||'')+'"]');if(a&&innerWidth<=820&&a.scrollIntoView)try{a.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}).observe(document.body,{attributes:true,attributeFilter:['data-zone']});
 })();
@@ -1918,7 +2033,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   x.globalAlpha=1;x.fillStyle='rgba(0,0,0,.72)';x.fillRect(40,40,820,440);
   x.fillStyle='#fff';x.font='italic 900 56px Arial,sans-serif';x.fillText('MIKEY0000',70,115);
   x.font='700 18px Arial,sans-serif';x.fillStyle='#bbb';x.fillText('PERSONA / BEYOND THE MASK  -  PROGRESS',70,148);
-  const n=Object.keys(TRS).length,st=[['TROPHIES',n+'/'+TR.length],['TOWER FLOOR',SAVE.get('floor',1)],['TREASURES',SAVE.get('wins',0)],['ARCANA',SAVE.get('arcana','-')]];
+  const n=Object.keys(TRS).length,st=[['TROPHIES',n+'/'+TR.length],['TOWER FLOOR',SAVE.get('floor',1)],['REPLIES',SAVE.get('replies',0)],['ARCANA',SAVE.get('arcana','-')]];
   st.forEach((t,i)=>{const px=70+i*195;x.fillStyle='#FFD500';x.font='700 15px Arial,sans-serif';x.fillText(t[0],px,215);x.fillStyle='#fff';x.font='italic 900 '+(String(t[1]).length>6?26:48)+'px Arial,sans-serif';x.fillText(String(t[1]),px,270)});
   x.fillStyle='#333';x.fillRect(70,320,720,18);x.fillStyle='#D90019';x.fillRect(70,320,720*n/TR.length,18);
   x.font='600 16px Arial,sans-serif';x.fillStyle='#ddd';x.fillText(TR.filter(t=>TRS[t[0]]).slice(0,6).map(t=>t[1]).join('  /  ')||'No trophies yet',70,380);
@@ -2025,9 +2140,9 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
 /* ---------- Mementos requests ---------- */
 (function(){
  const R=[['Send a calling card','Type a name into the calling card.',()=>{const n=SAVE.get('name','');return n&&n.trim()&&n.trim()!=='Someone'?1:0},1],
-  ['First steal','Reach the treasure in the heist game.',()=>Math.min(1,SAVE.get('wins',0)),1],
-  ['Professional','Steal the treasure three times.',()=>Math.min(3,SAVE.get('wins',0)),3],
-  ['Learn the route','Get spotted three times.',()=>Math.min(3,SAVE.get('caught',0)),3],
+  ['First reply','Send a reply in the phone chat.',()=>Math.min(1,SAVE.get('replies',0)),1],
+  ['Chatterbox','Send 10 replies in the phone chat.',()=>Math.min(10,SAVE.get('replies',0)),10],
+  ['Find a Palace','Search in Meta-Nav on the phone.',()=>SAVE.get('navi',0)?1:0,1],
   ['Take over','Press the Take over button.',()=>TRS.takeover?1:0,1]];
  const g=document.getElementById('mrg');
  function draw(){let all=true;g.innerHTML=R.map((r,i)=>{const v=r[2](),ok=v>=r[3];if(!ok)all=false;
