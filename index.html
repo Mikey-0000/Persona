@@ -1160,6 +1160,12 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .btcombo{position:absolute;right:3%;top:30%;z-index:9;color:#fff;font:italic 900 clamp(14px,2.2vw,22px)/1 var(--body);text-align:right;opacity:0;pointer-events:none;text-shadow:3px 3px 0 #000}
 .btcombo i{display:block;font-size:clamp(40px,7vw,78px);color:var(--bc);-webkit-text-stroke:2px #000;line-height:.9}
 .btcombo.on{animation:btcm 1.6s ease-out}@keyframes btcm{0%{opacity:0;transform:scale(2.2) rotate(-6deg)}12%{opacity:1;transform:scale(1) rotate(-3deg)}80%{opacity:1}100%{opacity:0}}
+.btpl{padding-left:84px!important;min-height:70px}.btpf{position:absolute;left:-14px;top:-14px;width:84px;height:84px;overflow:hidden;border:3px solid var(--bc);background:var(--bc);transform:skewX(8deg) rotate(-4deg);box-shadow:4px 4px 0 #000}.btpf img{width:118%;height:118%;margin:-9% 0 0 -9%;object-fit:cover;object-position:50% 20%;transform:skewX(-8deg)}
+.bth u{position:absolute;left:0;top:0;height:100%;background:#fff;transition:width .5s .35s;z-index:0}.bth.eh{position:relative}.bth.eh i{position:relative;z-index:1}
+.btf.shk{animation:btshk .32s}@keyframes btshk{0%,100%{translate:0 0}20%{translate:-9px 4px}40%{translate:8px -5px}60%{translate:-5px 3px}80%{translate:3px -2px}}
+.btendimg{width:150px;height:150px;object-fit:cover;object-position:50% 20%;border:4px solid var(--bc);box-shadow:8px 8px 0 var(--bc);transform:rotate(-5deg) skewX(-4deg);animation:bten .7s cubic-bezier(.2,1.4,.4,1) both}@keyframes bten{from{transform:scale(0) rotate(-40deg)}}
+.btend h4{font-size:clamp(34px,7vw,64px)!important;font-style:italic;text-shadow:4px 4px 0 var(--bc);animation:bten2 .6s .2s cubic-bezier(.2,1.6,.4,1) both}@keyframes bten2{from{transform:scale(3);opacity:0}}
+@media(max-width:700px){.bte{top:170px!important;width:50%!important;left:auto!important;right:3%!important}.btpl{padding-left:70px!important}.btpf{width:64px;height:64px}}
 @media(prefers-reduced-motion:reduce){.btf *{animation:none!important}}
 .pc-img{cursor:pointer}.pc-img:after{content:"READ THEIR STORY \25B6";position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#fff;font:italic 900 13px var(--body);letter-spacing:.1em;text-align:center;transform:translateY(100%);transition:transform .25s cubic-bezier(.2,1.2,.4,1)}
 .pc-img:hover:after,.pc-img:focus-visible:after{transform:none}.pc-img img{transition:transform .5s}.pc-img:hover img{transform:scale(1.06)}
@@ -1542,13 +1548,13 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
       <div class="btf" id="btf">
         <img class="btimg" id="btimg" alt="" aria-hidden="true"><div class="btbg" aria-hidden="true"></div><canvas class="btcv" id="btcv" aria-hidden="true"></canvas><div class="btfloor" aria-hidden="true"></div><div class="btgrid" aria-hidden="true"></div>
         <div class="bthero" id="bthero" aria-hidden="true"></div>
-        <div class="bte" id="bte"><div class="btaura" aria-hidden="true"></div><div class="bteg" aria-hidden="true"></div><div class="btnm" id="btnm"></div><div class="bth eh"><i id="bteh"></i></div><div class="btw" id="btw"></div><div class="enew" id="enew"></div></div>
-        <div class="btpl"><b id="btpn">YOU</b><div class="bth hp"><i id="btph"></i></div><div class="bth sp"><i id="btps"></i></div><small id="btpt"></small></div>
+        <div class="bte" id="bte"><div class="btaura" aria-hidden="true"></div><div class="bteg" aria-hidden="true"></div><div class="btnm" id="btnm"></div><div class="bth eh"><u></u><i id="bteh"></i></div><div class="btw" id="btw"></div><div class="enew" id="enew"></div></div>
+        <div class="btpl"><div class="btpf"><img id="btpimg" src="images/p3-hero.jpg" alt=""></div><b id="btpn">YOU</b><div class="bth hp"><i id="btph"></i></div><div class="bth sp"><i id="btps"></i></div><small id="btpt"></small></div>
         <div class="btsum" id="btsum" aria-hidden="true"></div><div class="btskill" id="btskill" aria-hidden="true"></div>
         <div class="btmsg" id="btmsg" aria-live="polite">Pick a command.</div>
         <div class="btmenu" id="btmenu"></div>
         <div class="btcin" id="btcin" aria-hidden="true"></div><div class="btturn" id="btturn" aria-hidden="true"></div><div class="btcombo" id="btcombo" aria-hidden="true"></div><div class="btfl" id="btfl" aria-hidden="true"></div><div class="btao" id="btao" aria-hidden="true">ALL-OUT ATTACK!</div>
-        <div class="btend" id="btend" hidden><small id="btrk"></small><h4 id="btet"></h4><p id="btes"></p><button class="reset" type="button" id="btre">Fight again</button></div>
+        <div class="btend" id="btend" hidden><img class="btendimg" id="btendimg" alt=""><small id="btrk"></small><h4 id="btet"></h4><p id="btes"></p><button class="reset" type="button" id="btre">Fight again</button></div>
       </div>
       <p class="fine" id="btbest"></p>
       <p class="fine">Find the shadow's weakness to knock it down and get One More. When it is down, call an All-Out Attack. Analyze reveals what it is weak to.</p>
@@ -2758,12 +2764,12 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   else{cn.innerHTML=pt+'<div class="burst5"></div><div class="mask5"></div>';later(()=>{cn.innerHTML='';for(let i=0;i<32;i++){const a=rnd(0,6.283),v=rnd(5,14);sp({k:'star',x:hx,y:hy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,rot:rnd(0,6),vr:rnd(-.3,.3),s:rnd(12,28),c:i%2?'#fff':'#000',c2:i%2?'#000':'#fff',life:rnd(26,44)|0})}flash('#df1a21');hitstop(110)},340)}
   later(()=>{cn.className='btcin';cn.innerHTML='';cb()},640)}
  /* ui */
- function setSkin(k){skin=k;hero.innerHTML=HERO[k];$('#btimg').src='images/shots/'+IMG[k]+'.webp';AM=[]}
+ function setSkin(k){skin=k;$('#btpimg').src='images/'+k+'-hero.jpg';hero.innerHTML=HERO[k];$('#btimg').src='images/shots/'+IMG[k]+'.webp';AM=[]}
  function enemyArt(){$('#enew').innerHTML=SVG[skin]}
  function fresh(){const w=EL[Math.floor(Math.random()*4)];let r;do{r=EL[Math.floor(Math.random()*4)]}while(r===w);
   P={hp:100,sp:40,guard:false,items:3};E={name:pick(NAMES[skin]),hp:120,max:120,weak:w,res:r,down:false,known:false};turns=0;taken=0;locked=false;over=false;sub=false;aoUsed=false;
   $('#btend').hidden=true;ENE.className='bte';enemyArt();$('#btnm').textContent=E.name;msg.textContent='A shadow appears!';combo=0;ENE.classList.add('enter');paint();turnB('YOUR TURN');menu()}
- function paint(){f.classList.toggle('low',P.hp<30&&!over);$('#bteh').style.width=Math.max(0,E.hp/E.max*100)+'%';$('#btph').style.width=Math.max(0,P.hp)+'%';$('#btps').style.width=P.sp/40*100+'%';
+ function paint(){const gu=$('.eh u');if(gu){gu.style.width=($('#bteh').style.width||'100%');setTimeout(()=>{gu.style.width=$('#bteh').style.width},550)}f.classList.toggle('low',P.hp<30&&!over);$('#bteh').style.width=Math.max(0,E.hp/E.max*100)+'%';$('#btph').style.width=Math.max(0,P.hp)+'%';$('#btps').style.width=P.sp/40*100+'%';
   $('#btpt').innerHTML='HP <b>'+Math.max(0,Math.round(P.hp))+'</b>  SP <b>'+P.sp+'</b>';$('#btw').textContent=E.known?'WEAK: '+EN[E.weak].toUpperCase()+'   RESISTS: '+EN[E.res].toUpperCase():'WEAKNESS: ???';ENE.classList.toggle('down',E.down);
   $('#btbest').textContent='Shadows defeated: '+wins()}
  function btn(label,fn,cls,dis,ic,hint){const b=document.createElement('button');b.type='button';b.className='bm '+(cls||'');b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+(ICON[ic]||'')+'</svg><span></span>';b.querySelector('span').textContent=label;if(dis)b.disabled=true;b.addEventListener('click',()=>{sfx('click');fn()});
@@ -2784,7 +2790,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   else if(k==='guard'){P.guard=true;P.sp=Math.min(40,P.sp+5);t='You brace yourself.'}
   else if(k==='item'){P.items--;P.hp=Math.min(100,P.hp+28);P.sp=Math.min(40,P.sp+10);t='Soda! HP and SP restored.';sfx('chime');const hb=hero.getBoundingClientRect(),fb=f.getBoundingClientRect();for(let i=0;i<20;i++)sp({k:'dot',x:hb.left-fb.left+hb.width/2+rnd(-30,30),y:hb.top-fb.top+hb.height*.8,vx:rnd(-.5,.5),vy:rnd(-3,-1),s:6,c:'#7dffb0',life:40})}
   locked=true;turns++;men.innerHTML='';
-  if(dmg){later(()=>{E.hp-=dmg;paint();ENE.classList.remove('hit');void ENE.offsetWidth;ENE.classList.add('hit');float(dmg,k==='allout'?'#ffd500':'#fff',true);combo++;const cb=$('#btcombo');cb.innerHTML='<i>'+combo+'</i> HIT'+(combo>1?'S':'');cb.classList.remove('on');void cb.offsetWidth;cb.classList.add('on');f.classList.add('chr');setTimeout(()=>f.classList.remove('chr'),260);if(one||k==='allout'||t.indexOf('CRIT')===0){speed();hitstop(100);zoom(1.14)}else zoom(1.05);if(window.__vib)window.__vib(k==='allout'?[30,40,40]:15);f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake')},k==='skill'?1100:150)}
+  if(dmg){later(()=>{E.hp-=dmg;paint();ENE.classList.remove('hit');void ENE.offsetWidth;ENE.classList.add('hit');float(dmg,k==='allout'?'#ffd500':'#fff',true);combo++;const cb=$('#btcombo');cb.innerHTML='<i>'+combo+'</i> HIT'+(combo>1?'S':'');cb.classList.remove('on');void cb.offsetWidth;cb.classList.add('on');f.classList.add('chr','shk');setTimeout(()=>f.classList.remove('shk'),320);setTimeout(()=>f.classList.remove('chr'),260);if(one||k==='allout'||t.indexOf('CRIT')===0){speed();hitstop(100);zoom(1.14)}else zoom(1.05);if(window.__vib)window.__vib(k==='allout'?[30,40,40]:15);f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake')},k==='skill'?1100:150)}
   msg.textContent=t+(one?'  ONE MORE!':'');paint();
   later(()=>{if(E.hp<=0){win();return}
    if(one){locked=false;turnB('ONE MORE!');menu();return}
@@ -2794,7 +2800,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   later(()=>{ENE.classList.remove('atk');if(Math.random()<.15){msg.textContent='It missed!';float('MISS','#aaa',false)}else{let d=Math.round(rnd(13,21));if(P.guard)d=Math.round(d*.45);P.hp-=d;taken+=d;msg.textContent=P.guard?'Blocked! You take '+d+'.':'You take '+d+' damage.';float(d,'#ff4a5a',false);sfx('caught');flash('#ff2030');hero.classList.remove('hurt');void hero.offsetWidth;hero.classList.add('hurt');f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');if(window.__vib)window.__vib(25)}
    P.guard=false;paint();
    later(()=>{if(P.hp<=0){lose();return}locked=false;turnB('YOUR TURN');menu()},800)},650)}
- function end(t,sm,rk){over=true;locked=true;men.innerHTML='';later(()=>{$('#btrk').textContent=rk||'';$('#btet').textContent=t;$('#btes').textContent=sm;$('#btend').hidden=false;$('#btre').focus({preventScroll:true})},900)}
+ function end(t,sm,rk){over=true;locked=true;men.innerHTML='';later(()=>{$('#btendimg').src='images/'+skin+'-hero.jpg';$('#btrk').textContent=rk||'';$('#btet').textContent=t;$('#btes').textContent=sm;$('#btend').hidden=false;$('#btre').focus({preventScroll:true})},900)}
  function win(){const n=wins()+1;SAVE.put('btw',n);award('shadow');if(taken===0)award('flawless');ENE.classList.add('dead');fxDie();sfx('win');paint();msg.textContent='The shadow fades away.';
   const rk=taken===0?'S':taken<30?'A':taken<60?'B':'C';end('BATTLE WON',turns+' turns  -  '+Math.round(taken)+' damage taken'+(aoUsed?'  -  All-Out Attack finish':''),'RANK '+rk)}
  function lose(){msg.textContent='You fell...';end('DEFEATED','The shadow stands. Heal up and try again.','')}
