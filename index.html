@@ -1166,6 +1166,10 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 .btendimg{width:150px;height:150px;object-fit:cover;object-position:50% 20%;border:4px solid var(--bc);box-shadow:8px 8px 0 var(--bc);transform:rotate(-5deg) skewX(-4deg);animation:bten .7s cubic-bezier(.2,1.4,.4,1) both}@keyframes bten{from{transform:scale(0) rotate(-40deg)}}
 .btend h4{font-size:clamp(34px,7vw,64px)!important;font-style:italic;text-shadow:4px 4px 0 var(--bc);animation:bten2 .6s .2s cubic-bezier(.2,1.6,.4,1) both}@keyframes bten2{from{transform:scale(3);opacity:0}}
 @media(max-width:700px){.bte{top:170px!important;width:50%!important;left:auto!important;right:3%!important}.btpl{padding-left:70px!important}.btpf{width:64px;height:64px}}
+.btstamp{position:absolute;left:50%;top:44%;z-index:9;pointer-events:none;opacity:0;white-space:nowrap;color:#fff;font:italic 900 clamp(26px,5.4vw,64px)/1 var(--body);-webkit-text-stroke:3px #000;paint-order:stroke fill;text-shadow:8px 8px 0 var(--sc,var(--bc)),-3px -3px 0 var(--sc,var(--bc))}
+.btstamp.on{animation:btstamp 1.15s cubic-bezier(.2,1.5,.4,1)}
+@keyframes btstamp{0%{opacity:0;transform:translate(-50%,-50%) scale(4) rotate(-14deg)}18%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}75%{opacity:1;transform:translate(-50%,-50%) scale(1.04) rotate(-6deg)}100%{opacity:0;transform:translate(-50%,-70%) scale(1.15) rotate(-6deg)}}
+@media(max-width:700px){.btf .bthero{left:-3%!important;bottom:150px!important;height:26%!important;z-index:4}}
 @media(prefers-reduced-motion:reduce){.btf *{animation:none!important}}
 .pc-img{cursor:pointer}.pc-img:after{content:"READ THEIR STORY \25B6";position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#fff;font:italic 900 13px var(--body);letter-spacing:.1em;text-align:center;transform:translateY(100%);transition:transform .25s cubic-bezier(.2,1.2,.4,1)}
 .pc-img:hover:after,.pc-img:focus-visible:after{transform:none}.pc-img img{transition:transform .5s}.pc-img:hover img{transform:scale(1.06)}
@@ -1553,7 +1557,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
         <div class="btsum" id="btsum" aria-hidden="true"></div><div class="btskill" id="btskill" aria-hidden="true"></div>
         <div class="btmsg" id="btmsg" aria-live="polite">Pick a command.</div>
         <div class="btmenu" id="btmenu"></div>
-        <div class="btcin" id="btcin" aria-hidden="true"></div><div class="btturn" id="btturn" aria-hidden="true"></div><div class="btcombo" id="btcombo" aria-hidden="true"></div><div class="btfl" id="btfl" aria-hidden="true"></div><div class="btao" id="btao" aria-hidden="true">ALL-OUT ATTACK!</div>
+        <div class="btcin" id="btcin" aria-hidden="true"></div><div class="btturn" id="btturn" aria-hidden="true"></div><div class="btcombo" id="btcombo" aria-hidden="true"></div><div class="btstamp" id="btstamp" aria-hidden="true"></div><div class="btfl" id="btfl" aria-hidden="true"></div><div class="btao" id="btao" aria-hidden="true">ALL-OUT ATTACK!</div>
         <div class="btend" id="btend" hidden><img class="btendimg" id="btendimg" alt=""><small id="btrk"></small><h4 id="btet"></h4><p id="btes"></p><button class="reset" type="button" id="btre">Fight again</button></div>
       </div>
       <p class="fine" id="btbest"></p>
@@ -1725,7 +1729,7 @@ addEventListener('click',e=>{const h=hotAt(e);if(h)h.fn(e)});
 (function(){
  const wi=document.getElementById('wi'),wc=document.getElementById('wic'),wt=document.getElementById('wit');if(!wi)return;const wx=wc.getContext('2d');let raf=0,busy=false;
  function noise(){const im=wx.createImageData(160,90),d=im.data;for(let i=0;i<d.length;i+=4){const v=Math.random()*255|0;d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=255}wx.putImageData(im,0,0);raf=requestAnimationFrame(noise)}
- $$('a[href="#p4"],a[href="#p5"]').forEach(a=>a.addEventListener('click',e=>{if(RM||busy)return;e.preventDefault();busy=true;const z=a.getAttribute('href').slice(1);wi.className='on '+(z==='p4'?'w4':'w5');wt.textContent=z==='p4'?'MIDNIGHT CHANNEL':'TAKE YOUR HEART';if(z==='p4')noise();sfx('click');
+ $$('a[href="#p4"],a[href="#p5"]').forEach(a=>a.addEventListener('click',e=>{if(RM||busy)return;e.preventDefault();busy=true;const z=a.getAttribute('href').slice(1);wi.className='on '+(z==='p4'?'w4':'w5');wt.textContent=z==='p4'?'MIDNIGHT CHANNEL':'HEART STOLEN';if(z==='p4')noise();sfx('click');
   setTimeout(()=>{const h=document.documentElement;h.style.scrollBehavior='auto';document.getElementById(z).scrollIntoView();h.style.scrollBehavior=''},260);
   setTimeout(()=>{wi.className='';cancelAnimationFrame(raf);busy=false},780)}));
 })();
@@ -1898,8 +1902,8 @@ function ransom(el,text){el.innerHTML='';[...text].forEach((ch,i)=>{
  const s=document.createElement('span'),p=pick(PAL);s.textContent=ch;
  s.style.cssText=`background:${p[0]};color:${p[1]};font-family:${pick(FONTS)};font-weight:${pick([400,800,900])};font-style:${Math.random()<.3?'italic':'normal'};transform:rotate(${rnd(-9,9).toFixed(1)}deg) translateY(${rnd(-6,6).toFixed(0)}px);padding:.04em ${rnd(.08,.2).toFixed(2)}em;font-size:${rnd(.78,1.1).toFixed(2)}em;clip-path:${pick(JAG)||'none'};animation-delay:${i*45}ms`;
  el.append(s)})}
-const r5=$('#r5');ransom(r5,'TAKE YOUR HEART');
-r5.addEventListener('click',()=>ransom(r5,'TAKE YOUR HEART'));
+const r5=$('#r5');ransom(r5,'HEART STOLEN');
+r5.addEventListener('click',()=>ransom(r5,'HEART STOLEN'));
 
 const card=$('#card'),tgt=$('#target');
 function setName(){const v=tgt.value.trim()||'Someone';$('#cname').textContent=v;SAVE.put('name',tgt.value)}
@@ -2757,6 +2761,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  function hitstop(ms){stopUntil=performance.now()+ms;f.classList.add('stop');setTimeout(()=>f.classList.remove('stop'),ms)}
  function zoom(k){f.style.setProperty('--z',k);f.classList.remove('zm');void f.offsetWidth;f.classList.add('zm')}
  function speed(){const[x,y]=ctr();for(let i=0;i<44;i++)sp({k:'line',x,y,a:rnd(0,6.283),r0:rnd(40,120),len:rnd(60,200),s:rnd(1,4),c:i%3?'#fff':EC.fire,life:12})}
+ function stamp(t,c){const b=$('#btstamp');b.textContent=t;b.dataset.t=t;b.style.setProperty('--sc',c||'var(--bc)');b.classList.remove('on');void b.offsetWidth;b.classList.add('on')}
  function turnB(t){const b=$('#btturn');b.textContent=t;b.classList.remove('on');void b.offsetWidth;b.classList.add('on')}
  function cine(cb){const cn=$('#btcin'),hb=hero.getBoundingClientRect(),fb=f.getBoundingClientRect(),hx=hb.left-fb.left+hb.width*.5,hy=hb.top-fb.top+hb.height*.14;cn.className='btcin on '+skin;const pt='<div class="btcut"><img src="images/'+skin+'-hero.jpg" alt=""><b></b></div><div class="btlb t"></div><div class="btlb b"></div>';
   if(skin==='p3'){cn.innerHTML=pt;flash('#cfe8ff');for(let i=0;i<2;i++)sp({k:'ring',x:hx,y:hy,s:40+i*30,c:'#bfe0ff',life:26});later(()=>{for(let i=0;i<44;i++){const a=rnd(0,6.283),v=rnd(4,14);sp({k:'shard',x:hx,y:hy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,rot:rnd(0,6),vr:rnd(-.3,.3),s:rnd(14,34),c:pick(['#ffffff','#bfe0ff','#6ab0ff']),life:rnd(26,46)|0})}hitstop(100)},200)}
@@ -2768,7 +2773,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
  function enemyArt(){$('#enew').innerHTML=SVG[skin]}
  function fresh(){const w=EL[Math.floor(Math.random()*4)];let r;do{r=EL[Math.floor(Math.random()*4)]}while(r===w);
   P={hp:100,sp:40,guard:false,items:3};E={name:pick(NAMES[skin]),hp:120,max:120,weak:w,res:r,down:false,known:false};turns=0;taken=0;locked=false;over=false;sub=false;aoUsed=false;
-  $('#btend').hidden=true;ENE.className='bte';enemyArt();$('#btnm').textContent=E.name;msg.textContent='A shadow appears!';combo=0;ENE.classList.add('enter');paint();turnB('YOUR TURN');menu()}
+  $('#btend').hidden=true;ENE.className='bte';enemyArt();$('#btnm').textContent=E.name;msg.textContent='A shadow appears!';combo=0;ENE.classList.add('enter');paint();stamp(skin==='p3'?'SHADOW APPEARS!':skin==='p4'?'ENCOUNTER!':'AMBUSH!');later(()=>turnB('YOUR TURN'),1250);menu()}
  function paint(){const gu=$('.eh u');if(gu){gu.style.width=($('#bteh').style.width||'100%');setTimeout(()=>{gu.style.width=$('#bteh').style.width},550)}f.classList.toggle('low',P.hp<30&&!over);$('#bteh').style.width=Math.max(0,E.hp/E.max*100)+'%';$('#btph').style.width=Math.max(0,P.hp)+'%';$('#btps').style.width=P.sp/40*100+'%';
   $('#btpt').innerHTML='HP <b>'+Math.max(0,Math.round(P.hp))+'</b>  SP <b>'+P.sp+'</b>';$('#btw').textContent=E.known?'WEAK: '+EN[E.weak].toUpperCase()+'   RESISTS: '+EN[E.res].toUpperCase():'WEAKNESS: ???';ENE.classList.toggle('down',E.down);
   $('#btbest').textContent='Shadows defeated: '+wins()}
@@ -2793,7 +2798,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
   if(dmg){later(()=>{E.hp-=dmg;paint();ENE.classList.remove('hit');void ENE.offsetWidth;ENE.classList.add('hit');float(dmg,k==='allout'?'#ffd500':'#fff',true);combo++;const cb=$('#btcombo');cb.innerHTML='<i>'+combo+'</i> HIT'+(combo>1?'S':'');cb.classList.remove('on');void cb.offsetWidth;cb.classList.add('on');f.classList.add('chr','shk');setTimeout(()=>f.classList.remove('shk'),320);setTimeout(()=>f.classList.remove('chr'),260);if(one||k==='allout'||t.indexOf('CRIT')===0){speed();hitstop(100);zoom(1.14)}else zoom(1.05);if(window.__vib)window.__vib(k==='allout'?[30,40,40]:15);f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake')},k==='skill'?1100:150)}
   msg.textContent=t+(one?'  ONE MORE!':'');paint();
   later(()=>{if(E.hp<=0){win();return}
-   if(one){locked=false;turnB('ONE MORE!');menu();return}
+   if(one){locked=false;stamp('ONE MORE!');menu();return}
    if(was&&k!=='allout')E.down=false;if(k==='allout')E.down=false;
    foe()},k==='skill'?2100:k==='allout'?1800:1000)}
  function foe(){paint();turnB('ENEMY TURN');msg.textContent=E.name+' attacks!';ENE.classList.add('atk');
@@ -2801,7 +2806,7 @@ $('#wreplay').addEventListener('click',()=>waterLoad(2600));
    P.guard=false;paint();
    later(()=>{if(P.hp<=0){lose();return}locked=false;turnB('YOUR TURN');menu()},800)},650)}
  function end(t,sm,rk){over=true;locked=true;men.innerHTML='';later(()=>{$('#btendimg').src='images/'+skin+'-hero.jpg';$('#btrk').textContent=rk||'';$('#btet').textContent=t;$('#btes').textContent=sm;$('#btend').hidden=false;$('#btre').focus({preventScroll:true})},900)}
- function win(){const n=wins()+1;SAVE.put('btw',n);award('shadow');if(taken===0)award('flawless');ENE.classList.add('dead');fxDie();sfx('win');paint();msg.textContent='The shadow fades away.';
+ function win(){const n=wins()+1;SAVE.put('btw',n);award('shadow');if(taken===0)award('flawless');ENE.classList.add('dead');fxDie();hitstop(260);zoom(1.25);stamp(skin==='p3'?'SHADOW SLAIN':skin==='p4'?'SHADOW FALLS':'HEART STOLEN','#fff');flash('#fff');sfx('win');paint();msg.textContent='The shadow fades away.';
   const rk=taken===0?'S':taken<30?'A':taken<60?'B':'C';end('BATTLE WON',turns+' turns  -  '+Math.round(taken)+' damage taken'+(aoUsed?'  -  All-Out Attack finish':''),'RANK '+rk)}
  function lose(){msg.textContent='You fell...';end('DEFEATED','The shadow stands. Heal up and try again.','')}
  $('#btre').addEventListener('click',fresh);
