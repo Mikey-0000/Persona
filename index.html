@@ -1149,7 +1149,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
       <div class="rv">
         <div class="field"><label for="target">Target</label><input id="target" type="text" maxlength="22" value="Someone" autocomplete="off"></div>
         <button class="btn red" id="send" type="button"><span>Send the card</span></button>
-        <p class="fine" style="margin-top:14px;color:#f1d9dd">Type a name and the card rewrites itself. Click anywhere here to slash the screen.</p>
+        <p class="fine" style="margin-top:14px;color:#f1d9dd">Type a name and the card rewrites itself. Click anywhere here to blow up the screen with stars.</p>
       </div>
     </div>
 
@@ -1288,10 +1288,11 @@ function burst(z,x,y){
   for(let i=0;i<18;i++){const a=rnd(0,6.283),v=rnd(2,9);add({k:'shard',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3,rot:rnd(0,6),vr:rnd(-.3,.3),s:rnd(8,22),c:pick(['#4aa3ff','#0057B8','#bcd8ff','#9fd0ff']),life:60})}
   add({k:'ring',x,y,r:90,c:'#bcd8ff',life:30});
  }else if(z==='p4'||z==='hero4'){
+  for(let i=0;i<3;i++)add({k:'ring',x,y,r:60+i*35,c:i%2?'#181818':'#ffd500',life:34+i*8});
+  for(let i=0;i<12;i++){const a=rnd(0,6.283),v=rnd(1,5);add({k:'dust',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:.05,s:rnd(3,7),c:pick(['#ffd500','#181818','#fff']),life:46})}
+ }else if(z==='p5'||z==='hero5'){
   add({k:'ring',x,y,r:110,c:'#fff',life:24});add({k:'ring',x,y,r:80,c:'#000',life:30});
   for(let i=0;i<16;i++){const a=i/16*6.283+rnd(-.2,.2),v=rnd(3,11),w=i%2;add({k:'star',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,rot:rnd(0,6),vr:rnd(-.25,.25),s:rnd(14,34),c:w?'#fff':'#000',c2:w?'#000':'#fff',life:rnd(34,52)|0})}
- }else if(z==='p5'||z==='hero5'){
-  const base=rnd(-1.2,-.5);for(let i=0;i<3;i++)add({k:'slash',x:x+rnd(-40,40),y:y+rnd(-40,40),a:base+rnd(-.25,.25),len:rnd(420,720),w:rnd(5,12),c:pick(['#d90019','#fff','#ff2a40']),life:26+i*3});
  }else if(z==='velvet'){
   for(let i=0;i<26;i++){const a=rnd(0,6.283),v=rnd(.5,3);add({k:'dust',x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1,g:-.01,s:rnd(2,5),c:pick(['#e6d3a1','#b6a16a','#fff']),life:70})}
  }
