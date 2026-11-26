@@ -946,6 +946,21 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 #wi.w5{background:linear-gradient(115deg,#000 38%,#df1a21 38% 62%,#000 62%)}#wi.w5 b{transform:skewX(-12deg);text-shadow:5px 5px 0 #000}
 #wi b{position:relative;font:italic 900 clamp(34px,9vw,110px)/1 var(--body);color:#fff;letter-spacing:.04em;text-align:center}
 @media (prefers-reduced-motion:reduce){#cut *,#wi{animation-duration:.01s!important}}
+
+.shotbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.28;filter:saturate(1.1)}
+#p3 .shotbg{mix-blend-mode:screen;opacity:.34}#p5 .shotbg{opacity:.3}
+#p3>.wrap,#p5>.wrap{position:relative;z-index:2}
+.shots{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:14px;margin:0 0 34px}
+.shot{position:relative;display:block;padding:0;border:3px solid #fff;background:#000;overflow:hidden;cursor:zoom-in;aspect-ratio:16/9;box-shadow:6px 6px 0 var(--sh,#000);transform:rotate(-.6deg);transition:transform .2s}
+.shot:nth-child(2){transform:rotate(.5deg)}.shot:hover,.shot:focus-visible{transform:rotate(0) scale(1.02);z-index:3}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot span{position:absolute;left:0;bottom:0;padding:5px 12px 5px 10px;background:#000;color:#fff;font:italic 800 12px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,92% 100%,0 100%)}
+.shots[data-z=p3]{--sh:#4aa3ff}.shots[data-z=p4]{--sh:#ff2d95}.shots[data-z=p5]{--sh:#df1a21}
+@media(max-width:700px){.shots{grid-template-columns:1fr}.shot{transform:none!important}}
+#shotlb{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:3vh 3vw;cursor:zoom-out}
+#shotlb[hidden]{display:none}#shoti{max-width:100%;max-height:82vh;object-fit:contain;box-shadow:0 0 0 3px #fff,10px 10px 0 #df1a21}
+#shotc{margin:0;color:#fff;font:italic 800 14px var(--body);letter-spacing:.08em;text-transform:uppercase}
+#shotx{position:absolute;top:12px;right:16px;background:none;border:0;color:#fff;font-size:40px;line-height:1;cursor:pointer}
 </style>
 </head>
 <body data-zone="hero">
@@ -1010,11 +1025,13 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 <!-- P3 -->
 <section id="p3" class="world" data-zone="p3">
   <div class="tint"></div>
+  <img class="shotbg" src="images/shots/p3-tartarus.webp" alt="" aria-hidden="true" decoding="async">
   <div class="bigmoon" id="bigmoon"></div>
   <div class="coffins" id="coffins" aria-hidden="true"></div>
   <div class="wrap">
     <div class="sec-head rv"><span class="n">P3</span><h2>MEMENTO MORI</h2></div>
     <p class="lede rv">A hidden hour sits between one day and the next. Strike midnight on the clock to step into it, then advance the calendar through the moon's phases toward the full moon.</p>
+    <div class="shots rv" data-z="p3"><button type="button" class="shot" data-src="images/shots/p3-rooftop.webp" data-cap="Rooftop, after school"><img src="images/shots/p3-rooftop.webp" alt="Rooftop, after school" loading="lazy" decoding="async"><span>Rooftop, after school</span></button><button type="button" class="shot" data-src="images/shots/p3-lounge.webp" data-cap="The lounge"><img src="images/shots/p3-lounge.webp" alt="The lounge" loading="lazy" decoding="async"><span>The lounge</span></button><button type="button" class="shot" data-src="images/shots/p3-tartarus.webp" data-cap="The Dark Hour"><img src="images/shots/p3-tartarus.webp" alt="The Dark Hour" loading="lazy" decoding="async"><span>The Dark Hour</span></button></div>
     <div class="grid2">
       <div class="panel rv clock-wrap">
         <svg id="clock" viewBox="0 0 220 220" role="img" aria-label="Analog clock">
@@ -1069,6 +1086,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
   <div class="wrap">
     <div class="sec-head rv"><span class="n">P4</span><h2>REACH OUT</h2></div>
     <p class="lede rv">Rain on the glass, fog on the street, a TV that shows more than a program. Tune the set, lift the fog, follow the strings and keep reaching out.</p>
+    <div class="shots rv" data-z="p4"><button type="button" class="shot" data-src="images/shots/p4-studio.webp" data-cap="The TV studio"><img src="images/shots/p4-studio.webp" alt="The TV studio" loading="lazy" decoding="async"><span>The TV studio</span></button><button type="button" class="shot" data-src="images/shots/p4-roof.webp" data-cap="Lunch on the roof"><img src="images/shots/p4-roof.webp" alt="Lunch on the roof" loading="lazy" decoding="async"><span>Lunch on the roof</span></button><button type="button" class="shot" data-src="images/shots/p4-street.webp" data-cap="Shopping District"><img src="images/shots/p4-street.webp" alt="Shopping District" loading="lazy" decoding="async"><span>Shopping District</span></button></div>
     <div class="grid2">
       <div class="rv">
         <button class="tv" id="tv" data-s="0" type="button" aria-label="Television. Press to change channel.">
@@ -1182,10 +1200,12 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 
 <!-- P5 -->
 <section id="p5" class="world" data-zone="p5">
+  <img class="shotbg" src="images/shots/p5-kamoshida.webp" alt="" aria-hidden="true" decoding="async">
   <div class="wrap">
     <div class="sec-head rv" style="margin-bottom:20px"><span class="n" style="color:var(--p5);text-shadow:4px 4px 0 #fff">P5</span></div>
     <h2 class="ransom rv" id="r5" aria-label="Take your heart" title="Click to reshuffle"></h2>
     <p class="p5lede rv">Style is a weapon. Name a target, send the calling card, pick your next move from the menu, and take over.</p>
+    <div class="shots rv" data-z="p5"><button type="button" class="shot" data-src="images/shots/p5-shibuya.webp" data-cap="Central Street"><img src="images/shots/p5-shibuya.webp" alt="Central Street" loading="lazy" decoding="async"><span>Central Street</span></button><button type="button" class="shot" data-src="images/shots/p5-kamoshida.webp" data-cap="Rainy Shibuya"><img src="images/shots/p5-kamoshida.webp" alt="Rainy Shibuya" loading="lazy" decoding="async"><span>Rainy Shibuya</span></button><button type="button" class="shot" data-src="images/shots/p5-palace.webp" data-cap="Inside the Palace"><img src="images/shots/p5-palace.webp" alt="Inside the Palace" loading="lazy" decoding="async"><span>Inside the Palace</span></button></div>
     <div class="cardrow">
       <div class="rv">
         <div class="callcard play" id="card">
@@ -1266,6 +1286,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 <div id="sum" aria-hidden="true"><div class="bgl"></div><div class="sl"></div><div class="nm"></div><div class="sub"></div></div>
 <div id="qz" role="dialog" aria-label="Arcana quiz"><div class="qzp" id="qzp"></div></div>
 <button class="inst" id="inst" type="button" hidden>Install app</button>
+<div id="shotlb" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden><button type="button" id="shotx" aria-label="Close">&times;</button><img id="shoti" alt=""><p id="shotc"></p></div>
 <div id="cut" aria-hidden="true"><div class="cbg"></div><svg class="csky" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 300V190h60v-40h50v60h40v-90h70v100h50v-60h60v80h80v-130h60v140h70v-70h80v90h60v-110h70v120h60v-50h90v70h70v-100h60v110h60V300z"/></svg><svg class="cjk" viewBox="0 0 120 170"><use href="#sil"/></svg><div class="cban">TIME TO TAKE YOUR HEART</div><div class="ccard"><small>CALLING CARD</small>The heart of <i id="cutn">Someone</i> will be taken.<svg viewBox="0 0 100 100"><use href="#star"/></svg></div></div>
 <div id="wi" aria-hidden="true"><canvas id="wic" width="160" height="90"></canvas><b id="wit"></b></div>
 <div id="ks" role="dialog" aria-label="Controls"><div class="ksp"><h3>CONTROLS</h3><ul><li><b>? </b>This panel</li><li><b>Esc</b>Close panels</li><li><b>Arrows / WASD</b>Move through the Persona 5 menu</li><li><b>D F J K</b>Play Velvet Beat (or tap the lanes)</li><li><b>Click</b>Everything else</li><li><b>Up Up Down Down Left Right Left Right B A</b>You will see</li><li><b>Trophies</b>Top right of the nav</li></ul><button class="btn" id="ksx" type="button"><span>Close</span></button></div></div>
@@ -1357,8 +1378,15 @@ addEventListener('pointerdown',e=>{
  if(z)burst(z,e.clientX,e.clientY)});
 let lastT=0;
 
+
+/* ---------- screenshot viewer ---------- */
+(function(){const lb=document.getElementById('shotlb'),im=document.getElementById('shoti'),cp=document.getElementById('shotc');if(!lb)return;
+ const close=()=>{lb.hidden=true;im.removeAttribute('src')};
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.shot');if(b){e.stopPropagation();sfx('click');im.src=b.dataset.src;im.alt=b.dataset.cap;cp.textContent=b.dataset.cap;lb.hidden=false;return}if(!lb.hidden&&e.target.closest('#shotlb'))close()},true);
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
+})();
 /* ---------- clickable hotspots ---------- */
-const HOT=[],NOH='button,a,input,select,textarea,label,summary,.panel,.note,.pin,canvas,.tile,.pc,.mk,.slab,#sum,#qz,#tw,#ks,#kcode,#lb,#toasts,.inst,#cut,#ph';
+const HOT=[],NOH='button,a,input,select,textarea,label,summary,.panel,.note,.pin,canvas,.tile,.pc,.mk,.slab,#sum,#qz,#tw,#ks,#kcode,#lb,#toasts,.inst,#cut,#ph,#lb,#shotlb,.shots';
 function hotAdd(o){HOT.push(o)}
 function hotAt(e){if(e.target.closest&&e.target.closest(NOH))return null;const z=document.body.dataset.zone;for(const h of HOT){if(h.z!==z)continue;const r=h.rect();if(!r||!r.width)continue;const w=r.width,hh=r.height,pd=h.pad||[0,1,0,1];
   if(h.circ){if(Math.hypot(e.clientX-(r.x+w/2),e.clientY-(r.y+hh/2))<Math.min(w,hh)/2)return h}else if(e.clientX>r.x+w*pd[0]&&e.clientX<r.x+w*pd[1]&&e.clientY>r.y+hh*pd[2]&&e.clientY<r.y+hh*pd[3])return h}return null}
