@@ -1176,6 +1176,21 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 @keyframes btgh{0%{opacity:0;transform:translateX(0)}30%{opacity:.5;transform:translateX(120px)}100%{opacity:0;transform:translateX(250px) skewX(-10deg)}}
 .bthero.hurt{animation:bthh2 .5s!important}@keyframes bthh2{20%{transform:translateX(-34px) rotate(-8deg);filter:brightness(5) drop-shadow(0 0 14px #f00)}60%{transform:translateX(-14px) rotate(-3deg)}}
 @media(max-width:700px){@keyframes btdash{0%{transform:none}42%,60%{transform:translateX(120px) scale(1.08) skewX(-10deg)}100%{transform:none}}}
+.p4img{position:absolute;inset:-3%;z-index:0;will-change:transform;transform:translate(var(--bx,0px),var(--by,0px)) scale(1.02)}.p4img img{width:100%;height:100%;object-fit:cover;display:block;animation:p4br 14s ease-in-out infinite alternate}@keyframes p4br{to{filter:saturate(1.18) brightness(1.04)}}
+.p4veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(255,229,39,0) 0,rgba(255,229,39,.0) 30%,rgba(255,229,39,.42) 100%),linear-gradient(180deg,rgba(255,229,39,.18),rgba(255,229,39,.28))}
+#p4 .panel{background:rgba(255,249,190,.9)!important;backdrop-filter:blur(3px)!important}
+/* ---- global cool layer ---- */
+#fxtrail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:64}
+.wipe2{position:fixed;inset:0;z-index:70;pointer-events:none;background:var(--wc,#fff);clip-path:polygon(0 0,0 0,-20% 100%,-20% 100%);animation:wp2 .7s cubic-bezier(.7,0,.2,1) forwards}
+@keyframes wp2{0%{clip-path:polygon(0 0,0 0,-25% 100%,-25% 100%)}45%{clip-path:polygon(0 0,125% 0,100% 100%,-25% 100%)}100%{clip-path:polygon(125% 0,125% 0,150% 100%,100% 100%)}}
+.ring2{position:fixed;z-index:66;pointer-events:none;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:3px solid var(--rc,#fff);animation:rg2 .6s ease-out forwards}@keyframes rg2{to{transform:scale(11);opacity:0;border-width:1px}}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:0;transition:opacity .25s;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.34),transparent 55%);mix-blend-mode:soft-light}
+.tilt{transition:translate .25s,rotate .25s,scale .25s}.tilt:hover .glare{opacity:1}
+.mag{transition:translate .2s}
+.scr{font-variant-numeric:tabular-nums}
+#sprog{position:fixed;left:0;top:0;height:4px;width:100%;z-index:90;transform-origin:0 50%;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,#4aa3ff,#ffd500,#df1a21);pointer-events:none}
+.rv.in{animation:rvp .8s cubic-bezier(.2,1.3,.4,1)}@keyframes rvp{from{filter:blur(6px)}}
+@media(prefers-reduced-motion:reduce){.wipe2,.ring2,#fxtrail{display:none}.p4img img{animation:none}}
 @media(prefers-reduced-motion:reduce){.btf *{animation:none!important}}
 .pc-img{cursor:pointer}.pc-img:after{content:"READ THEIR STORY \25B6";position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#fff;font:italic 900 13px var(--body);letter-spacing:.1em;text-align:center;transform:translateY(100%);transition:transform .25s cubic-bezier(.2,1.2,.4,1)}
 .pc-img:hover:after,.pc-img:focus-visible:after{transform:none}.pc-img img{transition:transform .5s}.pc-img:hover img{transform:scale(1.06)}
@@ -1372,7 +1387,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 
 <!-- P4 -->
 <section id="p4" class="world" data-zone="p4">
-  <div class="p4bg" aria-hidden="true"><div class="p4stick"><svg id="p4svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><img class="ted" id="ted" src="images/teddie.png" alt="" decoding="async" draggable="false"><div class="tedsay" id="tedsay" aria-live="polite"></div></div></div>
+  <div class="p4bg" aria-hidden="true"><div class="p4stick"><div class="p4img" aria-hidden="true"><img src="images/p4g-bg.webp" alt="" decoding="async" fetchpriority="low"></div><div class="p4veil" aria-hidden="true"></div><svg id="p4svg" style="display:none" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><img class="ted" id="ted" src="images/teddie.png" alt="" decoding="async" draggable="false"><div class="tedsay" id="tedsay" aria-live="polite"></div></div></div>
   <canvas id="rain" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="sec-head rv"><span class="n">P4</span><h2>REACH OUT</h2></div>
@@ -2072,7 +2087,48 @@ $('#vreset').addEventListener('click',()=>{sel=[];refresh()});
  function star(cx,cy,R,c,i){const rot=rnd(0,72),pts=[];for(let k=0;k<10;k++){const r=k%2?R*.42:R,a=(rot+k*36-90)*Math.PI/180;pts.push((cx+Math.cos(a)*r).toFixed(1)+','+(cy+Math.sin(a)*r).toFixed(1))}
   return `<polygon class="st" fill="${c}" points="${pts.join(' ')}" style="animation-delay:${-i*.6}s"/>`}
  [[370,190,44,'#ff9a1a'],[935,205,44,'#2fd2f0'],[1600,70,42,'#3dbfa0'],[1850,350,56,'#e5499e'],[1590,635,48,'#2ee660'],[260,625,46,'#e8f03a'],[75,905,50,'#25d6e8'],[545,1050,50,'#e63be6'],[1040,890,48,'#86a829'],[1850,990,48,'#4a6fe0'],[15,300,34,'#2ee660']].forEach((c,i)=>o+=star(...c,i));
- $('#p4svg').innerHTML=o;
+ /* backdrop is now images/p4g-bg.webp */
+})();
+
+/* ---------- Cool layer: trail, ripples, wipes, tilt, magnet, scramble ---------- */
+(function(){
+ const fine=matchMedia('(pointer:fine)').matches;
+ const ZC={hero:'#e6d3a1',p3:'#4aa3ff',p4:'#ffd500',p5:'#df1a21',velvet:'#e6d3a1'};
+ const zc=()=>ZC[document.body.dataset.zone]||'#fff';
+ const pb=document.createElement('div');pb.id='sprog';pb.setAttribute('aria-hidden','true');document.body.append(pb);
+ addEventListener('scroll',()=>{pb.style.setProperty('--sp',(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)).toFixed(4))},{passive:true});
+ if(RM)return;
+ /* zone wipe */
+ let lz=document.body.dataset.zone;
+ new MutationObserver(()=>{const z=document.body.dataset.zone;if(z===lz)return;lz=z;const w=document.createElement('div');w.className='wipe2';w.style.setProperty('--wc',ZC[z]||'#fff');document.body.append(w);setTimeout(()=>w.remove(),760)}).observe(document.body,{attributes:true,attributeFilter:['data-zone']});
+ /* click ripple */
+ addEventListener('pointerdown',e=>{const r=document.createElement('i');r.className='ring2';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';r.style.setProperty('--rc',zc());document.body.append(r);setTimeout(()=>r.remove(),650)},{passive:true});
+ if(!fine)return;
+ /* sparkle trail */
+ const cv=document.createElement('canvas');cv.id='fxtrail';cv.setAttribute('aria-hidden','true');document.body.append(cv);const c=cv.getContext('2d');
+ let W,H,ps=[],raf=0,lx=0,ly=0;
+ const fit=()=>{const d=Math.min(2,devicePixelRatio||1);W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;c.setTransform(d,0,0,d,0,0)};fit();addEventListener('resize',fit);
+ function star(x,y,r,rot){c.beginPath();for(let i=0;i<10;i++){const q=i%2?r*.45:r,a=rot+i*Math.PI/5;c.lineTo(x+Math.cos(a)*q,y+Math.sin(a)*q)}c.closePath();c.fill()}
+ function loop(){raf=0;c.clearRect(0,0,innerWidth,innerHeight);ps=ps.filter(p=>p.l>0);for(const p of ps){p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.l--;p.rot+=p.vr;c.globalAlpha=Math.max(0,p.l/p.m);c.fillStyle=p.c;
+   if(p.k==='s')star(p.x,p.y,p.r,p.rot);else if(p.k==='q'){c.save();c.translate(p.x,p.y);c.rotate(p.rot);c.fillRect(-p.r,-p.r*.5,p.r*2,p.r);c.restore()}else{c.beginPath();c.arc(p.x,p.y,p.r,0,6.283);c.fill()}}
+  c.globalAlpha=1;if(ps.length)raf=requestAnimationFrame(loop)}
+ addEventListener('pointermove',e=>{const d=Math.hypot(e.clientX-lx,e.clientY-ly);if(d<14)return;lx=e.clientX;ly=e.clientY;const z=document.body.dataset.zone,col=zc();
+  const k=z==='p5'?'q':z==='p3'?'o':'s';
+  ps.push({k,x:e.clientX,y:e.clientY,vx:rnd(-.6,.6),vy:rnd(-.4,.4),g:z==='p3'?.01:.03,r:z==='p5'?rnd(4,8):rnd(3,7),rot:rnd(0,6),vr:rnd(-.1,.1),l:28,m:28,c:z==='p5'&&Math.random()<.4?'#fff':col});
+  if(ps.length>90)ps.splice(0,ps.length-90);if(!raf)raf=requestAnimationFrame(loop)},{passive:true});
+ /* tilt + glare */
+ function tilt(el){if(el.dataset.tl)return;el.dataset.tl=1;el.classList.add('tilt');const g=document.createElement('i');g.className='glare';g.setAttribute('aria-hidden','true');el.append(g);
+  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;g.style.setProperty('--gx',x*100+'%');g.style.setProperty('--gy',y*100+'%');el.style.rotate='0 0 1 '+((x-.5)*1.6).toFixed(2)+'deg';el.style.translate='0 -3px';el.style.scale='1.012'});
+  el.addEventListener('pointerleave',()=>{el.style.rotate='';el.style.translate='';el.style.scale=''})}
+ $$('.panel,.tile,.cs,.ed').forEach(tilt);
+ /* magnet buttons */
+ $$('.reset,.dmore,.cspb,.btn').forEach(b=>{b.classList.add('mag');b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.18).toFixed(1)+'px '+((e.clientY-r.top-r.height/2)*.28).toFixed(1)+'px'});b.addEventListener('pointerleave',()=>{b.style.translate=''})});
+ /* P4 background parallax */
+ const p4=$('#p4'),pi=$('.p4img');if(p4&&pi)addEventListener('pointermove',e=>{pi.style.setProperty('--bx',((e.clientX/innerWidth-.5)*-26).toFixed(1)+'px');pi.style.setProperty('--by',((e.clientY/innerHeight-.5)*-16).toFixed(1)+'px')},{passive:true});
+ /* heading scramble */
+ const G='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*';
+ const sio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;sio.unobserve(e.target);const el=e.target,t=el.textContent;if(!t||t.length>40||el.children.length)return;let f=0;const iv=setInterval(()=>{f++;el.textContent=t.split('').map((ch,i)=>ch===' '||i<f/2?ch:G[Math.random()*G.length|0]).join('');if(f>=t.length*2){clearInterval(iv);el.textContent=t}},28)}),{threshold:.6});
+ $$('.sec-head h2').forEach(h=>sio.observe(h));
 })();
 
 /* ---------- Scenes (original illustrations) ---------- */
