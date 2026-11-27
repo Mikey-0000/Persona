@@ -1176,8 +1176,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 @keyframes btgh{0%{opacity:0;transform:translateX(0)}30%{opacity:.5;transform:translateX(120px)}100%{opacity:0;transform:translateX(250px) skewX(-10deg)}}
 .bthero.hurt{animation:bthh2 .5s!important}@keyframes bthh2{20%{transform:translateX(-34px) rotate(-8deg);filter:brightness(5) drop-shadow(0 0 14px #f00)}60%{transform:translateX(-14px) rotate(-3deg)}}
 @media(max-width:700px){@keyframes btdash{0%{transform:none}42%,60%{transform:translateX(120px) scale(1.08) skewX(-10deg)}100%{transform:none}}}
-.p4img{position:absolute;inset:-3%;z-index:0;will-change:transform;transform:translate(var(--bx,0px),var(--by,0px)) scale(1.02)}.p4img img{width:100%;height:100%;object-fit:cover;display:block;animation:p4br 14s ease-in-out infinite alternate}@keyframes p4br{to{filter:saturate(1.18) brightness(1.04)}}
-.p4veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(255,229,39,0) 0,rgba(255,229,39,.0) 30%,rgba(255,229,39,.42) 100%),linear-gradient(180deg,rgba(255,229,39,.18),rgba(255,229,39,.28))}
+.p4img{position:absolute;left:74%;top:25%;z-index:1;width:min(440px,34vw);translate:-50% -50%;pointer-events:none;will-change:transform;transform:translate(var(--bx,0px),var(--by,0px));filter:drop-shadow(0 10px 0 rgba(114,85,0,.25))}.p4img img{width:100%;height:auto;display:block;animation:p4br 6s ease-in-out infinite alternate}@keyframes p4br{to{transform:scale(1.04) rotate(-1deg)}}
 #p4 .panel{background:rgba(255,249,190,.9)!important;backdrop-filter:blur(3px)!important}
 /* ---- global cool layer ---- */
 #fxtrail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:64}
@@ -1387,7 +1386,7 @@ body.tedh,body.tedh #p3,body.tedh #p4,body.tedh #p5{cursor:pointer}
 
 <!-- P4 -->
 <section id="p4" class="world" data-zone="p4">
-  <div class="p4bg" aria-hidden="true"><div class="p4stick"><div class="p4img" aria-hidden="true"><img src="images/p4g-bg.webp" alt="" decoding="async" fetchpriority="low"></div><div class="p4veil" aria-hidden="true"></div><svg id="p4svg" style="display:none" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><img class="ted" id="ted" src="images/teddie.png" alt="" decoding="async" draggable="false"><div class="tedsay" id="tedsay" aria-live="polite"></div></div></div>
+  <div class="p4bg" aria-hidden="true"><div class="p4stick"><svg id="p4svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg><div class="p4img" aria-hidden="true"><img src="images/p4g-logo.webp" alt="" decoding="async"></div><img class="ted" id="ted" src="images/teddie.png" alt="" decoding="async" draggable="false"><div class="tedsay" id="tedsay" aria-live="polite"></div></div></div>
   <canvas id="rain" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="sec-head rv"><span class="n">P4</span><h2>REACH OUT</h2></div>
@@ -2074,7 +2073,7 @@ $('#vreset').addEventListener('click',()=>{sel=[];refresh()});
 /* P4 backdrop: rings, rays, circles, stars */
 (function(){
  const R=[[755,'#8a0f2e',24],[730,'#c4210f',20],[710,'#7b4a9a',14],[695,'#0a9a3b',10],[682,'#fff',14],[666,'#f5a000',12],[652,'#8cbfe8',10]];
- let o='<rect width="1920" height="1080" fill="#ffe527"/><g class="rg">'+R.map(r=>`<circle cx="960" cy="540" r="${r[0]}" fill="none" stroke="${r[1]}" stroke-width="${r[2]}"/>`).join('')+'</g>';
+ let o='<defs><pattern id="p4g" width="64" height="64" patternUnits="userSpaceOnUse"><rect width="64" height="64" fill="#ffef5e"/><rect x="2" y="2" width="60" height="60" rx="7" fill="#fff36e" stroke="#e9c61c" stroke-width="3"/></pattern><linearGradient id="p4sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#f5a300" stop-opacity=".18"/></linearGradient></defs><rect width="1920" height="1080" fill="url(#p4g)"/><rect width="1920" height="1080" fill="url(#p4sh)"/>';
  function ray(ang,len,layers,kC,kE){const tot=layers.reduce((a,l)=>a+l[1],0);let off=0,q='';
   for(const [c,h] of layers){const a=(off-tot/2),b=(off+h-tot/2);q+=`<polygon fill="${c}" points="0,${a*kC} ${len},${a*kE} ${len},${b*kE} 0,${b*kC}"/>`;off+=h}
   return `<g transform="translate(960 540) rotate(${ang})"><g class="sl">${q}</g></g>`}
@@ -2083,11 +2082,11 @@ $('#vreset').addEventListener('click',()=>{sel=[];refresh()});
  const C=[['#e0402d',16],['#fff',26],['#b5d314',46],['#7fe3f0',16],['#8aa82a',12]];
  o+=ray(191,1300,A,1.1,.45)+ray(-27,1300,B,.9,1.5)+ray(32,1300,C,.9,1.4)+ray(117,820,[['#fff',9],['#ffe527',5],['#fff',5]],1,.3);
  function orn(cx,cy,r,c,i){return `<g class="oc" style="animation-delay:${-i*1.3}s"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c}" stroke-width="${r*.13}"/><circle cx="${cx}" cy="${cy}" r="${r*.78}" fill="none" stroke="${c}" stroke-width="${r*.05}"/><circle cx="${cx}" cy="${cy}" r="${r*.2}" fill="${c}"/></g>`}
- [[1105,255,95,'#ff7bd8'],[728,40,72,'#3db8ee'],[1160,940,130,'#f5a21a'],[570,875,95,'#f08aa0'],[1840,730,80,'#86a829'],[40,30,60,'#f5a000'],[60,1020,70,'#c4210f'],[1340,600,100,'#e07a1a'],[715,420,75,'#fff']].forEach((c,i)=>o+=orn(...c,i));
+ 
  function star(cx,cy,R,c,i){const rot=rnd(0,72),pts=[];for(let k=0;k<10;k++){const r=k%2?R*.42:R,a=(rot+k*36-90)*Math.PI/180;pts.push((cx+Math.cos(a)*r).toFixed(1)+','+(cy+Math.sin(a)*r).toFixed(1))}
   return `<polygon class="st" fill="${c}" points="${pts.join(' ')}" style="animation-delay:${-i*.6}s"/>`}
  [[370,190,44,'#ff9a1a'],[935,205,44,'#2fd2f0'],[1600,70,42,'#3dbfa0'],[1850,350,56,'#e5499e'],[1590,635,48,'#2ee660'],[260,625,46,'#e8f03a'],[75,905,50,'#25d6e8'],[545,1050,50,'#e63be6'],[1040,890,48,'#86a829'],[1850,990,48,'#4a6fe0'],[15,300,34,'#2ee660']].forEach((c,i)=>o+=star(...c,i));
- /* backdrop is now images/p4g-bg.webp */
+ $('#p4svg').innerHTML=o;
 })();
 
 /* ---------- Cool layer: trail, ripples, wipes, tilt, magnet, scramble ---------- */
