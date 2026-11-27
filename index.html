@@ -909,7 +909,7 @@ button,.btn,a.l,.tile,.note,.card{touch-action:manipulation;-webkit-tap-highligh
 .cfine{padding:0 14px;font:600 11px var(--body);color:#aaa;margin:0}
 @media (max-width:700px){.ph{transform:none}}
 @media (prefers-reduced-motion:reduce){.phs.on,.phb2{animation:none}}
-.ted{position:absolute;left:88%;top:84%;height:min(46vh,420px);width:auto;max-width:90vw;transform:translate(-50%,-50%) rotate(-5deg);transform-origin:50% 92%;will-change:transform;animation:tedb 1.15s infinite;filter:drop-shadow(10px 12px 0 rgba(24,24,24,.28));pointer-events:none;user-select:none}
+.ted{position:absolute;left:88%;top:84%;height:min(46vh,420px);width:auto;max-width:90vw;transform:translate(-50%,-50%) rotate(-5deg);transform-origin:50% 92%;will-change:transform;filter:drop-shadow(10px 12px 0 rgba(24,24,24,.28));pointer-events:none;user-select:none}
 @media (max-width:700px){.ted{height:58vh}}
 @keyframes tedb{
  0%{transform:translate(-50%,-50%) rotate(-5deg) scale(1.1,.88);animation-timing-function:cubic-bezier(.2,.9,.3,1)}
@@ -1711,16 +1711,21 @@ addEventListener('pointermove',e=>{if(e.pointerType==='mouse')document.body.clas
 addEventListener('click',e=>{const h=hotAt(e);if(h)h.fn(e)});
 /* ---------- P4: Teddie reacts ---------- */
 (function(){
- const t=document.getElementById('ted'),say=document.getElementById('tedsay');if(!t)return;document.body.appendChild(say);
- const FX=['spin','leap','pop','wob'],LINES=['Kuma!?','Hey, that tickles, kuma!','Bear with me!','I am not a cat, kuma!','Sensei, look at me!','Ka-bear-oom!','Is it time to fight, kuma?','Careful, my zipper!','Fur real?','Woah, I am dizzy, kuma!'];
- let last='',n=SAVE.get('ted',0),to=0;
- const fire=e=>{let k;do{k=FX[Math.floor(Math.random()*FX.length)]}while(k===last);last=k;
-  t.classList.remove('fx','spin','leap','pop','wob');void t.offsetWidth;t.classList.add('fx',k);t.addEventListener('animationend',()=>t.classList.remove('fx',k),{once:true});
-  sfx('boing');if(window.__vib)window.__vib(k==='leap'?[20,30,20]:15);
-  say.textContent=LINES[Math.floor(Math.random()*LINES.length)];say.classList.add('on');clearTimeout(to);to=setTimeout(()=>say.classList.remove('on'),1900);
-  const cols=['#ff2d95','#ffe83d','#00c2b8','#3a7bff','#fff'];for(let i=0;i<18;i++){const a=i/18*6.283+rnd(-.2,.2),v=rnd(4,13);add({k:'star',x:e.clientX,y:e.clientY,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,rot:rnd(0,6),vr:rnd(-.3,.3),s:rnd(12,30),c:pick(cols),c2:'#181818',life:rnd(34,56)|0})}
-  n++;SAVE.put('ted',n);if(n>=10)award('kuma')};
- hotAdd({z:'p4',rect:()=>t.getBoundingClientRect(),pad:[.14,.86,.06,.94],fn:fire});
+ const t=document.getElementById('ted');if(!t)return;const sd=document.getElementById('tedsay');if(sd)sd.remove();
+ let sx=1,sy=1,sk=0,vx=0,vy=0,vk=0,tx=1,ty=1,tk=0,raf=0,last=0,n=SAVE.get('ted',0),down=false,ox=0;
+ const K=170,D=6.2;
+ function step(now){const dt=Math.min(.033,(now-last)/1000||.016);last=now;
+  vx+=((tx-sx)*K-vx*D)*dt;vy+=((ty-sy)*K-vy*D)*dt;vk+=((tk-sk)*K-vk*D)*dt;sx+=vx*dt;sy+=vy*dt;sk+=vk*dt;
+  t.style.transform='translate(-50%,-50%) rotate(-5deg) skewX('+sk.toFixed(2)+'deg) scale('+sx.toFixed(3)+','+sy.toFixed(3)+')';
+  if(Math.abs(sx-tx)+Math.abs(sy-ty)+Math.abs(vx)+Math.abs(vy)+Math.abs(vk)+Math.abs(sk-tk)>.004||down)raf=requestAnimationFrame(step);else{raf=0;t.style.transform=''}}
+ const go=()=>{if(!raf){last=performance.now();raf=requestAnimationFrame(step)}};
+ const off=e=>{const r=t.getBoundingClientRect();return ((e.clientX-r.x)/r.width-.5)};
+ const inside=e=>{const h=hotAt(e);return h&&h.id==='ted'};
+ addEventListener('pointerdown',e=>{if(RM||!inside(e))return;down=true;ox=off(e);tx=1.22;ty=.58;tk=-ox*14;vk-=ox*40;sfx('boing');go()});
+ addEventListener('pointerup',()=>{if(!down)return;down=false;tx=1;ty=1;tk=0;vy+=9;vx-=4;go()});
+ addEventListener('pointercancel',()=>{down=false;tx=1;ty=1;tk=0;go()});
+ const fire=e=>{n++;SAVE.put('ted',n);if(n>=10)award('kuma')};
+ hotAdd({id:'ted',z:'p4',rect:()=>t.getBoundingClientRect(),pad:[.14,.86,.06,.94],fn:fire});
 })();
 
 /* ---------- P3: the moon ---------- */
